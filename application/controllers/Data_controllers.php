@@ -9,6 +9,8 @@ class Data_controllers extends CI_Controller
         parent::__construct();
         $this->load->model("fakultas_model");
         $this->load->model("ruangan_model");
+        $this->load->model('waktu_model');
+        $this->load->model('kelas_model');
     }
 
     public function dosen()
@@ -64,6 +66,47 @@ class Data_controllers extends CI_Controller
     {
         if (isset($_POST['tambahRuangan'])) {
             $this->ruangan_model->tambahRuangan($_POST);
+        }
+    }
+
+    public function waktu()
+    {
+        $this->load->model("waktu_model");
+        $data['list_jam'] = $this->waktu_model->daftar_jam();
+
+        $this->load->view("data/waktu_view", $data);
+        if (isset($_POST['tambahWaktu'])) {
+            $this->waktu_model->tambahWaktu($_POST);
+            redirect("Data_controllers/waktu");
+        }
+    }
+
+    public function tambahWaktu()
+    {
+        if (isset($_POST['tambahWaktu'])) {
+            $this->waktu_model->tambahWaktu($_POST);
+        }
+    }
+
+    public function kelas()
+    {
+        $this->load->model("kelas_model");
+        $data['list_kelas'] = $this->kelas_model->daftar_kelas();
+        $data['list_ruangan'] = $this->ruangan_model->daftar_ruangan();
+        $data['list_fakultas'] = $this->fakultas_model->daftar_fakultas();
+        $data['list_gedung'] = $this->fakultas_model->daftar_gedung();
+
+        $this->load->view("data/kelas_view", $data);
+        if (isset($_POST['tambahKelas'])) {
+            $this->kelas_model->tambahRuangan($_POST);
+            redirect("Data_controllers/kelas");
+        }
+    }
+
+    public function tambahKelas()
+    {
+        if (isset($_POST['tambahKelas'])) {
+            $this->kelas_model->tambahKelas($_POST);
         }
     }
 }

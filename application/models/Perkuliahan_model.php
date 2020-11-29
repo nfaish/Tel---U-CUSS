@@ -66,4 +66,11 @@ class Perkuliahan_model extends CI_Model
             $sql = $this->db->query($query);
         }
     }
+
+    public function daftarDatakuliah()
+    {
+        $query = "SELECT * FROM mengajar";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
 }

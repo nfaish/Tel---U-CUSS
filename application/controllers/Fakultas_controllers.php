@@ -25,7 +25,7 @@ class Fakultas_controllers extends CI_Controller
         $this->load->view("jurusan_view/detail_jurusan", $data);
     }
 
-    function fetch()
+    public function fetch()
     {
         $data = $this->fakultas_model->select();
         $output = '
@@ -50,16 +50,11 @@ class Fakultas_controllers extends CI_Controller
         echo $output;
     }
 
-    function import()
+    public function import()
     {
         $id_jurusan = $this->session->id_jurusan;
-<<<<<<< HEAD
 
-        // print_r($id_fakultas['id_fakultas']);
 
-=======
-        
->>>>>>> 66002fea3a96529ac9d80cdac3ac7cb4ce682c43
         if (isset($_FILES["file"]["name"])) {
             $path = $_FILES["file"]["tmp_name"];
             $object = PHPExcel_IOFactory::load($path);
@@ -72,13 +67,8 @@ class Fakultas_controllers extends CI_Controller
                     $dosen_wali = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                     $data[] = array(
                         'id_jurusan'    => $id_jurusan,
-<<<<<<< HEAD
                         'nama_kelas'    => $nama_kelas,
                         'angkatan'      => $angkatan,
-=======
-                        'nama_kelas'  => $nama_kelas,
-                        'angkatan'   => $angkatan,
->>>>>>> 66002fea3a96529ac9d80cdac3ac7cb4ce682c43
                         'dosen_Wali'    => $dosen_wali
                     );
                 }

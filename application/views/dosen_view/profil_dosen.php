@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>TA Mahasiswa - Dashboard</title>
+    <title>Tel - U CUSS | Profil Dosen</title>
     <?php $this->load->view("_partials/header.php") ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
 </head>

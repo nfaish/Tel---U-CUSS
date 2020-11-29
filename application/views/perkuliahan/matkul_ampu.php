@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>TA Mahasiswa - Dashboard</title>
+    <title>TA Mahasiswa - Dashbo</title>
     <?php $this->load->view("_partials/header.php") ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
 </head>
@@ -29,22 +29,28 @@
                             <li class="list-group-item"><?= $my_profile['kode_dosen'] ?></li>
                         </ul>
                     </div>
-                    <div class="card card-default">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <form action="" method="post">
+                    <br>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Daftar Mata Kuliah Yang Di Ampu
+                        </div>
+                        <div class="card card-default">
+                            <div class="card-body">
+                                <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">NAMA MATKUL</th>
-                                                <th scope="col">KODE MATKUL</th>
+                                                <th scope="col">NAMA MATA KULIAH</th>
+                                                <th scope="col">KODE MATA KULIAH</th>
                                                 <th scope="col">SKS</th>
                                                 <th scope="col">ACTION</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if (!empty($list_matkul)) { ?>
-                                                <?php foreach ($list_matkul as $row => $value) { ?>
+                                            <?php if (!empty($list_matkul_ambil)) { ?>
+                                                <?php foreach ($list_matkul_ambil as $row => $value) { ?>
                                                     <tr>
                                                         <td>
                                                             <?php echo $value['nama_matkul']; ?>
@@ -56,10 +62,8 @@
                                                             <?php echo $value['sks']; ?>
                                                         </td>
                                                         <td>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" name="id_matkul[]" value="<?= $value['id_matkul']; ?>">
-                                                                <!-- <?php echo $value['nama_matkul']; ?> -->
-                                                            </div>
+                                                            <a href="<?= base_url('/fakultas_controllers/exploreMatkul_ambil/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                            <a href="<?= base_url('/fakultas_controllers/hapusMatkul_ambil/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-danger'>Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php }
@@ -67,9 +71,59 @@
                                             <?php } ?>
                                         </tbody>
                                     </table>
-                                    <button type="submit" class="btn btn-dark float-right" name="ambilMatkul">Ambil Matkul</button>
-                                </form>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Daftar Mata Kuliah
+                        </div>
+                        <div class="card card-default">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <form action="" method="post">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">NAMA MATA KULIAH</th>
+                                                    <th scope="col">KODE MATA KULIAH</th>
+                                                    <th scope="col">SKS</th>
+                                                    <th scope="col">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($list_matkul)) { ?>
+                                                    <?php foreach ($list_matkul as $row => $value) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $value['nama_matkul']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['kode_matkul']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['sks']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox" name="id_matkul[]" value="<?= $value['id_matkul']; ?>">
+                                                                    <!-- <?php echo $value['nama_matkul']; ?> -->
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <?php }
+                                                    ?>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                        <button type="submit" class="btn btn-dark float-right" name="ambilMatkul">Ambil Mata Kuliah</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--div class="card-footer small text-muted">Updated yesterday at 11:59 PM </div-->
                         </div>
                     </div>
                 </div>

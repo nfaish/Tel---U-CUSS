@@ -22,14 +22,14 @@ class Dosen_model extends CI_Model
         return $sql->result_array();
     }
 
-    public function dosenBynip($nip)
+    public function exploredosenBynip($nip)
     {
         $query = 'SELECT * FROM dosen WHERE nip = ' . $nip;
         $sql = $this->db->query($query)->row_array();
         return $sql;
     }
 
-    public function additionalBynip($nip)
+    public function exploreadditionalBynip($nip)
     {
         $query = 'SELECT * FROM dosen_additional WHERE nip = ' . $nip;
         $sql = $this->db->query($query)->row_array();
@@ -51,7 +51,17 @@ class Dosen_model extends CI_Model
         $sql = $this->db->query($query);
     }
 
-    function updateDosen($post, $nip)
+    public function tambahRoles($nip)
+    {
+        $query = "INSERT roles SET
+        user_role_id = 2,
+        nip = $nip
+        ";
+        // var_dump($query);exit;
+        $sql = $this->db->query($query);
+    }
+
+    function updateDosen($post)
     {
         $nip                = $this->db->escape($_POST['nip']);
         $jab_fungsional     = $this->db->escape($_POST['jab_fungsional']);

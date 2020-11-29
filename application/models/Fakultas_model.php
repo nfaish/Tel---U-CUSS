@@ -16,8 +16,10 @@ class Fakultas_model extends CI_Model
     {
         $query = "SELECT 
                     fakultas.id_fakultas,
+                    fakultas.kode_fakultas,
                     fakultas.nama_fakultas,
                     jurusan.id_jurusan,
+                    jurusan.kode_jurusan,
                     jurusan.nama_jurusan,
                     jurusan.id_fakultas
                     FROM fakultas
@@ -39,8 +41,10 @@ class Fakultas_model extends CI_Model
     {
         $query = "SELECT 
                     fakultas.id_fakultas,
+                    fakultas.kode_fakultas,
                     fakultas.nama_fakultas,
                     jurusan.id_jurusan,
+                    jurusan.kode_jurusan,
                     jurusan.nama_jurusan,
                     jurusan.id_fakultas as fakultas_id
                     FROM jurusan

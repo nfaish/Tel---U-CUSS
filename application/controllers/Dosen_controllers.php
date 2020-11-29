@@ -17,8 +17,8 @@ class Dosen_controllers extends CI_Controller
 
     public function exploreDosen($nip)
     {
-        $data['detailDosen'] = $this->dosen_model->dosenByNip($nip);
-        $data['detailAdditional'] = $this->dosen_model->additionalByNip($nip);
+        $data['detailDosen'] = $this->dosen_model->exploredosenByNip($nip);
+        $data['detailAdditional'] = $this->dosen_model->exploreadditionalByNip($nip);
         $this->load->view("dosen_view/detail_dosen", $data);
         if (isset($_POST['updateDosen'])) {
             $this->dosen_model->updateDosen($_POST, $nip);
@@ -36,7 +36,8 @@ class Dosen_controllers extends CI_Controller
 
     public function accDosen($nip)
     {
-        $data['list_dosen'] = $this->dosen_model->acc_dosen($nip);
-        $this->load->view("dosen_view/detail_dosen", $data);
+        $this->dosen_model->acc_dosen($nip);
+        $this->dosen_model->tambahRoles($nip);
+        redirect("Data_controllers/dosen");
     }
 }

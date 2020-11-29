@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>TA Mahasiswa - Dashboard</title>
+    <title>Tel - U CUSS | Daftar Mata Kuliah</title>
     <?php $this->load->view("_partials/header.php") ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
 </head>
@@ -17,7 +17,6 @@
             <?php $this->load->view("_partials/sidebar.php") ?>
             <div id="content-wrapper">
                 <div class="container-fluid">
-
                     <!-- DataTables Example -->
                     <div class="card mb-3">
                         <div class="card-header">
@@ -31,6 +30,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">NAMA MATA KULIAH</th>
+                                                <th scope="col">SKS</th>
                                                 <th scope="col">ACTION</th>
                                             </tr>
                                         </thead>
@@ -40,6 +40,9 @@
                                                     <tr>
                                                         <td>
                                                             <?php echo $value['nama_matkul']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $value['sks']; ?>
                                                         </td>
                                                         <td>
                                                             <a href="<?= base_url('/perkuliahan_controllers/exploreMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-dark'>Explore</a>
@@ -60,12 +63,34 @@
                         <div class="col-sm-6">
                             <div class="card card-default">
                                 <div class="card-body">
-                                    <h5 class="card-title">Add Mata Kuliah Dasar Umum</h5>
+                                    <h5 class="card-title">Tambah Mata Kuliah</h5>
+                                    <form action="" method="post">
+                                        <div class="form-group">
+                                            <label for="nama_matkul">Nama Mata Kuliah</label>
+                                            <input type="text" class="form-control" id="nama_matkul" name="nama_matkul" placeholder="...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kode_matkul">Kode Mata Kuliah</label>
+                                            <input type="text" class="form-control" id="kode_matkul" name="kode_matkul" placeholder="...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kode_matkul">SKS</label>
+                                            <input type="text" class="form-control" id="sks" name="sks" placeholder="...">
+                                        </div>
+                                        <button type="submit" class="btn btn-dark mt-3" name="tambahMatkul">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card card-default">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tambah Mata Kuliah Dasar Umum</h5>
                                     <form action="" method="post">
                                         <div class="form-group">
                                             <label for="id_fakultas">Nama Fakultas</label>
                                             <select class="form-control" id="id_fakultas" name="id_fakultas">
-                                                <option value=""> - pilih fakultas - </option>
+                                                <option value=""> - Pilih Fakultas - </option>
                                                 <?php foreach ($list_fakultas as $list_fakultas) { ?>
                                                     <option value="<?php echo $list_fakultas['id_fakultas']; ?>"><?php echo $list_fakultas['nama_fakultas']; ?> </option>
                                                 <?php } ?>
@@ -74,13 +99,13 @@
                                         <div class="form-group">
                                             <label for="angkatan">Angkatan</label>
                                             <select class="form-control" id="angkatan" name="angkatan">
-                                                <option value=""> - pilih angkatan - </option>
+                                                <option value=""> - Pilih Angkatan - </option>
                                                 <option value="2020">2020</option>
                                                 <option value="2021">2021</option>
                                                 <option value="2022">2022</option>
                                             </select>
                                         </div>
-                                        <label for="kode_matkul">Kode Mata Kuliah</label>
+                                        <label for="kode_matkul">Nama Mata Kuliah</label>
                                         <?php if (!empty($list_matkul)) { ?>
                                             <?php foreach ($list_matkul as $row => $value) { ?>
                                                 <div class="form-check">
@@ -95,26 +120,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="card card-default">
-                                <div class="card-body">
-                                    <h5 class="card-title">Tambah Mata Kuliah</h5>
-                                    <form action="" method="post">
-                                        <div class="form-group">
-                                            <label for="nama_matkul">Nama Mata Kuliah</label>
-                                            <input type="text" class="form-control" id="nama_matkul" name="nama_matkul" placeholder="...">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="kode_matkul">Kode Mata Kuliah</label>
-                                            <input type="text" class="form-control" id="kode_matkul" name="kode_matkul" placeholder="...">
-                                        </div>
-                                        <button type="submit" class="btn btn-dark mt-3" name="tambahMatkul">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <!-- /.container-fluid -->
+                <!-- /.container-fluid -->
                 </div>
             </div>
         </div>

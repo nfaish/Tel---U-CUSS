@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>TA Mahasiswa - Dashboard</title>
+    <title>Tel - U CUSS | Daftar Data Gedung dan Ruangan</title>
     <?php $this->load->view("_partials/header.php") ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
 </head>
@@ -32,8 +32,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
+                                                <th scope="col">NAMA GEDUNG</th>
                                                 <th scope="col">NAMA RUANGAN</th>
-                                                <th scope="col">LOKASI RUANGAN</th>
                                                 <th scope="col">KAPASISTAS</th>
                                                 <th scope="col">ACTION</th>
                                             </tr>
@@ -43,10 +43,10 @@
                                                 <?php foreach ($list_ruangan as $row => $value) { ?>
                                                     <tr>
                                                         <td>
-                                                            <?php echo $value['nama_ruangan']; ?>
+                                                            <?php echo $value['nama_gedung']; ?>
                                                         </td>
                                                         <td>
-                                                            <?php echo $value['nama_gedung']; ?>
+                                                            <?php echo $value['nama_ruangan']; ?>
                                                         </td>
                                                         <td>
                                                             <?php echo $value['kapasitas']; ?>
@@ -66,34 +66,52 @@
                             <!--div class="card-footer small text-muted">Updated yesterday at 11:59 PM </div-->
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Add Ruangan</h5>
-                                <form action="" method="post">
-                                    <div class="form-group">
-                                        <label for="nama_ruangan">Nama Ruangan</label>
-                                        <input type="text" class="form-control" id="nama_ruangan" name="nama_ruangan" placeholder="Masukkan Nama Ruangan">
+
+                    <div class="row mt-3">
+                        <div class="col-sm-6">
+                            <div class="card card-default">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tambah Gedung</h5>
+                                        <form action="" method="post">
+                                            <div class="form-group">
+                                                <label for="nama_gedung">Nama Gedung</label>
+                                                <input type="text" class="form-control" id="nama_gedung" name="nama_gedung" placeholder="Nama Gedung">
+                                            </div>
+                                            <button type="submit" class="btn btn-dark mt-3" name="tambahGedung">Submit</button>
+                                        </form>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="id_gedung">Lokasi Gedung</label>
-                                        <select class="form-control" id="id_gedung" name="id_gedung">
-                                            <option value=""> - pilih gedung - </option>
-                                            <?php foreach ($list_gedung as $list_gedung) { ?>
-                                                <option value="<?php echo $list_gedung['id_gedung']; ?>"><?php echo $list_gedung['nama_gedung']; ?> </option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="kapasitas">Kapasitas (Orang)</label>
-                                        <input type="number" class="form-control" id="kapasitas" name="kapasitas" placeholder="Masukkan kapasitas ruangan">
-                                    </div>
-                                    <button type="submit" class="btn btn-dark mt-3" name="tambahRuangan">Tambah</button>
-                                </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tambah Ruangan</h5>
+                                    <form action="" method="post">
+                                        <div class="form-group">
+                                            <label for="nama_ruangan">Nama Ruangan</label>
+                                            <input type="text" class="form-control" id="nama_ruangan" name="nama_ruangan" placeholder="Masukkan Nama Ruangan">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="id_gedung">Lokasi Gedung</label>
+                                            <select class="form-control" id="id_gedung" name="id_gedung">
+                                                <option value=""> - Pilih Gedung - </option>
+                                                <?php foreach ($list_gedung as $list_gedung) { ?>
+                                                    <option value="<?php echo $list_gedung['id_gedung']; ?>"><?php echo $list_gedung['nama_gedung']; ?> </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="kapasitas">Kapasitas (Orang)</label>
+                                            <input type="number" class="form-control" id="kapasitas" name="kapasitas" placeholder="Masukkan Kapasitas Kuangan">
+                                        </div>
+                                        <button type="submit" class="btn btn-dark mt-3" name="tambahRuangan">Tambah</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /.container-fluid -->
                 </div>
                 <!-- Sticky Footer -->
                 <!-- <footer class="sticky-footer">

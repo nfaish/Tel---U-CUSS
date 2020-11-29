@@ -7,8 +7,14 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="<?php echo site_url('Akun_dosen_controllers') ?>">
-            <i class="fas fa-fw fa-home"></i>
+            <i class="fa fa-user"></i>
             <span>Profil</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?php echo site_url('Preferensi_controllers') ?>">
+            <i class="fa fa-calendar"></i>
+            <span>Preferensi</span>
         </a>
     </li>
     <li class="nav-item dropdown">
@@ -21,10 +27,5 @@
             <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/matkulAmpu') ?>">Mata Kuliah Ampu</a>
         </div>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="<?php echo site_url('Preferensi_controllers') ?>">
-            <i class="fas fa-fw fa-home"></i>
-            <span>Penjadwalan</span>
-        </a>
-    </li>
+    
 </ul>

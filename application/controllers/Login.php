@@ -26,7 +26,14 @@ class Login extends CI_Controller
 		print_r($password);
 
 		$query_dsn	= "SELECT
-							*
+							dosen.nip as nip,
+							nama_depan,
+							nama_belakang,
+							kode_dosen,
+							username,
+							email,
+							password,
+							id_status
 						FROM
 							dosen
 						LEFT JOIN roles ON roles.nip = dosen.nip
@@ -46,11 +53,19 @@ class Login extends CI_Controller
 				'username' 			=> $row_dosen['username'],
 				'password' 			=> $row_dosen['password'],
 				'email' 			=> $row_dosen['email'],
-				'user_role' 		=> $row_dosen['user_role_id'],
+				// 'user_role' 		=> $row_dosen['user_role_id'],
 				'id_status' 		=> $row_dosen['id_status']
 			);
-			$this->session->set_userdata($data_session);
-			redirect(base_url('home'));
+			if ($data_session['id_status'] == 0) {
+				$this->session->set_userdata($data_session);
+				redirect(base_url('home'));
+			} else if ($data_session['id_status'] == 2) {
+				$this->session->set_userdata($data_session);
+				redirect(base_url('home'));
+			} else {
+				$this->session->set_flashdata('alert_gagal', 'Hubungi Admin Untuk Men - ACC');
+				redirect(base_url('login'));
+			}
 		} else {
 			$this->session->set_flashdata('alert_gagal', 'Username atau password salah !');
 			redirect(base_url('login'));

@@ -26,19 +26,25 @@ class Perkuliahan_controllers extends CI_Controller
         }
     }
 
-    public function jadwalAjar()
-    {
-    }
-
     public function matkulAmpu()
     {
         $nip                    = $this->session->userdata("nip");
-        $data['my_profile']      = $this->dosen_model->dosenByNip($nip);
+        $data['my_profile']      = $this->dosen_model->exploredosenByNip($nip);
         $data['list_matkul']    = $this->perkuliahan_model->daftarMatkul();
         $this->load->view("Perkuliahan/matkul_ampu", $data);
         if (isset($_POST['ambilMatkul'])) {
             $this->perkuliahan_model->ambilMatkul($_POST, $nip);
-            redirect("Perkuliahan_controllers");
+            redirect("/Perkuliahan_controllers/matkulAmpu");
         }
+    }
+
+    public function jadwalAjar()
+    {
+    }
+
+    public function dataKuliah()
+    {
+        $data['list_datakuliah'] = $this->perkuliahan_model->daftarDatakuliah();
+        $this->load->view("Perkuliahan/data_kuliah", $data);
     }
 }
