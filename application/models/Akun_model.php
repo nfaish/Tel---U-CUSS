@@ -45,4 +45,10 @@ class Akun_model extends CI_Model
                     )";
         $sql1 = $this->db->query($query1);
     }
+
+    public function deleteByNip($nip)
+    {
+        $this->db->delete('dosen_additional', array('nip' => $nip));
+         return true;
+    }
 }

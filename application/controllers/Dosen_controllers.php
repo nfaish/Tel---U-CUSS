@@ -8,6 +8,9 @@ class Dosen_controllers extends CI_Controller
     {
         parent::__construct();
         $this->load->model('dosen_model');
+        $this->load->model('akun_model');
+        $this->load->model('perkuliahan_model');
+        $this->load->model('M_preferensi');
     }
 
     public function index()
@@ -29,7 +32,12 @@ class Dosen_controllers extends CI_Controller
     public function hapusDosen($nip)
     {
         // $data['list_dosen'] = $this->dosen_model->daftar_dosen();
+        $data['cek_hapus_dosen_additional'] = $this->akun_model->deleteByNip($nip);
+        $data['cek_hapus_preferensi'] = $this->M_preferensi->deleteByNip($nip);
+        $data['cek_hapus_mengajar'] = $this->perkuliahan_model->deleteByNip($nip);
+        $data['cek_hapus_roles'] = $this->dosen_model->deleteRolesByNip($nip);
         $data['list_dosen'] = $this->dosen_model->hapus_dosen($nip);
+        $data['list_dosen'] = $this->dosen_model->daftar_dosen($nip);
         $data['list_dosenbaru'] = $this->dosen_model->daftar_dosenbaru();
         $this->load->view("data/dosen_view", $data);
     }

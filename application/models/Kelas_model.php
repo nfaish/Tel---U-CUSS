@@ -13,9 +13,9 @@ class Kelas_model extends CI_Model
                     jurusan.id_jurusan,
                     jurusan.nama_jurusan,
                     jurusan.id_fakultas,
+                    jurusan.angkatan,
                     kelas.id_kelas,
                     kelas.nama_kelas,
-                    kelas.angkatan,
                     kelas.dosen_wali,
                     kelas.id_jurusan
                     FROM fakultas
@@ -43,9 +43,9 @@ class Kelas_model extends CI_Model
                     jurusan.id_jurusan,
                     jurusan.kode_jurusan,
                     jurusan.nama_jurusan,
+                    jurusan.angkatan,
                     kelas.id_kelas,
                     kelas.nama_kelas,
-                    kelas.angkatan,
                     kelas.dosen_wali,
                     kelas.id_jurusan,
                     kelas.id_jurusan as jurusan_id
@@ -71,19 +71,16 @@ class Kelas_model extends CI_Model
     {
         $id_jurusan    = $this->db->escape($_POST['id_jurusan']);
         $nama_kelas   = $this->db->escape($_POST['nama_kelas']);
-        $angkatan   = $this->db->escape($_POST['angkatan']);
         $dosen_wali   = $this->db->escape($_POST['dosen_wali']);
         $query = "INSERT INTO kelas (
                     id_jurusan,
                     nama_kelas,
-                    angkatan,
                     dosen_wali
                 )
                 VALUES
                     (
                     $id_jurusan,
                     $nama_kelas,
-                    $angkatan,
                     $dosen_wali
                     )";
         $sql = $this->db->query($query);

@@ -166,5 +166,11 @@ class M_preferensi extends CI_Model{
         function fizzBuzz($n) {
         }
      }
+
+     public function deleteByNip($nip)
+     {
+         $this->db->delete('preferensi', array('nip' => $nip));
+         return true;
+     }
      
 }

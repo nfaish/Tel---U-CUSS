@@ -62,6 +62,17 @@ class Data_controllers extends CI_Controller
         }
     }
 
+    public function gedung()
+    {
+        $this->load->model("ruangan_model");
+        $data['list_gedung'] = $this->fakultas_model->daftar_gedung();
+        $this->load->view("data/ruangan_view", $data);
+        if (isset($_POST['tambahGedung'])) {
+            $this->ruangan_model->tambahGedung($_POST);
+            redirect("Data_controllers/ruangan");
+        }
+    }
+
     public function tambahRuangan()
     {
         if (isset($_POST['tambahRuangan'])) {
@@ -69,14 +80,39 @@ class Data_controllers extends CI_Controller
         }
     }
 
+    public function tambahGedung()
+    {
+        if (isset($_POST['tambahGedung'])) {
+            $this->ruangan_model->tambahGedung($_POST);
+        }
+    }
+
     public function waktu()
     {
         $this->load->model("waktu_model");
-        $data['list_jam'] = $this->waktu_model->daftar_jam();
+        //$data['list_jam'] = $this->waktu_model->daftar_jam();
+        $data['list_hari'] = $this->waktu_model->daftar_hari2();
+        $data['list_jam'] = $this->waktu_model->daftar_jam2();
 
         $this->load->view("data/waktu_view", $data);
         if (isset($_POST['tambahWaktu'])) {
             $this->waktu_model->tambahWaktu($_POST);
+            redirect("Data_controllers/waktu");
+        }
+    }
+
+    public function tambahHari()
+    {
+        if (isset($_POST['tambahHari'])) {
+            $this->waktu_model->tambahHari($_POST);
+            redirect("Data_controllers/waktu");
+        }
+    }
+
+    public function tambahJam()
+    {
+        if (isset($_POST['tambahJam'])) {
+            $this->waktu_model->tambahJam($_POST);
             redirect("Data_controllers/waktu");
         }
     }
@@ -99,7 +135,7 @@ class Data_controllers extends CI_Controller
         $this->load->view("data/kelas_view", $data);
         if (isset($_POST['tambahKelas'])) {
             $this->kelas_model->tambahRuangan($_POST);
-            redirect("Data_controllers/kelas");
+            
         }
     }
 
@@ -107,6 +143,9 @@ class Data_controllers extends CI_Controller
     {
         if (isset($_POST['tambahKelas'])) {
             $this->kelas_model->tambahKelas($_POST);
+            $data['jurusanByID'] = $this->fakultas_model->jurusanByID($_POST['id_jurusan']);
+            $data['kelasJurusan'] = $this->fakultas_model->daftar_kelas($_POST['id_jurusan']);
+            redirect(base_url("fakultas_controllers/exploreJurusan/" . $_POST['id_jurusan']));
         }
     }
 }

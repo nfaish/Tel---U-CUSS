@@ -36,8 +36,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($list_jurusan)) { ?>
-                                    <?php foreach ($list_jurusan as $row => $value) { ?>
+                                <?php if (!empty($list_fakultas)) { ?>
+                                    <?php foreach ($list_fakultas as $row => $value) { ?>
                                         <tr>
                                             <td>
                                                 <?php echo $value['nama_fakultas']; ?>
@@ -46,8 +46,8 @@
                                                 <?php echo $value['kode_fakultas']; ?>
                                             </td>
                                             <td>
-                                                <a href="<?= base_url('/fakultas_controllers/exploreJurusan/' . $value['id_jurusan']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                <a href="<?= base_url('/fakultas_controllers/hapusJurusan/' . $value['id_jurusan']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                <a href="<?= base_url('/fakultas_controllers/exploreFakultas/' . $value['id_fakultas']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                <a href="<?= base_url('/fakultas_controllers/hapusFakultas/' . $value['id_fakultas']) ?>" class='btn btn-sm btn-danger'>Delete</a>
                                             </td>
                                         </tr>
                                     <?php }
@@ -67,40 +67,46 @@
             </div>
             <div class="card card-default">
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">FAKULTAS</th>
-                                    <th scope="col">PROGRAM STUDI</th>
-                                    <th scope="col">KODE PROGRAM STUDI</th>
-                                    <th scope="col">ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!empty($list_jurusan)) { ?>
-                                    <?php foreach ($list_jurusan as $row => $value) { ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $value['nama_fakultas']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $value['nama_jurusan']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $value['kode_jurusan']; ?>
-                                            </td>
-                                            <td>
-                                                <a href="<?= base_url('/fakultas_controllers/exploreJurusan/' . $value['id_jurusan']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                <a href="<?= base_url('/fakultas_controllers/hapusJurusan/' . $value['id_jurusan']) ?>" class='btn btn-sm btn-danger'>Delete</a>
-                                            </td>
-                                        </tr>
-                                    <?php }
-                                    ?>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">FAKULTAS</th>
+                                                    <th scope="col">PROGRAM STUDI</th>
+                                                    <th scope="col">KODE PROGRAM STUDI</th>
+                                                    <th scope="col">ANGKATAN</th>
+                                                    <th scope="col">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($list_jurusan)) { ?>
+                                                    <?php foreach ($list_jurusan as $row => $value) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $value['nama_fakultas']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['nama_jurusan']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['kode_jurusan']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['angkatan']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <a href="<?= base_url('/fakultas_controllers/exploreJurusan/' . $value['id_jurusan']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                                <a href="<?= base_url('/fakultas_controllers/hapusJurusan/' . $value['id_jurusan']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php }
+                                                    ?>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                 </div>
                 <!--div class="card-footer small text-muted">Updated yesterday at 11:59 PM </div-->
             </div>
@@ -154,6 +160,10 @@
                                         <option value="<?php echo $list_fakultas['id_fakultas']; ?>"><?php echo $list_fakultas['nama_fakultas']; ?> </option>
                                     <?php } ?>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kode_jurusan">Tahun Angkatan</label>
+                                <input type="text" class="form-control" id="angkatan" name="angkatan" placeholder="Tahun Angkatan">
                             </div>
                             <button type="submit" class="btn btn-dark mt-3" name="tambahJurusan">Submit</button>
                         </form>

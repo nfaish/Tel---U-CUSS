@@ -23,7 +23,7 @@
             <span>Perkuliahan</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/data_kuliah') ?>">Data Kuliah</a>
+            <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/dataKuliah') ?>">Data Kuliah</a>
             <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers') ?>">Mata Kuliah</a>
         </div>
     </li>

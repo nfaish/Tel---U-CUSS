@@ -23,41 +23,96 @@
                             <i class="fas fa-table"></i>
                             Daftar Mata Kuliah
                         </div>
-                        <div class="card card-default">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">NAMA MATA KULIAH</th>
-                                                <th scope="col">SKS</th>
-                                                <th scope="col">ACTION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if (!empty($list_matkul)) { ?>
-                                                <?php foreach ($list_matkul as $row => $value) { ?>
-                                                    <tr>
-                                                        <td>
-                                                            <?php echo $value['nama_matkul']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $value['sks']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <a href="<?= base_url('/perkuliahan_controllers/exploreMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                            <a href="<?= base_url('/perkuliahan_controllers/hapusMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-danger'>Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                <?php }
-                                                ?>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
+                            <div class="card card-default">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">NAMA MATA KULIAH</th>
+                                                    <th scope="col">KODE MATA KULIAH</th>
+                                                    <th scope="col">SKS</th>
+                                                    <th scope="col">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($list_matkul)) { ?>
+                                                    <?php foreach ($list_matkul as $row => $value) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $value['nama_matkul']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['kode_matkul']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['sks']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <a href="<?= base_url('/perkuliahan_controllers/exploreMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                                <a href="<?= base_url('/perkuliahan_controllers/hapusMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php }
+                                                    ?>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                            <!--div class="card-footer small text-muted">Updated yesterday at 11:59 PM </div-->
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Mata Kuliah Dasar Umum
                         </div>
+                            <div class="card card-default">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">NAMA FAKULTAS</th>
+                                                    <th scope="col">NAMA PROGRAM STUDI</th>
+                                                    <th scope="col">NAMA MATA KULIAH</th>
+                                                    <th scope="col">KODE MATA KULIAH</th>
+                                                    <th scope="col">SKS</th>
+                                                    <th scope="col">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($list_mkdu)) { ?>
+                                                    <?php foreach ($list_mkdu as $row => $value) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $value['']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['nama_matkul']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['kode_matkul']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['sks']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <a href="<?= base_url('/perkuliahan_controllers/exploreMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                                <a href="<?= base_url('/perkuliahan_controllers/hapusMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php }
+                                                    ?>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -67,15 +122,15 @@
                                     <form action="" method="post">
                                         <div class="form-group">
                                             <label for="nama_matkul">Nama Mata Kuliah</label>
-                                            <input type="text" class="form-control" id="nama_matkul" name="nama_matkul" placeholder="...">
+                                            <input type="text" class="form-control" id="nama_matkul" name="nama_matkul" placeholder="Nama Mata Kuliah">
                                         </div>
                                         <div class="form-group">
                                             <label for="kode_matkul">Kode Mata Kuliah</label>
-                                            <input type="text" class="form-control" id="kode_matkul" name="kode_matkul" placeholder="...">
+                                            <input type="text" class="form-control" id="kode_matkul" name="kode_matkul" placeholder="Kode Mata Kuliah">
                                         </div>
                                         <div class="form-group">
                                             <label for="kode_matkul">SKS</label>
-                                            <input type="text" class="form-control" id="sks" name="sks" placeholder="...">
+                                            <input type="text" class="form-control" id="sks" name="sks" placeholder="Jumlah SKS">
                                         </div>
                                         <button type="submit" class="btn btn-dark mt-3" name="tambahMatkul">Submit</button>
                                     </form>
@@ -97,12 +152,21 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label for="id_fakultas">Nama Program Studi</label>
+                                            <select class="form-control" id="id_jurusan" name="id_jurusan">
+                                                <option value=""> - Pilih Program Studi - </option>
+                                                <?php foreach ($list_jurusan as $list_jurusan) { ?>
+                                                    <option value="<?php echo $list_jurusan['id_jurusan']; ?>"><?php echo $list_jurusan['nama_jurusan']; ?> </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="angkatan">Angkatan</label>
                                             <select class="form-control" id="angkatan" name="angkatan">
-                                                <option value=""> - Pilih Angkatan - </option>
-                                                <option value="2020">2020</option>
-                                                <option value="2021">2021</option>
-                                                <option value="2022">2022</option>
+                                                <option value=""> - Pilih Tahun Angkatan - </option>
+                                                <?php foreach ($list_jurusan2 as $list_jurusan2) { ?>
+                                                    <option value="<?php echo $list_jurusan2['id_jurusan']; ?>"><?php echo $list_jurusan2['angkatan']; ?> </option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <label for="kode_matkul">Nama Mata Kuliah</label>

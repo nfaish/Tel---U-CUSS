@@ -13,6 +13,14 @@ class Ruangan_model extends CI_Model
         print_r($sql);
     }
 
+    public function gedungByID($id_gedung)
+    {
+        $query = "SELECT * FROM gedung WHERE id_gedung = $id_gedung";
+
+        $sql = $this->db->query($query);
+        print_r($sql);
+    }
+
     public function daftar_ruangan()
     {
         $query = "SELECT 
@@ -29,10 +37,17 @@ class Ruangan_model extends CI_Model
         return $sql->result_array();
     }
 
+    public function daftar_gedung()
+    {
+        $query = "SELECT * FROM gedung";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
     public function tambahRuangan($post)
     {
-        $nama_ruangan            = $this->db->escape($_POST['nama_ruangan']);
-        $kapasitas            = $this->db->escape($_POST['kapasitas']);
+        $nama_ruangan = $this->db->escape($_POST['nama_ruangan']);
+        $kapasitas    = $this->db->escape($_POST['kapasitas']);
         $id_gedung    = $this->db->escape($_POST['id_gedung']);
         $query = "INSERT INTO ruangan (
                     nama_ruangan,   
@@ -44,6 +59,19 @@ class Ruangan_model extends CI_Model
                     $nama_ruangan,
                     $kapasitas,
                     $id_gedung
+                    )";
+        $sql = $this->db->query($query);
+    }
+
+    public function tambahGedung()
+    {
+        $nama_gedung  = $this->db->escape($_POST['nama_gedung']);
+        $query = "INSERT INTO gedung (
+                    nama_gedung
+                )
+                VALUES
+                    (
+                    $nama_gedung
                     )";
         $sql = $this->db->query($query);
     }

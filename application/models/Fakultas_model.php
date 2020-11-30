@@ -21,10 +21,21 @@ class Fakultas_model extends CI_Model
                     jurusan.id_jurusan,
                     jurusan.kode_jurusan,
                     jurusan.nama_jurusan,
+                    angkatan.id_angkatan,
+                    angkatan.angkatan,
                     jurusan.id_fakultas
                     FROM fakultas
                     JOIN jurusan ON
-                        jurusan.id_fakultas = fakultas.id_fakultas ";
+                        jurusan.id_fakultas = fakultas.id_fakultas
+                    JOIN angkatan ON
+                        jurusan.id_angkatan = angkatan.id_angkatan ";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
+    public function daftar_angkatan()
+    {
+        $query = "SELECT * FROM angkatan ";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
@@ -46,6 +57,31 @@ class Fakultas_model extends CI_Model
                     jurusan.id_jurusan,
                     jurusan.kode_jurusan,
                     jurusan.nama_jurusan,
+                    angkatan.id_angkatan,
+                    angkatan.angkatan,
+                    jurusan.id_fakultas as fakultas_id
+                    FROM jurusan
+                    JOIN fakultas ON
+                        fakultas.id_fakultas = jurusan.id_fakultas
+                    JOIN angkatan ON 
+                        angkatan.id_angkatan = jurusan.id_angkatan
+                    WHERE jurusan.id_jurusan =" . $id_jurusan;
+
+        $sql = $this->db->query($query);
+
+        return $sql->row_array();
+    }
+
+    public function angkatanByID($id_jurusan)
+    {
+        $query = "SELECT 
+                    fakultas.id_fakultas,
+                    fakultas.kode_fakultas,
+                    fakultas.nama_fakultas,
+                    jurusan.id_jurusan,
+                    jurusan.kode_jurusan,
+                    jurusan.nama_jurusan,
+                    jurusan.angkatan,
                     jurusan.id_fakultas as fakultas_id
                     FROM jurusan
                     JOIN fakultas ON
@@ -78,19 +114,33 @@ class Fakultas_model extends CI_Model
         $id_fakultas    = $this->db->escape($_POST['id_fakultas']);
         $nama_jurusan   = $this->db->escape($_POST['nama_jurusan']);
         $kode_jurusan   = $this->db->escape($_POST['kode_jurusan']);
+        $angkatan       = $this->db->escape($_POST['angkatan']);
+        $query2 = "INSERT INTO angkatan (
+            angkatan
+        ) SELECT * FROM (SELECT $angkatan) t
+        WHERE NOT EXISTS (SELECT angkatan FROM angkatan WHERE angkatan = $angkatan) ";
+        $sql2 = $this->db->query($query2);
+        
+        $query3 = "SELECT * FROM angkatan WHERE angkatan = $angkatan";
+        $sql3 = $this->db->query($query3);
+        $hasilquery = $sql3->result_array(); 
+        $id_angkatan = $hasilquery[0]['id_angkatan'];
         $query = "INSERT INTO jurusan (
                     id_fakultas,
                     nama_jurusan,
-                    kode_jurusan
+                    kode_jurusan,
+                    id_angkatan
                 )
                 VALUES
                     (
                     $id_fakultas,
                     $nama_jurusan,
-                    $kode_jurusan
+                    $kode_jurusan,
+                    $id_angkatan
                     )";
         $sql = $this->db->query($query);
     }
+    
 
     public function tambahFakultas($post)
     {

@@ -16,6 +16,8 @@ class Perkuliahan_controllers extends CI_Controller
     {
         $data['list_matkul'] = $this->perkuliahan_model->daftarMatkul();
         $data['list_fakultas'] = $this->fakultas_model->daftar_fakultas();
+        $data['list_jurusan'] = $this->fakultas_model->daftar_jurusan();
+        $data['list_jurusan2'] = $this->fakultas_model->daftar_jurusan();
         $this->load->view("Perkuliahan/index", $data);
         if (isset($_POST['tambahMatkul'])) {
             $this->perkuliahan_model->tambahMatkul($_POST);
@@ -31,6 +33,7 @@ class Perkuliahan_controllers extends CI_Controller
         $nip                    = $this->session->userdata("nip");
         $data['my_profile']      = $this->dosen_model->exploredosenByNip($nip);
         $data['list_matkul']    = $this->perkuliahan_model->daftarMatkul();
+        $data['matkul_ajarku'] = $this->perkuliahan_model->daftarMatkulByDosen($nip);
         $this->load->view("Perkuliahan/matkul_ampu", $data);
         if (isset($_POST['ambilMatkul'])) {
             $this->perkuliahan_model->ambilMatkul($_POST, $nip);
@@ -44,7 +47,11 @@ class Perkuliahan_controllers extends CI_Controller
 
     public function dataKuliah()
     {
-        $data['list_datakuliah'] = $this->perkuliahan_model->daftarDatakuliah();
+        $nip                    = $this->session->userdata("nip");
+        $data['my_profile']      = $this->dosen_model->exploredosenByNip($nip);
+        $data['list_matkul']    = $this->perkuliahan_model->daftarMatkul();
+        $data['matkul_ajarku'] = $this->perkuliahan_model->daftarMatkulByDosen($nip);
+        $data['data_matkul'] = $this->perkuliahan_model->daftarData_kuliah($nip);
         $this->load->view("Perkuliahan/data_kuliah", $data);
     }
 }

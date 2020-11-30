@@ -108,7 +108,7 @@
                             <div class="card card-default">
                                 <div class="card-body">
                                     <h5 class="card-title">Tambah Hari</h5>
-                                    <form action="" method="post">
+                                    <form action="<?= base_url('Data_controllers/tambahHari') ?>" method="post">
                                         <div class="form-group">
                                             <label for="kode_jam">Kode Hari</label>
                                             <input type="text" class="form-control" id="id_hari" name="id_hari" placeholder="Kode Hari">
@@ -118,7 +118,7 @@
                                             <input type="text" class="form-control" id="nama_hari" name="nama_hari" placeholder="Nama Hari">
                                         </div>
                                         
-                                        <button type="submit" class="btn btn-dark mt-3" name="tambahJam">Submit</button>
+                                        <button type="submit" class="btn btn-dark mt-3" name="tambahHari">Submit</button>
                                     </form>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                             <div class="card card-default">
                                 <div class="card-body">
                                     <h5 class="card-title">Tambah Jam</h5>
-                                    <form action="" method="post">
+                                    <form action="<?= base_url('Data_controllers/tambahJam') ?>" method="post">
                                         <div class="form-group">
                                             <label for="kode_jam">Kode Jam</label>
                                             <input type="text" class="form-control" id="kode_jam" name="kode_jam" placeholder="Kode Jam">

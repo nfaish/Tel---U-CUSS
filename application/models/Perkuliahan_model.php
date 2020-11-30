@@ -16,14 +16,17 @@ class Perkuliahan_model extends CI_Model
     {
         $nama_matkul   = $this->db->escape($_POST['nama_matkul']);
         $kode_matkul   = $this->db->escape($_POST['kode_matkul']);
+        $sks   = $this->db->escape($_POST['sks']);
         $query = "INSERT INTO matkul (
             nama_matkul,
-            kode_matkul
+            kode_matkul,
+            sks
         )
         VALUES
             (
             $nama_matkul,
-            $kode_matkul
+            $kode_matkul,
+            $sks
             )";
         $sql = $this->db->query($query);
     }
@@ -67,10 +70,41 @@ class Perkuliahan_model extends CI_Model
         }
     }
 
-    public function daftarDatakuliah()
+    public function daftarMatkulByDosen($nip)
     {
-        $query = "SELECT * FROM mengajar";
+        $query = "SELECT matkul.nama_matkul as nama_matkul, 
+                        matkul.kode_matkul as kode_matkul, 
+                        matkul.sks as sks,
+                        mengajar.nip as nip,
+                        mengajar.id_mengajar as id_mengajar
+                        FROM mengajar JOIN matkul on 
+                        mengajar.id_matkul = matkul.id_matkul
+                        WHERE mengajar.nip = $nip ";
         $sql = $this->db->query($query);
         return $sql->result_array();
+        
+    }
+
+    public function daftarData_kuliah($nip)
+    {
+        $query = "SELECT matkul.nama_matkul as nama_matkul, 
+                        matkul.kode_matkul as kode_matkul, 
+                        matkul.sks as sks,
+                        mengajar.nip as nip,
+                        mengajar.id_mengajar as id_mengajar,
+                        dosen.nama_depan as nama_depan,
+                        dosen.nama_belakang as nama_belakang,
+                        dosen.kode_dosen as kode_dosen
+                        FROM mengajar 
+                        JOIN dosen on mengajar.nip = dosen.nip 
+                        JOIN matkul on mengajar.id_matkul = matkul.id_matkul";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
+    public function deleteByNip($nip)
+    {
+        $this->db->delete('mengajar', array('nip' => $nip));
+         return true;
     }
 }

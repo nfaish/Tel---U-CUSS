@@ -22,35 +22,49 @@ class Waktu_model extends CI_Model
     }
 
 
-    public function daftar_jam()
+    // public function daftar_jam()
+    // {
+    //     $query = "SELECT 
+    //                 waktu.kode_waktu,
+    //                 waktu.id_kelas,
+    //                 waktu.kode_jam,
+    //                 jam.kode_jam,
+    //                 jam.nama_jam
+    //                 FROM jam
+    //                 JOIN waktu ON
+    //                     waktu.kode_jam = jam.kode_jam ";
+    //     $sql = $this->db->query($query);
+    //     return $sql->result_array();
+    // }
+
+    public function daftar_jam2()
     {
-        $query = "SELECT 
-                    waktu.kode_waktu,
-                    waktu.id_kelas,
-                    waktu.kode_jam,
-                    jam.kode_jam,
-                    jam.nama_jam
-                    FROM jam
-                    JOIN waktu ON
-                        waktu.kode_jam = jam.kode_jam ";
+        $query = "SELECT * FROM jam";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
 
-    public function daftar_hari()
+    public function daftar_hari2()
     {
-        $query = "SELECT 
-                    hari.id_hari,
-                    hari.nama_hari,
-                    waktu.kode_waktu,
-                    waktu.id_kelas,
-                    waktu.kode_jam
-                    FROM hari
-                    JOIN waktu ON
-                        waktu.id_hari = hari.id_hari ";
+        $query = "SELECT * FROM hari";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
+
+    // public function daftar_hari()
+    // {
+    //     $query = "SELECT 
+    //                 hari.id_hari,
+    //                 hari.nama_hari,
+    //                 waktu.kode_waktu,
+    //                 waktu.id_kelas,
+    //                 waktu.kode_jam
+    //                 FROM hari
+    //                 JOIN waktu ON
+    //                     waktu.id_hari = hari.id_hari ";
+    //     $sql = $this->db->query($query);
+    //     return $sql->result_array();
+    // }
 
     public function tambahJam($post)
     {
@@ -69,15 +83,15 @@ class Waktu_model extends CI_Model
     }
     public function tambahHari($post)
     {
-        $kode_hari           = $this->db->escape($_POST['kode_hari']);
+        $id_hari           = $this->db->escape($_POST['id_hari']);
         $nama_hari           = $this->db->escape($_POST['nama_hari']);
         $query = "INSERT INTO hari (
-                    kode_hari,
+                    id_hari,
                     nama_hari
                 )
                 VALUES
                     (
-                        $kode_hari,
+                        $id_hari,
                         $nama_hari
                     )";
         $sql = $this->db->query($query);
@@ -91,5 +105,12 @@ class Waktu_model extends CI_Model
     public function hapus_hari($id_hari)
     {
         $this->db->delete('hari', ['id_hari' => $id_hari]);
+    }
+
+    function select()
+    {
+        $this->db->order_by('id_hari', 'DESC');
+        $query = $this->db->get('hari');
+        return $query;
     }
 }

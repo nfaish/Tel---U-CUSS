@@ -115,4 +115,10 @@ class Dosen_model extends CI_Model
         print_r($nip);
         return $sql->row_array();
     }
+
+    public function deleteRolesByNip($nip)
+    {
+        $this->db->delete('roles', array('nip' => $nip));
+         return true;
+    }
 }

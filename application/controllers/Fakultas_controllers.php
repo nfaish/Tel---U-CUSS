@@ -20,6 +20,7 @@ class Fakultas_controllers extends CI_Controller
     public function exploreJurusan($id_jurusan)
     {
         $data['jurusanByID'] = $this->fakultas_model->jurusanByID($id_jurusan);
+        // $data['angkatanByID'] = $this->fakultas_model->angkatanByID($id_jurusan);
         $data['kelasJurusan'] = $this->fakultas_model->daftar_kelas($id_jurusan);
 
         $this->load->view("jurusan_view/detail_jurusan", $data);
