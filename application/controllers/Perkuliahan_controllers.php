@@ -24,7 +24,7 @@ class Perkuliahan_controllers extends CI_Controller
             redirect("Perkuliahan_controllers");
         } else if (isset($_POST['tambahMkdu'])) {
             $this->perkuliahan_model->tambahMkdu($_POST);
-            redirect("Perkuliahan_controllers");
+            redirect("Perkuliahan_controllers/matkulAmpu");
         }
     }
 
@@ -58,7 +58,7 @@ class Perkuliahan_controllers extends CI_Controller
     public function dataMKDU_fakultas()
     {
         $data['list_matkul'] = $this->perkuliahan_model->daftarMatkul();
-        $data['list_fakultas'] = $this->fakultas_model->daftar_fakultas();
+        $data['list_mkdu'] = $this->perkuliahan_model->daftarMKDU();
         $this->load->view("Perkuliahan/mkdu_fakultas", $data);
         if (isset($_POST['tambahMatkul'])) {
             $this->perkuliahan_model->tambahMatkul($_POST);

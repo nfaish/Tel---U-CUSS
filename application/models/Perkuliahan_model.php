@@ -33,24 +33,23 @@ class Perkuliahan_model extends CI_Model
 
     public function tambahMkdu($post)
     {
-        $angkatan    = $this->db->escape($_POST['angkatan']);
-        $id_fakultas    = $this->db->escape($_POST['id_fakultas']);
+        $id_jurusan    = $this->db->escape($_POST['id_jurusan']);
         $id_matkul      = $this->db->escape($_POST['id_matkul']);
         // print_r($id_matkul);
         for ($i = 0; $i < sizeof($id_matkul); $i++) {
             $query = "INSERT INTO perkuliahan (
-            angkatan,
-            id_fakultas,
-            id_matkul
-        )
-        VALUES
+                id_jurusan,
+                id_matkul
+            )
+            VALUES
             (
-            $angkatan,
-            $id_fakultas,
-            $id_matkul[$i]
+                $id_jurusan,
+                $id_matkul[$i]
             )";
             $sql = $this->db->query($query);
         }
+
+
     }
 
     public function ambilMatkul($post, $nip)
@@ -106,5 +105,24 @@ class Perkuliahan_model extends CI_Model
     {
         $this->db->delete('mengajar', array('nip' => $nip));
          return true;
+    }
+
+    public function daftarMKDU()
+    {
+        $query = "SELECT 
+                    fakultas.nama_fakultas as nama_fakultas,
+                    jurusan.nama_jurusan as nama_jurusan,
+                    angkatan.angkatan as angkatan,
+                    matkul.nama_matkul as nama_matkul,
+                    matkul.kode_matkul as kode_matkul,
+                    matkul.sks as sks
+                    FROM perkuliahan
+                    JOIN jurusan ON perkuliahan.id_jurusan = jurusan.id_jurusan
+                    JOIN matkul ON matkul.id_matkul = perkuliahan.id_matkul
+                    JOIN fakultas ON fakultas.id_fakultas = jurusan.id_fakultas
+                    JOIN angkatan_jurusan ON jurusan.id_jurusan = angkatan_jurusan.id_jurusan
+                    JOIN angkatan ON angkatan_jurusan.id_angkatan = angkatan.id_angkatan";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
     }
 }

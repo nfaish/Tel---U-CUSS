@@ -44,10 +44,13 @@
                                                     <?php foreach ($list_mkdu as $row => $value) { ?>
                                                         <tr>
                                                             <td>
-                                                                <?php echo $value['']; ?>
+                                                                <?php echo $value['nama_fakultas']; ?>
                                                             </td>
                                                             <td>
-                                                                <?php echo $value['']; ?>
+                                                                <?php echo $value['nama_jurusan']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['angkatan']; ?>
                                                             </td>
                                                             <td>
                                                                 <?php echo $value['nama_matkul']; ?>
@@ -59,8 +62,8 @@
                                                                 <?php echo $value['sks']; ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?= base_url('/perkuliahan_controllers/exploreMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                                <a href="<?= base_url('/perkuliahan_controllers/hapusMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                                <!-- <a href="<?= base_url('/perkuliahan_controllers/exploreMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                                <a href="<?= base_url('/perkuliahan_controllers/hapusMatkul/' . $value['id_matkul']) ?>" class='btn btn-sm btn-danger'>Delete</a> -->
                                                             </td>
                                                         </tr>
                                                     <?php }
