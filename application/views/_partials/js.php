@@ -152,6 +152,24 @@ $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) 
             }
         }
 
+        async function getAngkatanByJurusan(id_jurusan){
+            let result;
+
+            try {
+                result = await $.ajax({
+                    url: '<?php echo site_url('Perkuliahan_controllers/angkatanByJurusanId')?>' + '/' + id_jurusan,
+                    type: 'POST',
+                    data: {
+                        id_jurusan : id_jurusan
+                    },
+                })
+
+                return result;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         $(".wawaw").click(function() {
             // $(this).toggleClass('btn-default btn-success');
             // $(event.currentTarget).text($(event.currentTarget).text() === 
@@ -366,6 +384,8 @@ $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) 
             });
         });
 
+        // Pengisi dropdown jurusan sesuai fakultas
+
         $('#fakultas_tmkdu').change(function(){
             try {
                 console.log("test 1");
@@ -375,6 +395,10 @@ $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) 
                     var obj = JSON.parse(data);
                     if(obj.length != 0){
                         $('#jurusan_tmkdu').empty();
+                        var o =  new Option(' - Pilih Program Studi - ','');
+
+                        $(o).html(' - Pilih Program Studi - ');
+                        $('#jurusan_tmkdu').append(o);
                         $.each(obj, function(key, value) {
                             var o =  new Option(value.nama_jurusan,value.id_jurusan);
 
@@ -382,12 +406,10 @@ $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) 
                             $('#jurusan_tmkdu').append(o);
                         })
                         $('#angkatan_tmkdu').empty();
-                        $.each(obj, function(key, value) {
-                            var o =  new Option(value.angkatan,value.id_angkatan);
+                        var o =  new Option(' - Pilih Tahun Angkatan - ','');
 
-                            $(o).html(value.angkatan);
-                            $('#angkatan_tmkdu').append(o);
-                        })
+                        $(o).html(' - Pilih Tahun Angkatan - ');
+                        $('#angkatan_tmkdu').append(o);
                     } else {
                         $('#jurusan_tmkdu').empty();
                         var o =  new Option(' - Pilih Program Studi - ','');
@@ -395,15 +417,60 @@ $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) 
                         $(o).html(' - Pilih Program Studi - ');
                         $('#jurusan_tmkdu').append(o);
                         $('#angkatan_tmkdu').empty();
-                        var o =  new Option(' - Pilih Angkatan - ','');
+                        var o =  new Option(' - Pilih Tahun Angkatan - ','');
 
-                        $(o).html(' - Pilih Angkatan - ');
+                        $(o).html(' - Pilih Tahun Angkatan - ');
                         $('#angkatan_tmkdu').append(o);
                     }
                     
                 });
             } catch (error) {
                 console.log(error);
+                $('#jurusan_tmkdu').empty();
+                var o =  new Option(' - Pilih Program Studi - ','');
+
+                $(o).html(' - Pilih Program Studi - ');
+                $('#jurusan_tmkdu').append(o);
+            }
+        })
+
+        // Pengisi dropdown angkatan sesuai jurusan
+
+        $('#jurusan_tmkdu').change(function(){
+            try {
+                console.log("test 2");
+                console.log($(this).val());
+                getAngkatanByJurusan($(this).val()).then((data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    if(obj.length != 0){
+                        $('#angkatan_tmkdu').empty();
+                        var o =  new Option(' - Pilih Tahun Angkatan - ','');
+
+                        $(o).html(' - Pilih Tahun Angkatan - ');
+                        $('#angkatan_tmkdu').append(o);
+                        $.each(obj, function(key, value) {
+                            var o =  new Option(value.angkatan,value.id_angkatan);
+
+                            $(o).html(value.angkatan);
+                            $('#angkatan_tmkdu').append(o);
+                        })
+                    } else {
+                        $('#angkatan_tmkdu').empty();
+                        var o =  new Option(' - Pilih Tahun Angkatan - ','');
+
+                        $(o).html(' - Pilih Tahun Angkatan - ');
+                        $('#angkatan_tmkdu').append(o);
+                    }
+                    
+                });
+            } catch (error) {
+                console.log(error);
+                $('#angkatan_tmkdu').empty();
+                var o =  new Option(' - Pilih Tahun Angkatan - ','');
+
+                $(o).html(' - Pilih Tahun Angkatan - ');
+                $('#angkatan_tmkdu').append(o);
             }
         })
     });
