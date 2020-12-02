@@ -57,12 +57,16 @@ class Perkuliahan_controllers extends CI_Controller
 
     public function dataMKDU_fakultas()
     {
-        $nip                    = $this->session->userdata("nip");
-        $data['my_profile']      = $this->dosen_model->exploredosenByNip($nip);
-        $data['list_matkul']    = $this->perkuliahan_model->daftarMatkul();
-        $data['matkul_ajarku'] = $this->perkuliahan_model->daftarMatkulByDosen($nip);
-        $data['data_matkul'] = $this->perkuliahan_model->daftarData_kuliah($nip);
+        $data['list_matkul'] = $this->perkuliahan_model->daftarMatkul();
+        $data['list_fakultas'] = $this->fakultas_model->daftar_fakultas();
         $this->load->view("Perkuliahan/mkdu_fakultas", $data);
+        if (isset($_POST['tambahMatkul'])) {
+            $this->perkuliahan_model->tambahMatkul($_POST);
+            redirect("Perkuliahan_controllers");
+        } else if (isset($_POST['tambahMkdu'])) {
+            $this->perkuliahan_model->tambahMkdu($_POST);
+            redirect("Perkuliahan_controllers");
+        }
     }
 
     public function jurusanByFakultasId(){

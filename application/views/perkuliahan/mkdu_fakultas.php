@@ -72,8 +72,7 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
+                    <div class="col-sm-6">
                             <div class="card card-default">
                                 <div class="card-body">
                                     <h5 class="card-title">Tambah Mata Kuliah Dasar Umum</h5>
@@ -91,18 +90,12 @@
                                             <label for="id_fakultas">Nama Program Studi</label>
                                             <select class="form-control" id="jurusan_tmkdu" name="id_jurusan">
                                                 <option value=""> - Pilih Program Studi - </option>
-                                                <?php foreach ($list_jurusan as $list_jurusan) { ?>
-                                                    <option value="<?php echo $list_jurusan['id_jurusan']; ?>"><?php echo $list_jurusan['nama_jurusan']; ?> </option>
-                                                <?php } ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="angkatan">Angkatan</label>
                                             <select class="form-control" id="angkatan_tmkdu" name="angkatan">
                                                 <option value=""> - Pilih Tahun Angkatan - </option>
-                                                <?php foreach ($list_jurusan2 as $list_jurusan2) { ?>
-                                                    <option value="<?php echo $list_jurusan2['id_jurusan']; ?>"><?php echo $list_jurusan2['angkatan']; ?> </option>
-                                                <?php } ?>
                                             </select>
                                         </div>
                                         <label for="kode_matkul">Nama Mata Kuliah</label>
@@ -120,7 +113,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 <!-- /.container-fluid -->
                 </div>
             </div>
