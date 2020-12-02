@@ -21,14 +21,15 @@ class Fakultas_model extends CI_Model
                     jurusan.id_jurusan,
                     jurusan.kode_jurusan,
                     jurusan.nama_jurusan,
-                    angkatan.id_angkatan,
-                    angkatan.angkatan,
-                    jurusan.id_fakultas
-                    FROM fakultas
-                    JOIN jurusan ON
+                    jurusan.id_fakultas,
+                    angkatan.angkatan
+                    FROM jurusan
+                    JOIN fakultas ON
                         jurusan.id_fakultas = fakultas.id_fakultas
+                    JOIN angkatan_jurusan ON
+                        jurusan.id_jurusan = angkatan_jurusan.id_jurusan
                     JOIN angkatan ON
-                        jurusan.id_angkatan = angkatan.id_angkatan ";
+                        angkatan.id_angkatan = angkatan_jurusan.id_angkatan";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
@@ -115,30 +116,48 @@ class Fakultas_model extends CI_Model
         $nama_jurusan   = $this->db->escape($_POST['nama_jurusan']);
         $kode_jurusan   = $this->db->escape($_POST['kode_jurusan']);
         $angkatan       = $this->db->escape($_POST['angkatan']);
-        $query2 = "INSERT INTO angkatan (
+
+        // INSERT ANGAKATAN
+
+        $query1 = "INSERT INTO angkatan (
             angkatan
         ) SELECT * FROM (SELECT $angkatan) t
         WHERE NOT EXISTS (SELECT angkatan FROM angkatan WHERE angkatan = $angkatan) ";
-        $sql2 = $this->db->query($query2);
+        $sql1 = $this->db->query($query1);
+
+        // BACA ANGKATAN YANG KITA INPUT
         
-        $query3 = "SELECT * FROM angkatan WHERE angkatan = $angkatan";
-        $sql3 = $this->db->query($query3);
-        $hasilquery = $sql3->result_array(); 
+        $query2 = "SELECT * FROM angkatan WHERE angkatan = $angkatan";
+        $sql2 = $this->db->query($query2);
+        $hasilquery = $sql2->result_array(); 
         $id_angkatan = $hasilquery[0]['id_angkatan'];
-        $query = "INSERT INTO jurusan (
-                    id_fakultas,
-                    nama_jurusan,
-                    kode_jurusan,
+
+        // INSERT JURUSAN
+
+        $query3 = "INSERT INTO jurusan (
+            id_fakultas,
+            nama_jurusan,
+            kode_jurusan
+        ) SELECT * FROM (SELECT $id_fakultas, $nama_jurusan, $kode_jurusan) t
+        WHERE NOT EXISTS (SELECT nama_jurusan FROM jurusan WHERE kode_jurusan = $kode_jurusan AND id_fakultas = $id_fakultas) ";
+        $sql3 = $this->db->query($query3);
+
+        // BACA JURUSAN YANG KITA INPUT
+
+        $query4 = "SELECT * FROM jurusan WHERE kode_jurusan = $kode_jurusan AND id_fakultas = $id_fakultas";
+        $sql4 = $this->db->query($query4);
+        $hasilquery = $sql4->result_array(); 
+        $id_jurusan = $hasilquery[0]['id_jurusan'];
+
+        // INSERT BRIDGE TABEL ANGKATAN_JURUSAN
+
+        $query5 = "INSERT INTO angkatan_jurusan (
+                    id_jurusan,
                     id_angkatan
                 )
-                VALUES
-                    (
-                    $id_fakultas,
-                    $nama_jurusan,
-                    $kode_jurusan,
-                    $id_angkatan
-                    )";
-        $sql = $this->db->query($query);
+                SELECT * FROM (SELECT $id_jurusan, $id_angkatan) t
+                WHERE NOT EXISTS (SELECT id_angkatan_jurusan FROM angkatan_jurusan WHERE id_jurusan = $id_jurusan AND id_angkatan = $id_angkatan) ";
+        $sql5 = $this->db->query($query5);
     }
     
 
@@ -192,7 +211,19 @@ class Fakultas_model extends CI_Model
     }
 
     public function jurusanByFakultasId($id_fakultas){
-        return $this->db->select('*')->where('id_fakultas', $id_fakultas)->join('angkatan','angkatan.id_angkatan = jurusan.id_angkatan')->get('jurusan')->result_array();
+        return $this->db->select('*')->where('id_fakultas', $id_fakultas)->get('jurusan')->result_array();
         // SELECT * FROM FAKULTAS WHERE id_fakultas = $id_fakultas
+
+        // ANGKATAN 
+        
+        // JURUSAN
+    }
+
+    public function angkatanByJurusanId($id_jurusan){
+        return $this->db
+            ->select('angkatan.*')
+            ->where('angkatan_jurusan.id_jurusan', $id_jurusan)
+            ->join('angkatan_jurusan','angkatan.id_angkatan = angkatan_jurusan.id_angkatan')
+            ->get('angkatan')->result_array();
     }
 }

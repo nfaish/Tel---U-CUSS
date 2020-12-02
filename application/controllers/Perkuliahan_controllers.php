@@ -71,4 +71,11 @@ class Perkuliahan_controllers extends CI_Controller
         $data = $this->fakultas_model->jurusanByFakultasId($id_fakultas);
         echo json_encode($data);
     }
+
+    public function angkatanByJurusanId(){
+        $id_jurusan = $this->input->post('id_jurusan');
+
+        $data = $this->fakultas_model->angkatanByJurusanId($id_jurusan);
+        echo json_encode($data);
+    }
 }
