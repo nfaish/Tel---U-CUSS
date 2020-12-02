@@ -134,6 +134,24 @@ $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) 
         var nama_pembimbing = [];
         var tanggal = [];
 
+        async function getJurusanByFakultas(id_fakultas){
+            let result;
+
+            try {
+                result = await $.ajax({
+                    url: '<?php echo site_url('Perkuliahan_controllers/jurusanByFakultasId')?>' + '/' + id_fakultas,
+                    type: 'POST',
+                    data: {
+                        id_fakultas : id_fakultas
+                    },
+                })
+
+                return result;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         $(".wawaw").click(function() {
             // $(this).toggleClass('btn-default btn-success');
             // $(event.currentTarget).text($(event.currentTarget).text() === 
@@ -347,5 +365,46 @@ $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) 
                 }
             });
         });
+
+        $('#fakultas_tmkdu').change(function(){
+            try {
+                console.log("test 1");
+                console.log($(this).val());
+                getJurusanByFakultas($(this).val()).then((data) => {
+                    console.log(data);
+                    var obj = JSON.parse(data);
+                    if(obj.length != 0){
+                        $('#jurusan_tmkdu').empty();
+                        $.each(obj, function(key, value) {
+                            var o =  new Option(value.nama_jurusan,value.id_jurusan);
+
+                            $(o).html(value.nama_jurusan);
+                            $('#jurusan_tmkdu').append(o);
+                        })
+                        $('#angkatan_tmkdu').empty();
+                        $.each(obj, function(key, value) {
+                            var o =  new Option(value.angkatan,value.id_angkatan);
+
+                            $(o).html(value.angkatan);
+                            $('#angkatan_tmkdu').append(o);
+                        })
+                    } else {
+                        $('#jurusan_tmkdu').empty();
+                        var o =  new Option(' - Pilih Program Studi - ','');
+
+                        $(o).html(' - Pilih Program Studi - ');
+                        $('#jurusan_tmkdu').append(o);
+                        $('#angkatan_tmkdu').empty();
+                        var o =  new Option(' - Pilih Angkatan - ','');
+
+                        $(o).html(' - Pilih Angkatan - ');
+                        $('#angkatan_tmkdu').append(o);
+                    }
+                    
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        })
     });
 </script>

@@ -144,7 +144,7 @@
                                     <form action="" method="post">
                                         <div class="form-group">
                                             <label for="id_fakultas">Nama Fakultas</label>
-                                            <select class="form-control" id="id_fakultas" name="id_fakultas">
+                                            <select class="form-control" id="fakultas_tmkdu" name="id_fakultas">
                                                 <option value=""> - Pilih Fakultas - </option>
                                                 <?php foreach ($list_fakultas as $list_fakultas) { ?>
                                                     <option value="<?php echo $list_fakultas['id_fakultas']; ?>"><?php echo $list_fakultas['nama_fakultas']; ?> </option>
@@ -153,7 +153,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="id_fakultas">Nama Program Studi</label>
-                                            <select class="form-control" id="id_jurusan" name="id_jurusan">
+                                            <select class="form-control" id="jurusan_tmkdu" name="id_jurusan">
                                                 <option value=""> - Pilih Program Studi - </option>
                                                 <?php foreach ($list_jurusan as $list_jurusan) { ?>
                                                     <option value="<?php echo $list_jurusan['id_jurusan']; ?>"><?php echo $list_jurusan['nama_jurusan']; ?> </option>
@@ -162,7 +162,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="angkatan">Angkatan</label>
-                                            <select class="form-control" id="angkatan" name="angkatan">
+                                            <select class="form-control" id="angkatan_tmkdu" name="angkatan">
                                                 <option value=""> - Pilih Tahun Angkatan - </option>
                                                 <?php foreach ($list_jurusan2 as $list_jurusan2) { ?>
                                                     <option value="<?php echo $list_jurusan2['id_jurusan']; ?>"><?php echo $list_jurusan2['angkatan']; ?> </option>

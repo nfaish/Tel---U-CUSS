@@ -190,4 +190,9 @@ class Fakultas_model extends CI_Model
     {
         $this->db->insert_batch('kelas', $data);
     }
+
+    public function jurusanByFakultasId($id_fakultas){
+        return $this->db->select('*')->where('id_fakultas', $id_fakultas)->join('angkatan','angkatan.id_angkatan = jurusan.id_angkatan')->get('jurusan')->result_array();
+        // SELECT * FROM FAKULTAS WHERE id_fakultas = $id_fakultas
+    }
 }

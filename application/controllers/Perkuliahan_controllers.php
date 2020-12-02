@@ -54,4 +54,11 @@ class Perkuliahan_controllers extends CI_Controller
         $data['data_matkul'] = $this->perkuliahan_model->daftarData_kuliah($nip);
         $this->load->view("Perkuliahan/data_kuliah", $data);
     }
+
+    public function jurusanByFakultasId(){
+        $id_fakultas = $this->input->post('id_fakultas');
+
+        $data = $this->fakultas_model->jurusanByFakultasId($id_fakultas);
+        echo json_encode($data);
+    }
 }
