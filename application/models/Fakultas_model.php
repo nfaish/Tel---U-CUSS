@@ -64,8 +64,10 @@ class Fakultas_model extends CI_Model
                     FROM jurusan
                     JOIN fakultas ON
                         fakultas.id_fakultas = jurusan.id_fakultas
-                    JOIN angkatan ON 
-                        angkatan.id_angkatan = jurusan.id_angkatan
+                    JOIN angkatan_jurusan ON
+                        jurusan.id_jurusan = angkatan_jurusan.id_jurusan
+                    JOIN angkatan ON
+                        angkatan.id_angkatan = angkatan_jurusan.id_angkatan
                     WHERE jurusan.id_jurusan =" . $id_jurusan;
 
         $sql = $this->db->query($query);
