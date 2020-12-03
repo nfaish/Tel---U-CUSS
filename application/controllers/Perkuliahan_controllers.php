@@ -59,6 +59,7 @@ class Perkuliahan_controllers extends CI_Controller
     {
         $data['list_matkul'] = $this->perkuliahan_model->daftarMatkul();
         $data['list_mkdu'] = $this->perkuliahan_model->daftarMKDU();
+        $data['list_fakultas'] = $this->fakultas_model->daftar_fakultas();
         $this->load->view("Perkuliahan/mkdu_fakultas", $data);
         if (isset($_POST['tambahMatkul'])) {
             $this->perkuliahan_model->tambahMatkul($_POST);

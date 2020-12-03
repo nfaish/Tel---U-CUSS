@@ -25,7 +25,7 @@
                         <div class="card card-default">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <form action="preferensi/create" method="post">
+                                    <form action="Preferensi_controllers/create" method="post">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -55,67 +55,67 @@
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="6.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="shift1<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="7.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="2" id="defaultCheck2" name="shift2<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="8.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="3" id="defaultCheck2" name="shift3<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="9.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="4" id="defaultCheck2" name="shift4<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="10.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="5" id="defaultCheck2" name="shift5<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="11.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="6" id="defaultCheck2" name="shift6<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="12.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="7" id="defaultCheck2" name="shift7<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="13.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="8" id="defaultCheck2" name="shift8<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="14.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="9" id="defaultCheck2" name="shift9<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="15.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="10" id="defaultCheck2" name="shift10<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="16.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="11" id="defaultCheck2" name="shift11<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="17.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="12" id="defaultCheck2" name="shift12<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" value="1" id="defaultCheck2" name="18.30<?php echo $jadwal['id_hari'] ?>">
+                                                                <input class="form-check-input" type="checkbox" value="13" id="defaultCheck2" name="shift13<?php echo $jadwal['id_hari'] ?>">
                                                             </div>
                                                         </td>
                                                     </tr>

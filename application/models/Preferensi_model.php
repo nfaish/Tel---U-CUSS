@@ -5,55 +5,67 @@ class Preferensi_model extends CI_Model
 {
     public function __construct()
     {
-        return $this->db->get('preferensi')->result_array();
+        return $this->db->get('hari')->result_array();
     }
 
-    //membaca DB baru_pekansidang untuk tampilan DOSEN
+    //membaca DB hari untuk tampilan DOSEN
     public function bacaJadwal()
     {
         return $this->db->get('hari')->result_array();
     }
 
+    public function tambahPreferensi()
+    {
+        $query = "SELECT * FROM hari";
+
+        $sql = $this->db->query($query);
+
+        return $sql->result_array();
+    }
+
+    public function bacaPreferensi($nip)
+    {
+        return $this->db->get('preferensi')->result_array($nip);
+    }
+
     //menambahkan kesediaan untuk menguji
     public function masukkanPreferensiDosen()
     {
-        $hari = $this->input->post('nama_hari');
-
-        $jumlah_hari = count($hari);
-
-        for ($i = 0; $i < $hari; $i++) {
+        $nama_hari = $this->input->post('nama_hari');
+        $jumlah_nama_hari = count($nama_hari);
+        for ($i = 0; $i < $jumlah_nama_hari; $i++) {
             //Cek input jika ada maka 1, jika tidak maka 0
-            $jam1Checked = $this->input->post('6.30' . $hari[$i]) == null ? 0 : 1;
-            $jam2Checked = $this->input->post('7.30' . $hari[$i]) == null ? 0 : 1;
-            $jam3Checked = $this->input->post('8.30' . $hari[$i]) == null ? 0 : 1;
-            $jam4Checked = $this->input->post('9.30' . $hari[$i]) == null ? 0 : 1;
-            $jam5Checked = $this->input->post('10.30' . $hari[$i]) == null ? 0 : 1;
-            $jam6Checked = $this->input->post('11.30' . $hari[$i]) == null ? 0 : 1;
-            $jam7Checked = $this->input->post('12.30' . $hari[$i]) == null ? 0 : 1;
-            $jam8Checked = $this->input->post('13.30' . $hari[$i]) == null ? 0 : 1;
-            $jam9Checked = $this->input->post('14.30' . $hari[$i]) == null ? 0 : 1;
-            $jam10Checked = $this->input->post('15.30' . $hari[$i]) == null ? 0 : 1;
-            $jam11Checked = $this->input->post('16.30' . $hari[$i]) == null ? 0 : 1;
-            $jam12Checked = $this->input->post('17.30' . $hari[$i]) == null ? 0 : 1;
-            $jam13Checked = $this->input->post('18.30' . $hari[$i]) == null ? 0 : 1;
+            $jam1Checked = $this->input->post('shift1' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam2Checked = $this->input->post('shift2' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam3Checked = $this->input->post('shift3' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam4Checked = $this->input->post('shift4' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam5Checked = $this->input->post('shift5' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam6Checked = $this->input->post('shift6' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam7Checked = $this->input->post('shift7' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam8Checked = $this->input->post('shift8' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam9Checked = $this->input->post('shift9' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam10Checked = $this->input->post('shift10' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam11Checked = $this->input->post('shift11' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam12Checked = $this->input->post('shift12' . $nama_hari[$i]) == null ? 0 : 1;
+            $jam13Checked = $this->input->post('shift13' . $nama_hari[$i]) == null ? 0 : 1;
 
             //siapin variabel buat dikirim
             $data = [
                 'nip' => $this->session->nip,
-                'id_pekansidang' => $hari[$i],
-                '6.30' => $jam1Checked,
-                '7.30' => $jam2Checked,
-                '8.30' => $jam3Checked,
-                '9.30' => $jam4Checked,
-                '10.30' => $jam5Checked,
-                '11.30' => $jam6Checked,
-                '12.30' => $jam7Checked,
-                '13.30' => $jam8Checked,
-                '14.30' => $jam9Checked,
-                '15.30' => $jam10Checked,
-                '16.30' => $jam11Checked,
-                '17.30' => $jam12Checked,
-                '18.30' => $jam13Checked,
+                'id_hari' => $nama_hari[$i],
+                'shift1' => $jam1Checked,
+                'shift2' => $jam2Checked,
+                'shift3' => $jam3Checked,
+                'shift4' => $jam4Checked,
+                'shift5' => $jam5Checked,
+                'shift6' => $jam6Checked,
+                'shift7' => $jam7Checked,
+                'shift8' => $jam8Checked,
+                'shift9' => $jam9Checked,
+                'shift10' => $jam10Checked,
+                'shift11' => $jam11Checked,
+                'shift12' => $jam12Checked,
+                'shift13' => $jam13Checked,
             ];
 
             //jalanin query database
@@ -61,10 +73,31 @@ class Preferensi_model extends CI_Model
         }
     }
 
-    public function bacaPreferensi($nip)
-    {
-        return $this->db->get('baru_jadwaldosen')->result_array($nip);
-    }
+     public function jadwaldosen()
+     {
+        $nip = $this->session->nip;
+        $query = $this->db->query("SELECT   preferensi.nip as nip ,
+                                            hari.id_hari as id_hari,
+                                            hari.nama_hari as nama_hari,
+                                            preferensi.shift1 as shift1, 
+                                            preferensi.shift2 as shift2, 
+                                            preferensi.shift3 as shift3,
+                                            preferensi.shift4 as shift4, 
+                                            preferensi.shift5 as shift5, 
+                                            preferensi.shift6 as shift6, 
+                                            preferensi.shift7 as shift7, 
+                                            preferensi.shift8 as shift8, 
+                                            preferensi.shift9 as shift9, 
+                                            preferensi.shift10 as shift10, 
+                                            preferensi.shift11 as shift11, 
+                                            preferensi.shift12 as shift12,  
+                                            preferensi.shift13 as shift13 
+                                    FROM preferensi
+                                    JOIN hari ON preferensi.id_hari = hari.id_hari
+                                    WHERE nip = '$nip'");
+
+        return $query->result_array();
+     }
 
     public function test()
     {
@@ -72,4 +105,11 @@ class Preferensi_model extends CI_Model
         {
         }
     }
+
+    public function deleteByNip($nip)
+     {
+         $this->db->delete('preferensi', array('nip' => $nip));
+         return true;
+     }
+
 }
