@@ -167,19 +167,27 @@ class Fakultas_model extends CI_Model
         $nama_fakultas  = $this->db->escape($_POST['nama_fakultas']);
         $kode_fakultas  = $this->db->escape($_POST['kode_fakultas']);
         $id_gedung      = $this->db->escape($_POST['id_gedung']);
+
+        // Tambah ke tabel fakultas
+
         $query1   = "INSERT INTO fakultas (
             nama_fakultas,
             kode_fakultas
-        )
-        VALUES
-            (
-            $nama_fakultas,
-            $kode_fakultas
-            )";
+        ) SELECT * FROM (SELECT $nama_fakultas, $kode_fakultas) t
+        WHERE NOT EXISTS (SELECT nama_fakultas FROM fakultas WHERE kode_fakultas = $kode_fakultas AND nama_fakultas = $nama_fakultas)";
         $sql1 = $this->db->query($query1);
 
+        // Ambil id yang sudah di ditambah
+
+        $query2   = "SELECT id_fakultas FROM fakultas WHERE nama_fakultas = $nama_fakultas AND kode_fakultas = $kode_fakultas";
+        $sql2 = $this->db->query($query2);
+        $hasilquery = $sql2->result_array();
+        $id_fakultas = $hasilquery[0]['id_fakultas'];
+
+        // Sambungkan fakultas sesuai gedung
+
         for ($i = 0; $i < sizeof($id_gedung); $i++) {
-            $query2 = "INSERT INTO gedung_fakultas (
+            $query3 = "INSERT INTO gedung_fakultas (
                         id_fakultas,
                         id_gedung
                     )
@@ -188,7 +196,7 @@ class Fakultas_model extends CI_Model
                         $id_fakultas,
                         $id_gedung[$i]
                         )";
-            $sql2 = $this->db->query($query2);
+            $sql3 = $this->db->query($query3);
         }
     }
 

@@ -31,65 +31,65 @@
         }else{
             var nip = '<?= $this->session->userdata('nip') ?>'
         }
-        $.ajax({
-            url  : '<?= base_url('Notifikasi/getNotif/') ?>'+nip,
-            type : 'get',
-            success : function(response){
-                var html = ''
-                $.each(response, function (key, val) {
-                    var jenis = val.id_abdimas ? val.id_abdimas : val.id_penelitian
-                    var controller = val.id_abdimas ? 'Abdimas/progressDetail/' : 'Penelitian/penelitianDetail/'
-                    var link = '<?= base_url()?>'+ controller + jenis
-                    var status = ''
-                    if (val.id_abdimas) {
-                        if (val.id_status_abdimas == 4) {
-                            status = 'Pengajuan Abdimas Disetujui'
-                        }else if (val.id_status_abdimas == 2) {
-                            status = 'Pengajuan Abdimas telah dinyatakan berjalan'
-                        }else if (val.id_status_abdimas == 3) {
-                            status = 'Pengajuan Abdimas telah dinyatakan selesai'
-                        }else if (val.id_status_abdimas == 5) {
-                            status = 'Pengajuan Abdimas telah ditolak'
-                        }else {
-                            status = 'Pengajuan Abdimas Tidak Disetujui'
-                        }
-                    } else {
-                        if (val.id_status_penelitian == 4) {
-                            status = 'Pengajuan Penelitian Disetujui'
-                        }else if (val.id_status_penelitian == 2) {
-                            status = 'Pengajuan Penelitian telah dinyatakan berjalan'
-                        }else if (val.id_status_penelitian == 3) {
-                            status = 'Pengajuan Penelitian telah dinyatakan selesai'
-                        }else if (val.id_status_penelitian == 5){
-                            status = 'Pengajuan Penelitian telah ditolak'
-                        }else {
-                            status = 'Pengajuan Penelitian Disetujui'
-                        }
-                    }
+        // $.ajax({
+        //     url  : '<?= base_url('Notifikasi/getNotif/') ?>'+nip,
+        //     type : 'get',
+        //     success : function(response){
+        //         var html = ''
+        //         $.each(response, function (key, val) {
+        //             var jenis = val.id_abdimas ? val.id_abdimas : val.id_penelitian
+        //             var controller = val.id_abdimas ? 'Abdimas/progressDetail/' : 'Penelitian/penelitianDetail/'
+        //             var link = '<?= base_url()?>'+ controller + jenis
+        //             var status = ''
+        //             if (val.id_abdimas) {
+        //                 if (val.id_status_abdimas == 4) {
+        //                     status = 'Pengajuan Abdimas Disetujui'
+        //                 }else if (val.id_status_abdimas == 2) {
+        //                     status = 'Pengajuan Abdimas telah dinyatakan berjalan'
+        //                 }else if (val.id_status_abdimas == 3) {
+        //                     status = 'Pengajuan Abdimas telah dinyatakan selesai'
+        //                 }else if (val.id_status_abdimas == 5) {
+        //                     status = 'Pengajuan Abdimas telah ditolak'
+        //                 }else {
+        //                     status = 'Pengajuan Abdimas Tidak Disetujui'
+        //                 }
+        //             } else {
+        //                 if (val.id_status_penelitian == 4) {
+        //                     status = 'Pengajuan Penelitian Disetujui'
+        //                 }else if (val.id_status_penelitian == 2) {
+        //                     status = 'Pengajuan Penelitian telah dinyatakan berjalan'
+        //                 }else if (val.id_status_penelitian == 3) {
+        //                     status = 'Pengajuan Penelitian telah dinyatakan selesai'
+        //                 }else if (val.id_status_penelitian == 5){
+        //                     status = 'Pengajuan Penelitian telah ditolak'
+        //                 }else {
+        //                     status = 'Pengajuan Penelitian Disetujui'
+        //                 }
+        //             }
 
 
-                    if (val.status == 1) {
-                        html += `
-                            <button class='dropdown-item disabled' href='#'>${status}</button> 
-                        `
-                    } else {
-                        html += `
+        //             if (val.status == 1) {
+        //                 html += `
+        //                     <button class='dropdown-item disabled' href='#'>${status}</button> 
+        //                 `
+        //             } else {
+        //                 html += `
                             
-                            <button class='dropdown-item' data-id=${val.id_notification} data-link='${link}' id='click-notif'>${status}</button> 
-                        `
-                    }
-                })
-                $('#notification').html(html)
-            }
-        })
+        //                     <button class='dropdown-item' data-id=${val.id_notification} data-link='${link}' id='click-notif'>${status}</button> 
+        //                 `
+        //             }
+        //         })
+        //         $('#notification').html(html)
+        //     }
+        // })
 
-        $.ajax({
-            url  : '<?= base_url('Notifikasi/countNotif/') ?>'+nip,
-            type : 'get',
-            success : function(response){
-                $('#sumary-notif').text(response.total_notif)
-            }
-        })
+        // $.ajax({
+        //     url  : '<?= base_url('Notifikasi/countNotif/') ?>'+nip,
+        //     type : 'get',
+        //     success : function(response){
+        //         $('#sumary-notif').text(response.total_notif)
+        //     }
+        // })
 
         $(document).on('click', '#click-notif', function () {
             var id = $(this).attr('data-id')

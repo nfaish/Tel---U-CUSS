@@ -27,6 +27,8 @@ class Data_controllers extends CI_Controller
         $data['list_jurusan'] = $this->fakultas_model->daftar_jurusan();
         $data['list_fakultas'] = $this->fakultas_model->daftar_fakultas();
         $data['list_gedung'] = $this->fakultas_model->daftar_gedung();
+        $data['list_gedung2'] = $this->fakultas_model->daftar_gedung();
+        // print_r($data['list_gedung']);
         // $data['list_jurusan'] = $this->fakultas_model->hapus_jurusan($id_jurusan);
         $this->load->view("data/fakultas_view", $data);
         if (isset($_POST['tambahJurusan'])) {

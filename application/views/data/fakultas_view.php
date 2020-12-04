@@ -126,17 +126,17 @@
                                 <input type="text" class="form-control" id="kode_fakultas" name="kode_fakultas" placeholder="Kode Fakultas">
                             </div>
                             <div class="form-group">
-                                <label for="id_gedung">Lokasi Gedung</label>
+                                <!-- <label for="id_gedung">Lokasi Gedung</label>
                                 <select class="form-control" id="id_gedung" name="id_gedung">
                                     <option value=""> - Pilih Gedung - </option>
                                     <?php foreach ($list_gedung as $list_gedung) { ?>
                                         <option value="<?php echo $list_gedung['id_gedung']; ?>"><?php echo $list_gedung['nama_gedung']; ?> </option>
                                     <?php } ?>
-                                </select>
+                                </select> -->
                                 <br>
                                 <label for="nama_gedung">Lokasi Gedung </label>
-                                    <?php if (!empty($list_gedung)) { ?>
-                                        <?php foreach ($list_gedung as $row => $value) { ?>
+                                    <?php if (!empty($list_gedung2)) { ?>
+                                        <?php foreach ($list_gedung2 as $row => $value) { ?>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="id_gedung[]" value="<?= $value['id_gedung']; ?>">
                                                 <?php echo $value['nama_gedung']; ?>
