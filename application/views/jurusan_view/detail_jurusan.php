@@ -91,7 +91,13 @@
                         <!--div class="card-footer small text-muted">Updated yesterday at 11:59 PM </div-->
                     </div>
                 </div>
-                <div class="row">
+                
+                    <a href="<?php print base_url('/assets/documents/template_xls/template_tambah_kelas.xls') ?>" class="btn btn-sm btn-success btn-skema" target="blank">
+                        <i class="fas fa-file-excel"></i> 
+                        Download Template Tambah Kelas
+                    </a>
+                
+                <div class="row mt-3">
                     <div class="col-sm-6">
                         <div class="card card-default">
                             <div class="card-body">
@@ -118,7 +124,9 @@
                                 <div class="container">
                                     <br />
                                     <h3 align="center">Upload Data Kelas</h3>
+                                    
                                     <form method="post" id="import_form" enctype="multipart/form-data">
+                                    <br>
                                         <p><label>Pilih File Data Excel</label>
                                             <input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
                                         <br />
@@ -126,7 +134,7 @@
                                     </form>
                                     <br />
                                     <div class="table-responsive" id="kelas">
-
+                                    
                                     </div>
                                 </div>
                             </div>

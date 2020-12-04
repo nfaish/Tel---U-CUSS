@@ -78,6 +78,7 @@
                                         <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
+                                                    <th scope="col">ID GEDUNG</th>
                                                     <th scope="col">NAMA GEDUNG</th>
                                                     <th scope="col">ACTION</th>
                                                 </tr>
@@ -86,6 +87,9 @@
                                                 <?php if (!empty($list_gedung)) { ?>
                                                     <?php foreach ($list_gedung as $row => $value) { ?>
                                                         <tr>
+                                                            <td>
+                                                                <?php echo $value['id_gedung']; ?>
+                                                            </td>
                                                             <td>
                                                                 <?php echo $value['nama_gedung']; ?>
                                                             </td>
@@ -104,6 +108,15 @@
                         </div>
                     </div>
 
+                        <a href="<?php print base_url('/assets/documents/template_xls/template_tambah_gedung.xls') ?>" class="btn btn-sm btn-success btn-skema" target="blank">
+                            <i class="fas fa-file-excel"></i> 
+                            Download Template Tambah Gedung
+                        </a>
+                        <a href="<?php print base_url('/assets/documents/template_xls/template_tambah_ruang.xls') ?>" class="btn btn-sm btn-success btn-skema" target="blank">
+                            <i class="fas fa-file-excel"></i> 
+                            Download Template Tambah Ruangan
+                        </a>
+
                     <div class="row mt-3">
                         <div class="col-sm-6">
                             <div class="card card-default">
@@ -115,12 +128,14 @@
                                                 <label for="nama_gedung">Nama Gedung</label>
                                                 <input type="text" class="form-control" id="nama_gedung" name="nama_gedung" placeholder="Nama Gedung">
                                             </div>
-                                            <button type="submit" class="btn btn-dark mt-3" name="tambahGedung">Submit</button>
+                                            <br /><br /><br /><br /><br /><br /><br />
+                                            <button type="submit" class="btn btn-dark mt-3" name="tambahGedung">Tambah</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
@@ -149,6 +164,40 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mt-4">
+                        <div class="col-sm-6">
+                            <div class="card card-default">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 align="center">Upload Data Gedung</h3>
+                                        <form method="post" id="import_form" enctype="multipart/form-data">
+                                            <p><label>Pilih File Data Excel</label>
+                                                <input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
+                                            
+                                            <input type="submit" name="import" value="Import" class="btn btn-info" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card card-default">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 align="center">Upload Data Ruangan</h3>
+                                        <form method="post" id="import_form" enctype="multipart/form-data">
+                                            <p><label>Pilih File Data Excel</label>
+                                                <input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
+                                            
+                                            <input type="submit" name="import" value="Import" class="btn btn-info" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
                 </div>
                 <!-- Sticky Footer -->
                 <!-- <footer class="sticky-footer">

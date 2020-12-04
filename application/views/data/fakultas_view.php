@@ -133,6 +133,16 @@
                                         <option value="<?php echo $list_gedung['id_gedung']; ?>"><?php echo $list_gedung['nama_gedung']; ?> </option>
                                     <?php } ?>
                                 </select>
+                                <br>
+                                <label for="nama_gedung">Lokasi Gedung </label>
+                                    <?php if (!empty($list_gedung)) { ?>
+                                        <?php foreach ($list_gedung as $row => $value) { ?>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="id_gedung[]" value="<?= $value['id_gedung']; ?>">
+                                                <?php echo $value['nama_gedung']; ?>
+                                            </div>
+                                        <?php } ?>
+                                    <?php } ?>
                             </div>
                             <button type="submit" class="btn btn-dark mt-3" name="tambahFakultas">Submit</button>
                         </form>

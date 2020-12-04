@@ -87,8 +87,7 @@ class Fakultas_model extends CI_Model
                     jurusan.angkatan,
                     jurusan.id_fakultas as fakultas_id
                     FROM jurusan
-                    JOIN fakultas ON
-                        fakultas.id_fakultas = jurusan.id_fakultas
+                    JOIN fakultas ON fakultas.id_fakultas = jurusan.id_fakultas
                     WHERE jurusan.id_jurusan =" . $id_jurusan;
 
         $sql = $this->db->query($query);
@@ -165,21 +164,32 @@ class Fakultas_model extends CI_Model
 
     public function tambahFakultas($post)
     {
-        $id_gedung      = $this->db->escape($_POST['id_gedung']);
         $nama_fakultas  = $this->db->escape($_POST['nama_fakultas']);
         $kode_fakultas  = $this->db->escape($_POST['kode_fakultas']);
-        $query = "INSERT INTO fakultas (
-                    id_gedung,
-                    nama_fakultas,
-                    kode_fakultas
-                )
-                VALUES
-                    (
-                    $id_gedung,
-                    $nama_fakultas,
-                    $kode_fakultas
-                    )";
-        $sql = $this->db->query($query);
+        $id_gedung      = $this->db->escape($_POST['id_gedung']);
+        $query1   = "INSERT INTO fakultas (
+            nama_fakultas,
+            kode_fakultas
+        )
+        VALUES
+            (
+            $nama_fakultas,
+            $kode_fakultas
+            )";
+        $sql1 = $this->db->query($query1);
+
+        for ($i = 0; $i < sizeof($id_gedung); $i++) {
+            $query2 = "INSERT INTO gedung_fakultas (
+                        id_fakultas,
+                        id_gedung
+                    )
+                    VALUES
+                        (
+                        $id_fakultas,
+                        $id_gedung[$i]
+                        )";
+            $sql2 = $this->db->query($query2);
+        }
     }
 
     public function tambahGedung($post)
