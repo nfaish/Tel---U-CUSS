@@ -77,12 +77,16 @@ class Perkuliahan_controllers extends CI_Controller
 
     public function dataKuliah()
     {
-        $nip                    = $this->session->userdata("nip");
-        $data['my_profile']      = $this->dosen_model->exploredosenByNip($nip);
-        $data['list_matkul']    = $this->perkuliahan_model->daftarMatkul();
-        $data['matkul_ajarku'] = $this->perkuliahan_model->daftarMatkulByDosen($nip);
-        $data['data_matkul'] = $this->perkuliahan_model->daftarData_kuliah($nip);
-        $this->load->view("Perkuliahan/data_kuliah", $data);
+        try{
+            $nip                    = $this->session->userdata("nip");
+            $data['my_profile']      = $this->dosen_model->exploredosenByNip($nip);
+            $data['list_matkul']    = $this->perkuliahan_model->daftarMatkul();
+            $data['matkul_ajarku'] = $this->perkuliahan_model->daftarMatkulByDosen($nip);
+            $data['data_matkul'] = $this->perkuliahan_model->daftarData_kuliah($nip);
+            $this->load->view("Perkuliahan/data_kuliah", $data);
+        } catch (Exception $e){
+            show_error("Internal Server Error",500);
+        }
     }
 
     public function dataMKDU_fakultas()

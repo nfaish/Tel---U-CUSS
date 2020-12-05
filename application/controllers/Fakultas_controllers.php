@@ -29,7 +29,7 @@ class Fakultas_controllers extends CI_Controller
     public function exploreFakultas($id_fakultas)
     {
         $data['FakultasByID'] = $this->fakultas_model->fakultasByID($id_fakultas);
-        $data['jurusanByID'] = $this->fakultas_model->jurusanByID($id_jurusan);
+        $data['jurusanByID'] = $this->fakultas_model->daftar_jurusan();
         $this->load->view("jurusan_view/detail_fakultas", $data);
     }
 

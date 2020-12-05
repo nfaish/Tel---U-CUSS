@@ -62,7 +62,7 @@ class Fakultas_model extends CI_Model
                     angkatan.angkatan,
                     jurusan.id_fakultas as fakultas_id
                     FROM fakultas
-                    JOIN jurusan ON jurusan.id_jurusan = fakultas.id_jurusan
+                    JOIN jurusan ON jurusan.id_fakultas = fakultas.id_fakultas
                     JOIN angkatan_jurusan ON jurusan.id_jurusan = angkatan_jurusan.id_jurusan
                     JOIN angkatan ON angkatan.id_angkatan = angkatan_jurusan.id_angkatan
                     WHERE fakultas.id_fakultas =" . $id_fakultas;

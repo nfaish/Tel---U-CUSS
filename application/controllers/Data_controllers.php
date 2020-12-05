@@ -71,7 +71,7 @@ class Data_controllers extends CI_Controller
         }
     }
 
-    public function exploreRuangan()
+    public function exploreRuangan($id_ruangan)
     {
         $this->load->model('ruangan_model');
 		$data['dataRuangan'] = $this->ruangan_model->load_RuanganSelect($id_ruangan);
