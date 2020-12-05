@@ -26,6 +26,13 @@ class Fakultas_controllers extends CI_Controller
         $this->load->view("jurusan_view/detail_jurusan", $data);
     }
 
+    public function exploreFakultas($id_fakultas)
+    {
+        $data['FakultasByID'] = $this->fakultas_model->fakultasByID($id_fakultas);
+        $data['jurusanByID'] = $this->fakultas_model->jurusanByID($id_jurusan);
+        $this->load->view("jurusan_view/detail_fakultas", $data);
+    }
+
     public function fetch()
     {
         $data = $this->fakultas_model->select();
@@ -84,5 +91,11 @@ class Fakultas_controllers extends CI_Controller
         $data['list_jurusan'] = $this->fakultas_model->hapus_jurusan($id_jurusan);
         $this->load->view("data/fakultas_view", $data);
         // redirect('Data_controllers/fakultas');
+    }
+
+    public function hapusFakultas($id_fakultas)
+    {
+        $data['list_fakultas'] = $this->fakultas_model->hapus_fakultas($id_fakultas);
+        $this->load->view("data/fakultas_view", $data);
     }
 }

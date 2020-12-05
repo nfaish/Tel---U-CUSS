@@ -49,6 +49,27 @@ class Fakultas_model extends CI_Model
         return $sql->result_array();
     }
 
+    public function fakultasByID($id_fakultas)
+    {
+        $query = "SELECT 
+                    fakultas.id_fakultas,
+                    fakultas.kode_fakultas,
+                    fakultas.nama_fakultas,
+                    jurusan.id_jurusan,
+                    jurusan.kode_jurusan,
+                    jurusan.nama_jurusan,
+                    angkatan.id_angkatan,
+                    angkatan.angkatan,
+                    jurusan.id_fakultas as fakultas_id
+                    FROM fakultas
+                    JOIN jurusan ON jurusan.id_jurusan = fakultas.id_jurusan
+                    JOIN angkatan_jurusan ON jurusan.id_jurusan = angkatan_jurusan.id_jurusan
+                    JOIN angkatan ON angkatan.id_angkatan = angkatan_jurusan.id_angkatan
+                    WHERE fakultas.id_fakultas =" . $id_fakultas;
+        $sql = $this->db->query($query);
+        return $sql->row_array();
+    }
+
     public function jurusanByID($id_jurusan)
     {
         $query = "SELECT 

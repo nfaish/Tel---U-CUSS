@@ -80,4 +80,72 @@ class Ruangan_model extends CI_Model
     {
         $this->db->delete('ruangan', ['id_ruangan' => $id_ruangan]);
     }
+
+    public function load_RuanganSelect($id_ruangan)
+    {
+        $query = "SELECT * FROM ruangan WHERE id_ruangan = ".intval($id_ruangan);
+        $sql = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
+    }
+
+    public function load_GedungSelect($id_gedung)
+    {
+        $query = "SELECT * FROM gedung WHERE id_gedung = ".intval($id_gedung);
+        $sql = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
+    }
+
+    public function simpanRuangan($post)
+    {
+        $nama_ruangan = $this->db->escape($_POST['nama_ruangan']);
+        $kapasitas    = $this->db->escape($_POST['kapasitas']);
+        $id_gedung    = $this->db->escape($_POST['id_gedung']);
+        $query = "INSERT INTO ruangan (
+                    nama_ruangan,   
+                    kapasitas,   
+                    id_gedung
+                )
+                VALUES
+                    (
+                    $nama_ruangan,
+                    $kapasitas,
+                    $id_gedung
+                    )";
+        $sql = $this->db->query($query);
+        
+        if($sql)
+            return true;
+        return false;
+    }
+
+    public function simpanGedung($post)
+    {
+        $nama_gedung = $this->db->escape($_POST['nama_gedung']);
+        $query = "INSERT INTO gedung (
+                    nama_gedung
+                )
+                VALUES
+                    (
+                    $nama_gedung
+                    )";
+        $sql = $this->db->query($query);
+        
+        if($sql)
+            return true;
+        return false;
+    }
+
+    function hapusRuangan($id_ruangan)
+    {
+        $this->db->query("DELETE FROM ruangan WHERE id_ruangan = ".intval($id_ruangan));
+    }
+
+    function hapusGedung($id_gedung)
+    {
+        $this->db->query("DELETE FROM gedung WHERE id_gedung = ".intval($id_gedung));
+    }
 }

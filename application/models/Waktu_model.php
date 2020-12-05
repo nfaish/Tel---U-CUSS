@@ -13,12 +13,70 @@ class Waktu_model extends CI_Model
         print_r($sql);
     }
 
+    public function load_HariSelect($id_hari)
+    {
+        $query = "SELECT * FROM hari WHERE id_hari = ".intval($id_hari);
+        $sql = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
+    }
+
+    public function simpanHari($post){
+        $nama_hari  = $this->db->escape($_POST['nama_hari']);
+        $query = "INSERT INTO hari (
+                    nama_hari
+                )
+                VALUES
+                    (
+                        $nama_hari
+                    )";
+        $sql = $this->db->query($query);
+        
+        if($sql)
+            return true;
+        return false;
+    }
+
+    function hapusHari1($id_hari){
+        $this->db->query("DELETE FROM hari WHERE id_hari = ".intval($id_hari));
+    }
+
     public function jamByID($kode_jam)
     {
         $query = "SELECT * FROM jam WHERE kode_jam = $kode_jam";
 
         $sql = $this->db->query($query);
         print_r($sql);
+    }
+
+    public function load_JamSelect($kode_jam)
+    {
+        $query = "SELECT * FROM jam WHERE kode_jam = ".intval($kode_jam);
+        $sql = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
+    }
+
+    public function simpanJam($post){
+        $nama_jam = $this->db->escape($_POST['nama_jam']);
+        $query = "INSERT INTO jam (
+                    nama_jam
+                )
+                VALUES
+                    (
+                        $nama_jam
+                    )";
+        $sql = $this->db->query($query);
+        
+        if($sql)
+            return true;
+        return false;
+    }
+
+    function hapusJam1($kode_jam){
+        $this->db->query("DELETE FROM jam WHERE kode_jam = ".intval($kode_jam));
     }
 
 

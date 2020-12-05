@@ -64,6 +64,43 @@ class Data_controllers extends CI_Controller
         }
     }
 
+    public function tambahRuangan()
+    {
+        if (isset($_POST['tambahRuangan'])) {
+            $this->ruangan_model->tambahRuangan($_POST);
+        }
+    }
+
+    public function exploreRuangan()
+    {
+        $this->load->model('ruangan_model');
+		$data['dataRuangan'] = $this->ruangan_model->load_RuanganSelect($id_ruangan);
+        if (isset($_POST['simpanRuangan'])) 
+        {
+            $nama_ruangan   = $this->db->escape($_POST['nama_ruangan']);
+            $id_gedung   = $this->db->escape($_POST['id_gedung']);
+            $kapasitas   = $this->db->escape($_POST['kapasitas']);
+			$query = "UPDATE ruangan SET
+						nama_ruangan = $nama_ruangan,
+                        id_gedung = $id_gedung,
+                        kapasitas = $kapasitas
+					WHERE id_ruangan = $id_ruangan 
+					";
+			$sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Ruangan Telah Diubah');
+			redirect("data_controllers/ruangan");
+		}
+		$this->load->view('data/ubah_ruangan_view', $data);
+    }
+
+    public function hapusRuangan($id_ruangan)
+    {
+		$this->load->model('ruangan_model');
+		$this->ruangan_model->hapusRuangan($id_ruangan);
+		$this->session->set_flashdata('alert', 'Ruangan Telah Dihapus');
+		redirect (base_url("data_controllers/ruangan"));
+	}
+
     public function gedung()
     {
         $this->load->model("ruangan_model");
@@ -75,19 +112,38 @@ class Data_controllers extends CI_Controller
         }
     }
 
-    public function tambahRuangan()
-    {
-        if (isset($_POST['tambahRuangan'])) {
-            $this->ruangan_model->tambahRuangan($_POST);
-        }
-    }
-
     public function tambahGedung()
     {
         if (isset($_POST['tambahGedung'])) {
             $this->ruangan_model->tambahGedung($_POST);
         }
     }
+
+    public function exploreGedung()
+    {
+        $this->load->model('ruangan_model');
+		$data['dataGedung'] = $this->ruangan_model->load_GedungSelect($id_gedung);
+        if (isset($_POST['simpanGedung'])) 
+        {
+            $nama_gedung  = $this->db->escape($_POST['nama_gedung']);
+			$query = "UPDATE gedung SET
+						nama_gedung = $nama_gedung
+					WHERE id_gedung = $id_gedung 
+					";
+			$sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Gedung Telah Diubah');
+			redirect("data_controllers/ruangan");
+		}
+		$this->load->view('data/ubah_gedung_view', $data);
+    }
+
+    public function hapusGedung($id_gedung)
+    {
+		$this->load->model('ruangan_model');
+		$this->ruangan_model->hapusGedung($id_gedung);
+		$this->session->set_flashdata('alert', 'Gedung Telah Dihapus');
+		redirect (base_url("data_controllers/ruangan"));
+	}
 
     public function waktu()
     {
@@ -111,6 +167,32 @@ class Data_controllers extends CI_Controller
         }
     }
 
+    public function exploreHari1()
+    {
+        $this->load->model('waktu_model');
+		$data['dataHari'] = $this->waktu_model->load_HariSelect($id_hari);
+        if (isset($_POST['simpanHari'])) 
+        {
+			$nama_hari   = $this->db->escape($_POST['nama_hari']);
+			$query = "UPDATE hari SET
+						nama_hari = $nama_hari
+					WHERE id_hari = $id_hari 
+					";
+			$sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Hari Telah Diubah');
+			redirect("data_controllers/waktu");
+		}
+		$this->load->view('data/ubah_hari_view', $data);
+    }
+    
+    public function hapusHari1($id_hari)
+    {
+		$this->load->model('waktu_model');
+		$this->waktu_model->hapusHari1($id_hari);
+		$this->session->set_flashdata('alert', 'Hari Telah Dihapus');
+		redirect (base_url("data_controllers/waktu"));
+	}
+
     public function tambahJam()
     {
         if (isset($_POST['tambahJam'])) {
@@ -118,6 +200,32 @@ class Data_controllers extends CI_Controller
             redirect("Data_controllers/waktu");
         }
     }
+
+    public function exploreJam1()
+    {
+        $this->load->model('waktu_model');
+		$data['dataJam'] = $this->waktu_model->load_JamSelect($kode_jam);
+        if (isset($_POST['simpanJam'])) 
+        {
+			$nama_jam   = $this->db->escape($_POST['nama_jam']);
+			$query = "UPDATE jam SET
+						nama_jam = $nama_jam
+					WHERE kode_jam= $kode_jam
+					";
+			$sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Jam Telah Diubah');
+			redirect("data_controllers/waktu");
+		}
+		$this->load->view('data/ubah_jam_view', $data);
+    }
+
+    public function hapusJam1($kode_jam)
+    {
+		$this->load->model('waktu_model');
+		$this->waktu_model->hapusJam1($kode_jam);
+		$this->session->set_flashdata('alert', 'Jam Telah Dihapus');
+		redirect (base_url("data_controllers/waktu"));
+	}
 
     public function tambahWaktu()
     {

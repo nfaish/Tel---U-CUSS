@@ -52,8 +52,8 @@
                                                                 <?php echo $value['kapasitas']; ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?= base_url('/ruangan_controllers/exploreRuangan/' . $value['id_ruangan']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                                <a href="<?= base_url('/ruangan_controllers/hapusRuangan/' . $value['id_ruangan']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                            <a href="<?= base_url('/data_controllers/exploreRuangan/' . $value['id_ruangan']) ?>" class='btn btn-sm btn-dark'> Explore</a>
+                                                            <a href="<?= base_url('/data_controllers/hapusRuangan/' . $value['id_ruangan']) ?>" class='btn btn-sm btn-danger'> Delete</a>
                                                             </td>
                                                         </tr>
                                                     <?php }
@@ -94,8 +94,8 @@
                                                                 <?php echo $value['nama_gedung']; ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?= base_url('/ruangan_controllers/exploreGedung/' . $value['id_gedung']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                                <a href="<?= base_url('/ruangan_controllers/hapusGedung/' . $value['id_gedung']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                                <a href="<?= base_url('/data_controllers/exploreGedung/' . $value['id_gedung']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                                <a href="<?= base_url('/data_controllers/hapusGedung/' . $value['id_gedung']) ?>" class='btn btn-sm btn-danger'>Delete</a>
                                                             </td>
                                                         </tr>
                                                     <?php }

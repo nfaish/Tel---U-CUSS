@@ -46,9 +46,9 @@
                                                         <td>
                                                             <?php echo $value['nama_hari']; ?>
                                                         </td>
-                                                        <td>
-                                                            <a href="<?= base_url('/fakultas_controllers/exploreHari/' . $value['id_hari']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                            <a href="<?= base_url('/fakultas_controllers/hapusHari/' . $value['id_hari']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                        <td> 
+                                                            <a href="<?= base_url('/data_controllers/exploreHari1/' . $value['id_hari']) ?>" class='btn btn-sm btn-dark'> Explore</a>
+                                                            <a href="<?= base_url('/data_controllers/hapusHari1/' . $value['id_hari']) ?>" class='btn btn-sm btn-danger'> Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php }
@@ -88,8 +88,8 @@
                                                             <?php echo $value['nama_jam']; ?>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= base_url('/fakultas_controllers/exploreJam/' . $value['kode_jam']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                            <a href="<?= base_url('/fakultas_controllers/hapusJam/' . $value['kode_jam']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                            <a href="<?= base_url('/data_controllers/exploreJam1/' . $value['kode_jam']) ?>" class='btn btn-sm btn-dark'> Explore</a>
+                                                            <a href="<?= base_url('/data_controllers/hapusJam1/' . $value['kode_jam']) ?>" class='btn btn-sm btn-danger'> Delete</a>
                                                         </td>
                                                     </tr>
                                                 <?php }
