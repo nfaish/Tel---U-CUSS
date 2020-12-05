@@ -28,6 +28,36 @@ class Perkuliahan_controllers extends CI_Controller
         }
     }
 
+    public function exploreMatkul()
+    {
+        $this->load->model('perkuliahan_model');
+		$data['dataMatkul'] = $this->perkuliahan_model->load_MatkulSelect($id_matkul);
+        if (isset($_POST['simpanMatkul'])) 
+        {
+            $nama_matkul  = $this->db->escape($_POST['nama_matkul']);
+            $kode_matkul  = $this->db->escape($_POST['kode_matkul']);
+            $sks  = $this->db->escape($_POST['sks']);
+			$query = "UPDATE matkul SET
+						nama_matkul = $nama_matkul,
+                        kode_matkul = $kode_matkul,
+                        sks = $sks
+					WHERE id_matkul = $id_matkul 
+					";
+			$sql = $this->db->query($query);
+            redirect("perkuliahan_controllers/index");
+            $this->session->set_flashdata('alert', 'Data Mata Kuliah Telah Diubah');
+		}
+		$this->load->view('perkuliahan/ubah_index', $data);
+    }
+
+    public function hapusMatkul($id_matkul)
+    {
+		$this->load->model('perkuliahan_model');
+		$this->perkuliahan_model->hapusMatkul($id_matkul);
+        redirect (base_url("perkuliahan_controllers/index"));
+        $this->session->set_flashdata('alert', 'Mata Kuliah Telah Dihapus');
+	}
+
     public function matkulAmpu()
     {
         $nip                    = $this->session->userdata("nip");
@@ -66,9 +96,44 @@ class Perkuliahan_controllers extends CI_Controller
             redirect("Perkuliahan_controllers");
         } else if (isset($_POST['tambahMkdu'])) {
             $this->perkuliahan_model->tambahMkdu($_POST);
-            redirect("Perkuliahan_controllers");
+            redirect("Perkuliahan_controllers/dataMKDU_fakultas");
         }
     }
+
+    public function exploreMKDU_jurusan()
+    {
+        $this->load->model('perkuliahan_model');
+		$data['dataMKDU'] = $this->perkuliahan_model->load_MKDU_jurusanSelect($id_perkuliahan);
+        if (isset($_POST['simpanMKDU_jurusan'])) 
+        {
+            $id_jurusan    = $this->db->escape($_POST['id_jurusan']);
+            $id_matkul      = $this->db->escape($_POST['id_matkul']);
+            // print_r($id_matkul);
+            for ($i = 0; $i < sizeof($id_matkul); $i++) {
+                $query = "INSERT INTO perkuliahan (
+                    id_jurusan,
+                    id_matkul
+                )
+                VALUES
+                (
+                    $id_jurusan,
+                    $id_matkul[$i]
+                )";
+                $sql = $this->db->query($query);
+            }
+            redirect("perkuliahan_controllers/mkdu_fakultas");
+            $this->session->set_flashdata('alert', 'Data Mata Kuliah Dasar Umum Jurusan Telah Diubah');
+		}
+		$this->load->view('perkuliahan/ubah_mkdu_fakultas', $data);
+    }
+
+    public function hapusMKDU_jurusan($id_matkul)
+    {
+		$this->load->model('perkuliahan_model');
+		$this->perkuliahan_model->hapusMKDU($id_perkuliahan);
+        redirect (base_url("perkuliahan_controllers/mkdu_fakultas"));
+        $this->session->set_flashdata('alert', 'Mata Kuliah Dasar Umum Jurusan Telah Dihapus');
+	}
 
     public function jurusanByFakultasId(){
         $id_fakultas = $this->input->post('id_fakultas');

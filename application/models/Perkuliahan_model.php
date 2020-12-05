@@ -12,6 +12,13 @@ class Perkuliahan_model extends CI_Model
         return $sql->result_array();
     }
 
+    public function daftarMKDU_jurusan()
+    {
+        $query = "SELECT * FROM perkuliahan";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
     public function tambahMatkul()
     {
         $nama_matkul   = $this->db->escape($_POST['nama_matkul']);
@@ -31,6 +38,43 @@ class Perkuliahan_model extends CI_Model
         $sql = $this->db->query($query);
     }
 
+    public function load_MatkulSelect($id_matkul)
+    {
+        $query = "SELECT * FROM matkul WHERE id_matkul = ".intval($id_matkul);
+        $sql = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
+    }
+
+    public function simpanMatkul($post){
+        $nama_matkul  = $this->db->escape($_POST['nama_matkul']);
+        $kode_matkul  = $this->db->escape($_POST['kode_matkul']);
+        $sks  = $this->db->escape($_POST['sks']);
+        $query = "INSERT INTO matkul (
+                    nama_matkul,
+                    kode_matkul,
+                    sks
+                )
+                VALUES
+                    (
+                        $nama_matkul,
+                        $kode_matkul,
+                        $sks
+                    )";
+        $sql = $this->db->query($query);
+        
+        if($sql)
+            return true;
+        return false;
+    }
+
+    function hapusMatkul($id_matkul)
+    {
+        $this->db->query("DELETE FROM matkul WHERE id_matkul = ".intval($id_matkul));
+    }
+
+
     public function tambahMkdu($post)
     {
         $id_jurusan    = $this->db->escape($_POST['id_jurusan']);
@@ -48,8 +92,42 @@ class Perkuliahan_model extends CI_Model
             )";
             $sql = $this->db->query($query);
         }
+    }
 
+    public function load_MKDU_jurusanSelect($id_perkuliahan)
+    {
+        $query = "SELECT * FROM perkuliahan WHERE id_perkuliahan = ".intval($id_perkuliahan);
+        $sql = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
+    }
 
+    public function simpanMKDU_jurusan($post)
+    {
+            $id_jurusan    = $this->db->escape($_POST['id_jurusan']);
+            $id_matkul      = $this->db->escape($_POST['id_matkul']);
+            for ($i = 0; $i < sizeof($id_matkul); $i++) 
+            {
+                $query = "INSERT INTO perkuliahan (
+                    id_jurusan,
+                    id_matkul
+                )
+                VALUES
+                (
+                    $id_jurusan,
+                    $id_matkul[$i]
+                )";
+                $sql = $this->db->query($query);
+            }
+        if($sql)
+            return true;
+        return false;
+    }
+
+    function hapusMKDU_jurusan($id_perkuliahan)
+    {
+        $this->db->query("DELETE FROM perkuliahan WHERE id_perkuliahan = ".intval($id_perkuliahan));
     }
 
     public function ambilMatkul($post, $nip)
