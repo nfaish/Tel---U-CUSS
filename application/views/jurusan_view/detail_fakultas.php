@@ -17,37 +17,40 @@
             <?php $this->load->view("_partials/sidebar_admin.php") ?>
             <div id="content-wrapper">
                 <div class="container-fluid">
-                <!-- DataTables Example -->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fas fa-table"></i>
-                        Profil Fakultas
+                          <i class="fas fa-table"></i>
+                          Ubah Profil Fakultas
                     </div>
-                    <div class="card card-default">
-                        <div class="card-body">
-                            <form action="" method="post">
-                                <div class="form-group">
-                                    <label for="id_fakultas">Nama Fakultas</label>
-                                    <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas" value="<?= $fakultasByID['nama_fakultas'] ?>">
+                        <div class="card card-default">
+                                <div class="card-body">
+                                  <div class="table-responsive">
+                                    <table class="table">
+                                        <form action="" method="post">
+                                            <input type="hidden" class="form-control" id="<?php echo $dataFakultas['id_fakultas']; ?>" name="id_fakultas" value="<?= $dataFakultas['id_fakultas'] ?>">
+                                            <div class="form-group">
+                                                <label for="id_fakultas">Nama Fakultas</label>
+                                                <input type="text" class="form-control" id="<?php echo $dataFakultas['nama_fakultas']; ?>" name="nama_fakultas" value="<?= $dataFakultas['nama_fakultas'] ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nama_jurusan">Kode Fakultas</label>
+                                                <input type="text" class="form-control" id="<?php echo $dataFakultas['kode_fakultas']; ?>" name="kode_fakultas" value="<?= $dataFakultas['kode_fakultas'] ?>">
+                                            </div>
+                                            <button type="submit" class="btn btn-dark mt-3" name="updateFakultas">Ubah Data</button>
+                                        </form>
+                                    </table>
+                                  </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="nama_jurusan">Kode Fakultas</label>
-                                    <input type="text" class="form-control" id="kode_fakultas" name="kode_fakultas" value="<?= $fakultasByID['kode_fakultas'] ?>">
-                                </div>
-                                <button type="submit" class="btn btn-dark mt-3" name="editJurusan">Ubah Data</button>
-                            </form>
-                        </div>
-                        <!--div class="card-footer small text-muted">Updated yesterday at 11:59 PM </div-->
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <i class="fas fa-table"></i>
-                        Daftar Program Studi
-                    </div>
-                    <div class="card card-default">
-                        <div class="card-body">
+                          </div>
+              </div>
 
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-table"></i>
+                                Daftar Program Studi
+                            </div>
+                            <div class="card card-default">
+                                <div class="card-body">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -82,13 +85,10 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                </div>
+                            </div>
                         </div>
-                        <!--div class="card-footer small text-muted">Updated yesterday at 11:59 PM </div-->
-                    </div>
                 </div>
-                <!-- /.container-fluid -->
-                </div>
-
             </div>
         </div>
     </div>

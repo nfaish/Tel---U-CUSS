@@ -267,4 +267,33 @@ class Fakultas_model extends CI_Model
             ->join('angkatan_jurusan','angkatan.id_angkatan = angkatan_jurusan.id_angkatan')
             ->get('angkatan')->result_array();
     }
+
+    public function updateFakultas()
+    {
+            $id_fakultas   = $this->db->escape($_POST['id_fakultas']);
+            $kode_fakultas  = $this->db->escape($_POST['kode_fakultas']);
+            $nama_fakultas  = $this->db->escape($_POST['nama_fakultas']);
+			$query = "UPDATE fakultas SET
+                        id_fakultas = $id_fakultas,
+						kode_fakultas = $kode_fakultas,
+                        nama_fakultas = $nama_fakultas
+					WHERE id_fakultas = $id_fakultas 
+					";
+			$sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Fakultas Telah Diubah');
+    }
+
+    public function load_FakultasSelect($id_fakultas)
+    {
+        $query = "SELECT * FROM fakultas WHERE id_fakultas = ".intval($id_fakultas);
+        $sql = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
+    }
+
+    function hapusFakultas($id_fakultas)
+    {
+        $this->db->query("DELETE FROM fakultas WHERE id_fakultas = ".intval($id_fakultas));
+    }
 }

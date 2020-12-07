@@ -22,20 +22,16 @@ class Waktu_model extends CI_Model
         return false;
     }
 
-    public function simpanHari($post){
-        $nama_hari  = $this->db->escape($_POST['nama_hari']);
-        $query = "INSERT INTO hari (
-                    nama_hari
-                )
-                VALUES
-                    (
-                        $nama_hari
-                    )";
-        $sql = $this->db->query($query);
-        
-        if($sql)
-            return true;
-        return false;
+    public function updateHari()
+    {
+            $nama_hari  = $this->db->escape($_POST['nama_hari']);
+            $id_hari  = $this->db->escape($_POST['id_hari']);
+            $query = "UPDATE hari SET 
+                        nama_hari = $nama_hari 
+                        WHERE id_hari = $id_hari
+                        ";
+            $sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Hari Telah Diubah');
     }
 
     function hapusHari1($id_hari){
@@ -52,31 +48,26 @@ class Waktu_model extends CI_Model
 
     public function load_JamSelect($kode_jam)
     {
-        $query = "SELECT * FROM jam WHERE kode_jam = ".intval($kode_jam);
+        $query = "SELECT * FROM jam WHERE kode_jam = '$kode_jam'";
         $sql = $this->db->query($query);
         if($sql->num_rows() > 0)
             return $sql->row_array();
         return false;
     }
 
-    public function simpanJam($post){
-        $nama_jam = $this->db->escape($_POST['nama_jam']);
-        $query = "INSERT INTO jam (
-                    nama_jam
-                )
-                VALUES
-                    (
-                        $nama_jam
-                    )";
-        $sql = $this->db->query($query);
-        
-        if($sql)
-            return true;
-        return false;
+    public function updateJam($kode_jam)
+    {
+            $nama_jam = $this->db->escape($_POST['nama_jam']);
+            $kode_jam = $this->db->escape($_POST['kode_jam']);
+            $query = "UPDATE jam SET 
+                    nama_jam = $nama_jam 
+                    WHERE kode_jam = $kode_jam";
+            $sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Jam Telah Diubah');
     }
 
     function hapusJam1($kode_jam){
-        $this->db->query("DELETE FROM jam WHERE kode_jam = ".intval($kode_jam));
+        $this->db->query("DELETE FROM jam WHERE kode_jam = '$kode_jam'");
     }
 
 

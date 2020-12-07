@@ -28,22 +28,13 @@ class Perkuliahan_controllers extends CI_Controller
         }
     }
 
-    public function exploreMatkul()
+    public function exploreMatkul($id_matkul)
     {
         $this->load->model('perkuliahan_model');
 		$data['dataMatkul'] = $this->perkuliahan_model->load_MatkulSelect($id_matkul);
-        if (isset($_POST['simpanMatkul'])) 
+        if (isset($_POST['updateMatkul'])) 
         {
-            $nama_matkul  = $this->db->escape($_POST['nama_matkul']);
-            $kode_matkul  = $this->db->escape($_POST['kode_matkul']);
-            $sks  = $this->db->escape($_POST['sks']);
-			$query = "UPDATE matkul SET
-						nama_matkul = $nama_matkul,
-                        kode_matkul = $kode_matkul,
-                        sks = $sks
-					WHERE id_matkul = $id_matkul 
-					";
-			$sql = $this->db->query($query);
+            $this->perkuliahan_model->updateMatkul($id_matkul);
             redirect("perkuliahan_controllers/index");
             $this->session->set_flashdata('alert', 'Data Mata Kuliah Telah Diubah');
 		}
@@ -104,27 +95,21 @@ class Perkuliahan_controllers extends CI_Controller
         }
     }
 
-    public function exploreMKDU_jurusan()
+    public function exploreMKDU_jurusan($id_perkuliahan)
     {
         $this->load->model('perkuliahan_model');
+        $data['list_matkul'] = $this->perkuliahan_model->daftarMatkul();
+        $data['list_mkdu'] = $this->perkuliahan_model->daftarMKDU();
+        $data['list_fakultas'] = $this->fakultas_model->daftar_fakultas();
+        $data['list_jurusan'] = $this->fakultas_model->daftar_jurusan();
+        $data['list_jurusan2'] = $this->fakultas_model->daftar_jurusan();
+        $data['list_angkatan'] = $this->perkuliahan_model->daftarAngkatan();
 		$data['dataMKDU'] = $this->perkuliahan_model->load_MKDU_jurusanSelect($id_perkuliahan);
         if (isset($_POST['simpanMKDU_jurusan'])) 
         {
             $id_jurusan    = $this->db->escape($_POST['id_jurusan']);
             $id_matkul      = $this->db->escape($_POST['id_matkul']);
-            // print_r($id_matkul);
-            for ($i = 0; $i < sizeof($id_matkul); $i++) {
-                $query = "INSERT INTO perkuliahan (
-                    id_jurusan,
-                    id_matkul
-                )
-                VALUES
-                (
-                    $id_jurusan,
-                    $id_matkul[$i]
-                )";
-                $sql = $this->db->query($query);
-            }
+            
             redirect("perkuliahan_controllers/mkdu_fakultas");
             $this->session->set_flashdata('alert', 'Data Mata Kuliah Dasar Umum Jurusan Telah Diubah');
 		}

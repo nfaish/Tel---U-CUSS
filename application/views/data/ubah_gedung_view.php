@@ -23,12 +23,13 @@
                                 <div class="card-body">
                                   <div class="table-responsive">
                                     <table class="table">
-                                      <form action="<?= base_url('Ruangan_controllers/tambahGedung') ?>" method="post">
+                                      <form action="" method="post">
                                             <div class="form-group">
                                                 <label for="nama_gedung">Masukkan Nama Gedung</label>
-                                                <input type="text" class="form-control" id="nama_gedung" name="nama_gedung" placeholder="Nama Gedung">
+                                                <input type="text" class="form-control" id="<?php echo $dataGedung['nama_gedung']; ?>" name="nama_gedung" placeholder="Nama Gedung" value="<?php echo $dataGedung['nama_gedung']; ?>">
+                                                <input type="hidden" class="form-control" id="<?php echo $dataGedung['id_gedung']; ?>" name="id_gedung" placeholder="ID Gedung" value="<?php echo $dataGedung['id_gedung']; ?>">
                                             </div>
-                                            <button type="submit" name="simpanGedung" class="btn btn-primary">Simpan</button>
+                                            <button type="submit" name="updateGedung" class="btn btn-primary">Simpan</button>
                                         </form>
                                     </table>
                                   </div>

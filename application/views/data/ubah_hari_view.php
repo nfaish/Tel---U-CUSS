@@ -30,9 +30,10 @@
                                             </label>
                                             <div>
                                                 <input type="text" name="nama_hari" class="form-control" value="<?= $dataHari['nama_hari'] ?>" required>
+                                                <input type="hidden" name="id_hari" class="form-control" value="<?= $dataHari['id_hari'] ?>" required>
                                             </div>
                                         </div>
-                                        <button type="submit" name="simpanHari" class="btn btn-primary">Simpan</button>
+                                        <button type="submit" name="updateHari" class="btn btn-primary">Simpan</button>
                                       </form>
                                     </table>
                                   </div>

@@ -24,19 +24,20 @@
                                   <div class="table-responsive">
                                     <table class="table">
                                       <form action="" method="post">
+                                          <input type="hidden" class="form-control" id="<?php echo $dataMatkul['id_matkul']; ?>" name="id_matkul" value="<?= $dataMatkul['id_matkul'] ?>">  
                                           <div class="form-group">
                                               <label for="nama_matkul">Nama Mata Kuliah</label>
-                                              <input type="text" class="form-control" id="nama_matkul" name="nama_matkul" placeholder="Nama Mata Kuliah">
+                                              <input type="text" class="form-control" id="<?php echo $dataMatkul['nama_matkul']; ?>" name="nama_matkul" placeholder="Nama Mata Kuliah" value="<?= $dataMatkul['nama_matkul'] ?>">
                                           </div>
                                           <div class="form-group">
                                               <label for="kode_matkul">Kode Mata Kuliah</label>
-                                              <input type="text" class="form-control" id="kode_matkul" name="kode_matkul" placeholder="Kode Mata Kuliah">
+                                              <input type="text" class="form-control" id="<?php echo $dataMatkul['kode_matkul']; ?>" name="kode_matkul" placeholder="Kode Mata Kuliah" value="<?= $dataMatkul['kode_matkul'] ?>">
                                           </div>
                                           <div class="form-group">
                                               <label for="kode_matkul">SKS</label>
-                                              <input type="text" class="form-control" id="sks" name="sks" placeholder="Jumlah SKS">
+                                              <input type="text" class="form-control" id="<?php echo $dataMatkul['sks']; ?>" name="sks" placeholder="Jumlah SKS" value="<?= $dataMatkul['sks'] ?>">
                                           </div>
-                                          <button type="submit" class="btn btn-dark mt-3" name="simpanMatkul">Submit</button>
+                                          <button type="submit" class="btn btn-dark mt-3" name="updateMatkul">Submit</button>
                                       </form>
                                     </table>
                                   </div>

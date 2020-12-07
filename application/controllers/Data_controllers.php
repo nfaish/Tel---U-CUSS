@@ -64,6 +64,31 @@ class Data_controllers extends CI_Controller
         }
     }
 
+    public function exploreRuangan($id_ruangan)
+    {
+        $this->load->model('ruangan_model');
+        $data['dataRuangan'] = $this->ruangan_model->load_RuanganSelect($id_ruangan);
+        $data['list_gedung'] = $this->fakultas_model->daftar_gedung();
+        if (isset($_POST['updateRuangan'])) 
+        {
+            $this->ruangan_model->updateRuangan($id_ruangan);
+			redirect("data_controllers/ruangan");
+		}
+		$this->load->view('data/ubah_ruangan_view', $data);
+    }
+
+    public function exploreGedung($id_gedung)
+    {
+        $this->load->model('ruangan_model');
+		$data['dataGedung'] = $this->ruangan_model->load_GedungSelect($id_gedung);
+        if (isset($_POST['updateGedung'])) 
+        {
+            $this->ruangan_model->updateGedung($id_gedung);
+			redirect("data_controllers/ruangan");
+		}
+		$this->load->view('data/ubah_gedung_view', $data);
+    }
+
     public function tambahRuangan()
     {
         if (isset($_POST['tambahRuangan'])) {
@@ -71,27 +96,6 @@ class Data_controllers extends CI_Controller
         }
     }
 
-    public function exploreRuangan($id_ruangan)
-    {
-        $this->load->model('ruangan_model');
-		$data['dataRuangan'] = $this->ruangan_model->load_RuanganSelect($id_ruangan);
-        if (isset($_POST['simpanRuangan'])) 
-        {
-            $nama_ruangan   = $this->db->escape($_POST['nama_ruangan']);
-            $id_gedung   = $this->db->escape($_POST['id_gedung']);
-            $kapasitas   = $this->db->escape($_POST['kapasitas']);
-			$query = "UPDATE ruangan SET
-						nama_ruangan = $nama_ruangan,
-                        id_gedung = $id_gedung,
-                        kapasitas = $kapasitas
-					WHERE id_ruangan = $id_ruangan 
-					";
-			$sql = $this->db->query($query);
-			$this->session->set_flashdata('alert', 'Data Ruangan Telah Diubah');
-			redirect("data_controllers/ruangan");
-		}
-		$this->load->view('data/ubah_ruangan_view', $data);
-    }
 
     public function hapusRuangan($id_ruangan)
     {
@@ -119,23 +123,6 @@ class Data_controllers extends CI_Controller
         }
     }
 
-    public function exploreGedung()
-    {
-        $this->load->model('ruangan_model');
-		$data['dataGedung'] = $this->ruangan_model->load_GedungSelect($id_gedung);
-        if (isset($_POST['simpanGedung'])) 
-        {
-            $nama_gedung  = $this->db->escape($_POST['nama_gedung']);
-			$query = "UPDATE gedung SET
-						nama_gedung = $nama_gedung
-					WHERE id_gedung = $id_gedung 
-					";
-			$sql = $this->db->query($query);
-			$this->session->set_flashdata('alert', 'Data Gedung Telah Diubah');
-			redirect("data_controllers/ruangan");
-		}
-		$this->load->view('data/ubah_gedung_view', $data);
-    }
 
     public function hapusGedung($id_gedung)
     {
@@ -167,18 +154,13 @@ class Data_controllers extends CI_Controller
         }
     }
 
-    public function exploreHari1()
+    public function exploreHari1($id_hari)
     {
         $this->load->model('waktu_model');
 		$data['dataHari'] = $this->waktu_model->load_HariSelect($id_hari);
-        if (isset($_POST['simpanHari'])) 
+        if (isset($_POST['updateHari'])) 
         {
-			$nama_hari   = $this->db->escape($_POST['nama_hari']);
-			$query = "UPDATE hari SET
-						nama_hari = $nama_hari
-					WHERE id_hari = $id_hari 
-					";
-			$sql = $this->db->query($query);
+            $this->waktu_model->updateHari($id_hari);
 			$this->session->set_flashdata('alert', 'Data Hari Telah Diubah');
 			redirect("data_controllers/waktu");
 		}
@@ -201,18 +183,13 @@ class Data_controllers extends CI_Controller
         }
     }
 
-    public function exploreJam1()
+    public function exploreJam1($kode_jam)
     {
         $this->load->model('waktu_model');
 		$data['dataJam'] = $this->waktu_model->load_JamSelect($kode_jam);
-        if (isset($_POST['simpanJam'])) 
+        if (isset($_POST['updateJam'])) 
         {
-			$nama_jam   = $this->db->escape($_POST['nama_jam']);
-			$query = "UPDATE jam SET
-						nama_jam = $nama_jam
-					WHERE kode_jam= $kode_jam
-					";
-			$sql = $this->db->query($query);
+            $this->waktu_model->updateJam($kode_jam);
 			$this->session->set_flashdata('alert', 'Data Jam Telah Diubah');
 			redirect("data_controllers/waktu");
 		}

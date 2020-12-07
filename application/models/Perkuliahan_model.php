@@ -19,6 +19,13 @@ class Perkuliahan_model extends CI_Model
         return $sql->result_array();
     }
 
+    public function daftarAngkatan()
+    {
+        $query = "SELECT * FROM angkatan";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
     public function tambahMatkul()
     {
         $nama_matkul   = $this->db->escape($_POST['nama_matkul']);
@@ -47,26 +54,21 @@ class Perkuliahan_model extends CI_Model
         return false;
     }
 
-    public function simpanMatkul($post){
+    public function updateMatkul()
+    {
+        $id_matkul  = $this->db->escape($_POST['id_matkul']);
         $nama_matkul  = $this->db->escape($_POST['nama_matkul']);
         $kode_matkul  = $this->db->escape($_POST['kode_matkul']);
         $sks  = $this->db->escape($_POST['sks']);
-        $query = "INSERT INTO matkul (
-                    nama_matkul,
-                    kode_matkul,
-                    sks
-                )
-                VALUES
-                    (
-                        $nama_matkul,
-                        $kode_matkul,
-                        $sks
-                    )";
+        $query = "UPDATE matkul SET
+						id_matkul = $id_matkul,
+                        nama_matkul = $nama_matkul,
+                        kode_matkul = $kode_matkul,
+                        sks= $sks
+					WHERE id_matkul = $id_matkul
+					";
         $sql = $this->db->query($query);
-        
-        if($sql)
-            return true;
-        return false;
+        $this->session->set_flashdata('alert', 'Data Mata Kuliah Telah Diubah');
     }
 
     function hapusMatkul($id_matkul)
@@ -188,6 +190,7 @@ class Perkuliahan_model extends CI_Model
     public function daftarMKDU()
     {
         $query = "SELECT 
+                    perkuliahan.id_perkuliahan as id_perkuliahan,
                     fakultas.nama_fakultas as nama_fakultas,
                     jurusan.nama_jurusan as nama_jurusan,
                     angkatan.angkatan as angkatan,

@@ -99,44 +99,31 @@ class Ruangan_model extends CI_Model
         return false;
     }
 
-    public function simpanRuangan($post)
+    public function updateGedung()
     {
-        $nama_ruangan = $this->db->escape($_POST['nama_ruangan']);
-        $kapasitas    = $this->db->escape($_POST['kapasitas']);
-        $id_gedung    = $this->db->escape($_POST['id_gedung']);
-        $query = "INSERT INTO ruangan (
-                    nama_ruangan,   
-                    kapasitas,   
-                    id_gedung
-                )
-                VALUES
-                    (
-                    $nama_ruangan,
-                    $kapasitas,
-                    $id_gedung
-                    )";
-        $sql = $this->db->query($query);
-        
-        if($sql)
-            return true;
-        return false;
+            $id_gedung   = $this->db->escape($_POST['id_gedung']);
+            $nama_gedung  = $this->db->escape($_POST['nama_gedung']);
+			$query = "UPDATE gedung SET
+						nama_gedung = $nama_gedung
+					WHERE id_gedung = $id_gedung 
+					";
+			$sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Gedung Telah Diubah');
     }
 
-    public function simpanGedung($post)
+    public function updateRuangan($id_ruangan)
     {
-        $nama_gedung = $this->db->escape($_POST['nama_gedung']);
-        $query = "INSERT INTO gedung (
-                    nama_gedung
-                )
-                VALUES
-                    (
-                    $nama_gedung
-                    )";
-        $sql = $this->db->query($query);
-        
-        if($sql)
-            return true;
-        return false;
+            $nama_ruangan   = $this->db->escape($_POST['nama_ruangan']);
+            $id_gedung   = $this->db->escape($_POST['id_gedung']);
+            $kapasitas   = $this->db->escape($_POST['kapasitas']);
+			$query = "UPDATE ruangan SET
+						nama_ruangan = $nama_ruangan,
+                        id_gedung = $id_gedung,
+                        kapasitas = $kapasitas
+					WHERE id_ruangan = $id_ruangan 
+					";
+			$sql = $this->db->query($query);
+			$this->session->set_flashdata('alert', 'Data Ruangan Telah Diubah');
     }
 
     function hapusRuangan($id_ruangan)

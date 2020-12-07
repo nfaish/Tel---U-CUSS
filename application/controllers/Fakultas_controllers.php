@@ -28,10 +28,29 @@ class Fakultas_controllers extends CI_Controller
 
     public function exploreFakultas($id_fakultas)
     {
-        $data['FakultasByID'] = $this->fakultas_model->fakultasByID($id_fakultas);
-        $data['jurusanByID'] = $this->fakultas_model->daftar_jurusan();
-        $this->load->view("jurusan_view/detail_fakultas", $data);
+        $this->load->model('Fakultas_model');
+        $data['dataFakultas'] = $this->fakultas_model->load_FakultasSelect($id_fakultas);
+        if (isset($_POST['updateFakultas'])) 
+        {
+            $this->fakultas_model->updateFakultas($id_fakultas);
+			redirect("data_controllers/fakultas");
+		}
+		$this->load->view('jurusan_view/detail_fakultas', $data);
     }
+
+    // public function exploreFakultas($id_fakultas)
+    // {
+    //     $data['fakultasByID'] = $this->fakultas_model->fakultasByID($id_fakultas);
+    //     $data['jurusanByID'] = $this->fakultas_model->daftar_jurusan();
+    //     $this->load->model('fakultas_model');
+    //     if (isset($_POST['updateFakultas'])) 
+    //     {
+    //         $this->fakultas_model->updateFakultas($id_fakultas);
+	// 		redirect("fakultas_controllers/detail_fakultas");
+	// 	}
+        
+    //     $this->load->view("jurusan_view/detail_fakultas", $data);
+    // }
 
     public function fetch()
     {
@@ -95,7 +114,7 @@ class Fakultas_controllers extends CI_Controller
 
     public function hapusFakultas($id_fakultas)
     {
-        $data['list_fakultas'] = $this->fakultas_model->hapus_fakultas($id_fakultas);
+        $data['list_fakultas'] = $this->fakultas_model->hapusFakultas($id_fakultas);
         $this->load->view("data/fakultas_view", $data);
     }
 }

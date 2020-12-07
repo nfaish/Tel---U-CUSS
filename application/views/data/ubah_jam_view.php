@@ -30,9 +30,10 @@
                                             </label>
                                             <div>
                                                 <input type="text" name="nama_jam" class="form-control" value="<?= $dataJam['nama_jam'] ?>" required>
+                                                <input type="hidden" name="kode_jam" class="form-control" value="<?= $dataJam['kode_jam'] ?>" required>
                                             </div>
                                         </div>
-                                        <button type="submit" name="simpanJam" class="btn btn-primary">Simpan</button>
+                                        <button type="submit" name="updateJam" class="btn btn-primary">Simpan</button>
                                       </form>
                                     </table>
                                   </div>
