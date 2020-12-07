@@ -28,12 +28,7 @@
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label for="id_fakultas">Nama Fakultas</label>
-                                    <select class="form-control" id="id_fakultas" name="id_fakultas">
-                                        <option value="<?= $jurusanByID['nama_jurusan'] ?>" selected> <?= $jurusanByID['nama_fakultas'] ?> </option>
-                                        <?php foreach ($list_fakultas as $list_fakultas) { ?>
-                                            <option value="<?php echo $list_fakultas['id_fakultas']; ?>"><?php echo $list_fakultas['nama_fakultas']; ?></option>
-                                        <?php } ?>
-                                    </select>
+                                    <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas" value="<?= $fakultasByID['nama_fakultas'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="nama_jurusan">Kode Fakultas</label>
