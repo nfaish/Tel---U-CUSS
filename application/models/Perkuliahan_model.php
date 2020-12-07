@@ -98,7 +98,25 @@ class Perkuliahan_model extends CI_Model
 
     public function load_MKDU_jurusanSelect($id_perkuliahan)
     {
-        $query = "SELECT * FROM perkuliahan WHERE id_perkuliahan = ".intval($id_perkuliahan);
+        $query = "SELECT 
+                    perkuliahan.id_perkuliahan as id_perkuliahan,
+                    fakultas.id_fakultas as id_fakultas,
+                    fakultas.nama_fakultas as nama_fakultas,
+                    jurusan.id_jurusan as id_jurusan,
+                    jurusan.nama_jurusan as nama_jurusan,
+                    angkatan.id_angkatan as id_angkatan,
+                    angkatan.angkatan as angkatan,
+                    matkul.id_matkul as id_matkul,
+                    matkul.nama_matkul as nama_matkul,
+                    matkul.kode_matkul as kode_matkul,
+                    matkul.sks as sks
+                    FROM perkuliahan
+                    JOIN jurusan ON perkuliahan.id_jurusan = jurusan.id_jurusan
+                    JOIN matkul ON matkul.id_matkul = perkuliahan.id_matkul
+                    JOIN fakultas ON fakultas.id_fakultas = jurusan.id_fakultas
+                    JOIN angkatan_jurusan ON jurusan.id_jurusan = angkatan_jurusan.id_jurusan
+                    JOIN angkatan ON angkatan_jurusan.id_angkatan = angkatan.id_angkatan
+                    WHERE id_perkuliahan = $id_perkuliahan";
         $sql = $this->db->query($query);
         if($sql->num_rows() > 0)
             return $sql->row_array();
@@ -203,6 +221,30 @@ class Perkuliahan_model extends CI_Model
                     JOIN fakultas ON fakultas.id_fakultas = jurusan.id_fakultas
                     JOIN angkatan_jurusan ON jurusan.id_jurusan = angkatan_jurusan.id_jurusan
                     JOIN angkatan ON angkatan_jurusan.id_angkatan = angkatan.id_angkatan";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
+    public function perkuliahanByJurusan($id_jurusan){
+        $query = "SELECT 
+                    perkuliahan.id_perkuliahan as id_perkuliahan,
+                    fakultas.id_fakultas as id_fakultas,
+                    fakultas.nama_fakultas as nama_fakultas,
+                    jurusan.id_jurusan as id_jurusan,
+                    jurusan.nama_jurusan as nama_jurusan,
+                    angkatan.id_angkatan as id_angkatan,
+                    angkatan.angkatan as angkatan,
+                    matkul.id_matkul as id_matkul,
+                    matkul.nama_matkul as nama_matkul,
+                    matkul.kode_matkul as kode_matkul,
+                    matkul.sks as sks
+                    FROM perkuliahan
+                    JOIN jurusan ON perkuliahan.id_jurusan = jurusan.id_jurusan
+                    JOIN matkul ON matkul.id_matkul = perkuliahan.id_matkul
+                    JOIN fakultas ON fakultas.id_fakultas = jurusan.id_fakultas
+                    JOIN angkatan_jurusan ON jurusan.id_jurusan = angkatan_jurusan.id_jurusan
+                    JOIN angkatan ON angkatan_jurusan.id_angkatan = angkatan.id_angkatan
+                    WHERE id_jurusan = $id_jurusan";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }

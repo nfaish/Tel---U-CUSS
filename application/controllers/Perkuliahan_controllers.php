@@ -102,7 +102,6 @@ class Perkuliahan_controllers extends CI_Controller
         $data['list_mkdu'] = $this->perkuliahan_model->daftarMKDU();
         $data['list_fakultas'] = $this->fakultas_model->daftar_fakultas();
         $data['list_jurusan'] = $this->fakultas_model->daftar_jurusan();
-        $data['list_jurusan2'] = $this->fakultas_model->daftar_jurusan();
         $data['list_angkatan'] = $this->perkuliahan_model->daftarAngkatan();
 		$data['dataMKDU'] = $this->perkuliahan_model->load_MKDU_jurusanSelect($id_perkuliahan);
         if (isset($_POST['simpanMKDU_jurusan'])) 
