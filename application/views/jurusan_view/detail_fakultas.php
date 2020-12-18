@@ -36,6 +36,17 @@
                                                 <label for="nama_jurusan">Kode Fakultas</label>
                                                 <input type="text" class="form-control" id="<?php echo $dataFakultas['kode_fakultas']; ?>" name="kode_fakultas" value="<?= $dataFakultas['kode_fakultas'] ?>">
                                             </div>
+                                            <label for="kode_fakultas">Lokasi Gedung</label>
+                                            <!-- <?php if (!empty($list_gedung)) { ?>
+                                                <?php foreach ($list_gedung as $row => $value) { ?>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" name="id_gedung[]" value="<?= $value['id_gedung']; ?>" <?php echo ($value['id_gedung'] == $dataLokasiGedung['id_gedung']) ? 'checked' : ''; ?>>
+                                                        <?php echo $value['nama_gedung']; ?>
+                                                    </div>
+                                                <?php }
+                                                ?>
+                                            <?php } ?> -->
+                                            <br><br>
                                             <button type="submit" class="btn btn-dark mt-3" name="updateFakultas">Ubah Data</button>
                                         </form>
                                     </table>
@@ -57,13 +68,13 @@
                                                 <tr>
                                                     <th scope="col">NAMA PROGRAM STUDI</th>
                                                     <th scope="col">KODE PROGRAM STUDI</th>
-                                                    <th scope="col">KODE ANGKATAN</th>
+                                                    <th scope="col">ANGKATAN</th>
                                                     <th scope="col">ACTION</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (!empty($list_jurusan)) { ?>
-                                                    <?php foreach ($list_jurusan as $row => $value) { ?>
+                                                <?php if (!empty($list_jurusanfakultas)) { ?>
+                                                    <?php foreach ($list_jurusanfakultas as $row => $value) { ?>
                                                         <tr>
                                                             <td>
                                                                 <?php echo $value['nama_jurusan']; ?>

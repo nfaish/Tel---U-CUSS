@@ -80,6 +80,7 @@ class Data_controllers extends CI_Controller
     public function exploreGedung($id_gedung)
     {
         $this->load->model('ruangan_model');
+        $data['list_ruangangedung'] = $this->ruangan_model->daftar_ruangangedung($id_gedung);
 		$data['dataGedung'] = $this->ruangan_model->load_GedungSelect($id_gedung);
         if (isset($_POST['updateGedung'])) 
         {

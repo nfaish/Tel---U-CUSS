@@ -13,6 +13,14 @@ class Ruangan_model extends CI_Model
         print_r($sql);
     }
 
+    public function ruangan_gedungByID($id_gedung)
+    {
+        $query = "SELECT * FROM ruangan WHERE id_gedung = $id_gedung";
+
+        $sql = $this->db->query($query);
+        print_r($sql);
+    }
+
     public function gedungByID($id_gedung)
     {
         $query = "SELECT * FROM gedung WHERE id_gedung = $id_gedung";
@@ -33,6 +41,23 @@ class Ruangan_model extends CI_Model
                     FROM gedung
                     JOIN ruangan ON
                         ruangan.id_gedung = gedung.id_gedung ";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
+    public function daftar_ruangangedung($id_gedung)
+    {
+        $query = "SELECT * FROM ruangan WHERE id_gedung = $id_gedung";
+        // $query = "SELECT 
+        //             gedung.id_gedung,
+        //             gedung.nama_gedung,
+        //             ruangan.id_ruangan,
+        //             ruangan.id_gedung,
+        //             ruangan.nama_ruangan,
+        //             ruangan.kapasitas
+        //             FROM ruangan
+        //             JOIN gedung ON
+        //                 gedung.id_gedung = ruangan.id_gedung ";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }

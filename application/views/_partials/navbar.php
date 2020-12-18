@@ -35,7 +35,7 @@
                     if ($this->session->userdata('user_role') == 4 ) {
 
                     }else { ?>
-                        <a class="dropdown-item" href="<?= base_url('/Pengaturan') ?>">Pengaturan</a>
+                        <a class="dropdown-item" href="<?php echo site_url('Akun_dosen_controllers') ?>">Pengaturan</a>
                         <?php
                     }
                 ?>

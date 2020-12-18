@@ -36,6 +36,50 @@
                                 </div>
                     </div>
               </div>
+              <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            Daftar Ruangan
+                        </div>
+                        <div class="card card-default">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">NAMA GEDUNG</th>
+                                                    <th scope="col">NAMA RUANGAN</th>
+                                                    <th scope="col">KAPASISTAS</th>
+                                                    <th scope="col">ACTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($list_ruangangedung)) { ?>
+                                                    <?php foreach ($list_ruangangedung as $row => $value) { ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $value['nama_gedung']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['nama_ruangan']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['kapasitas']; ?>
+                                                            </td>
+                                                            <td>
+                                                            <a href="<?= base_url('/data_controllers/exploreRuangan/' . $value['id_ruangan']) ?>" class='btn btn-sm btn-dark'> Explore</a>
+                                                            <a href="<?= base_url('/data_controllers/hapusRuangan/' . $value['id_ruangan']) ?>" class='btn btn-sm btn-danger'> Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php }
+                                                    ?>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
             </div>
           </div>
       </div>

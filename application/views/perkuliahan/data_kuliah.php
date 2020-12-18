@@ -34,7 +34,7 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <i class="fas fa-table"></i>
-                            Daftar Data Mata Kuliah
+                            Daftar Data Kuliah
                         </div>
                             <div class="card card-default">
                                 <div class="card-body">
@@ -71,7 +71,7 @@
                                                                 <?php echo $value['kode_dosen']; ?>
                                                             </td>
                                                             <td>
-                                                                <a href="<?= base_url('/fakultas_controllers/exploreMatkul_ajarku/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                                
                                                                 <a href="<?= base_url('/fakultas_controllers/hapusMatkul_ajarku/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-danger'>Delete</a>
                                                             </td>
                                                         </tr>

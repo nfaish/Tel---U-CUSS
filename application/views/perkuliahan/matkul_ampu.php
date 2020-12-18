@@ -62,7 +62,7 @@
                                                             <?php echo $value['sks']; ?>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= base_url('/fakultas_controllers/exploreMatkul_ajarku/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                            
                                                             <a href="<?= base_url('/fakultas_controllers/hapusMatkul_ajarku/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-danger'>Delete</a>
                                                         </td>
                                                     </tr>

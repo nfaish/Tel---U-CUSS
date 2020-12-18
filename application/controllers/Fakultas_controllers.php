@@ -29,7 +29,10 @@ class Fakultas_controllers extends CI_Controller
     public function exploreFakultas($id_fakultas)
     {
         $this->load->model('Fakultas_model');
+        $data['list_gedung'] = $this->fakultas_model->daftar_gedung();
+        $data['list_jurusanfakultas'] = $this->fakultas_model->daftar_jurusanfakultas($id_fakultas);
         $data['dataFakultas'] = $this->fakultas_model->load_FakultasSelect($id_fakultas);
+        // $data['dataLokasiGedung'] = $this->fakultas_model->load_Lokasi_GedungSelect($id_gedung_fakultas);
         if (isset($_POST['updateFakultas'])) 
         {
             $this->fakultas_model->updateFakultas($id_fakultas);
