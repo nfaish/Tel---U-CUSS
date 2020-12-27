@@ -25,7 +25,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/dataKuliah') ?>">Data Kuliah</a>
             <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers') ?>">Daftar Mata Kuliah</a>
-            <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/dataMKDU_fakultas') ?>">Daftar MKDU Fakultas</a>
+            <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/dataMKDU_fakultas') ?>">Daftar Mata Kuliah <br>Dasar Umum Jurusan</a>
         </div>
     </li>
     <li class="nav-item dropdown">
