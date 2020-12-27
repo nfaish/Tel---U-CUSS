@@ -13,7 +13,9 @@ class Preferensi_controllers extends CI_Controller
     {
         $this->load->model('Preferensi_model');
 		$data['jadwal'] = $this->Preferensi_model->bacaJadwal();
+		$data['jadwal2'] = $this->Preferensi_model->bacaJadwal();
 		$data['preferensi'] = $this->Preferensi_model->jadwaldosen();
+		$data['preferensi2'] = $this->Preferensi_model->jadwaldosen();
         $this->load->view('dosen_view/preferensi_view', $data);
     }
 
