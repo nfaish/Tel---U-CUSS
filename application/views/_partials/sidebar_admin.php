@@ -34,8 +34,8 @@
             <span>Penjadwalan</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="<?php echo base_url('/Pengaturan/ruangan') ?>">Generate Jadwal</a>
-            <a class="dropdown-item" href="<?php echo base_url('/Pengaturan/ruangan') ?>">Hasil Jadwal</a>
+            <a class="dropdown-item" href="<?php echo base_url('/Penjadwalan_controllers/generate') ?>">Generate Jadwal</a>
+            <a class="dropdown-item" href="<?php echo base_url('/Penjadwalan_controllers/hasil_generate') ?>">Hasil Jadwal</a>
         </div>
     </li>
 </ul>

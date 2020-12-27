@@ -23,7 +23,7 @@
             <span>Perkuliahan</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/jadwalAjar') ?>">Jadwal Ajar</a>
+            <a class="dropdown-item" href="<?= base_url('/Penjadwalan_controllers/hasil_generate') ?>">Jadwal Ajar</a>
             <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/matkulAmpu') ?>">Mata Kuliah Ampu</a>
         </div>
     </li>

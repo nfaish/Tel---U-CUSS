@@ -452,6 +452,12 @@ class Pengaturan extends MY_Controller
 		$this->load->view('v_pengaturan/v_ruangan', $data);
 	}
 
+	public function generate()
+	{
+		$this->load->model('m_pengaturan');
+		$this->load->view('penjadwalan/generate_jadwal');
+	}
+
 	public function simpanRuangan()
 	{
 		$this->load->model('m_pengaturan');
