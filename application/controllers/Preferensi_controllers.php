@@ -12,7 +12,8 @@ class Preferensi_controllers extends CI_Controller
     public function index()
     {
         $this->load->model('Preferensi_model');
-        $data['jadwal'] = $this->Preferensi_model->bacaJadwal();
+		$data['jadwal'] = $this->Preferensi_model->bacaJadwal();
+		$data['preferensi'] = $this->Preferensi_model->jadwaldosen();
         $this->load->view('dosen_view/preferensi_view', $data);
     }
 
@@ -191,9 +192,8 @@ class Preferensi_controllers extends CI_Controller
 				$data_read[$i]['shift13'] = 'Not Ready';
 			}
 		}
-
-		$data['baru_jadwaldosen'] = $data_read;
-		$this->load->view('dosen_view/preferensi_view',$data);
+		
+		redirect("Preferensi_controllers");
 	}
         
 

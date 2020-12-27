@@ -32,44 +32,97 @@ class Preferensi_model extends CI_Model
     public function masukkanPreferensiDosen()
     {
         $nama_hari = $this->input->post('nama_hari');
-        $jumlah_nama_hari = count($nama_hari);
-        for ($i = 0; $i < $jumlah_nama_hari; $i++) {
-            //Cek input jika ada maka 1, jika tidak maka 0
-            $jam1Checked = $this->input->post('shift1' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam2Checked = $this->input->post('shift2' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam3Checked = $this->input->post('shift3' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam4Checked = $this->input->post('shift4' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam5Checked = $this->input->post('shift5' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam6Checked = $this->input->post('shift6' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam7Checked = $this->input->post('shift7' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam8Checked = $this->input->post('shift8' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam9Checked = $this->input->post('shift9' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam10Checked = $this->input->post('shift10' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam11Checked = $this->input->post('shift11' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam12Checked = $this->input->post('shift12' . $nama_hari[$i]) == null ? 0 : 1;
-            $jam13Checked = $this->input->post('shift13' . $nama_hari[$i]) == null ? 0 : 1;
+        
+        $nip = $this->session->nip;
 
-            //siapin variabel buat dikirim
-            $data = [
-                'nip' => $this->session->nip,
-                'id_hari' => $nama_hari[$i],
-                'shift1' => $jam1Checked,
-                'shift2' => $jam2Checked,
-                'shift3' => $jam3Checked,
-                'shift4' => $jam4Checked,
-                'shift5' => $jam5Checked,
-                'shift6' => $jam6Checked,
-                'shift7' => $jam7Checked,
-                'shift8' => $jam8Checked,
-                'shift9' => $jam9Checked,
-                'shift10' => $jam10Checked,
-                'shift11' => $jam11Checked,
-                'shift12' => $jam12Checked,
-                'shift13' => $jam13Checked,
-            ];
+        $query_check = $this->db->query("SELECT * FROM preferensi WHERE nip = $nip");
 
-            //jalanin query database
-            $this->db->insert('preferensi', $data);
+        if($query_check->num_rows() == 0) {
+            $jumlah_nama_hari = count($nama_hari);
+            for ($i = 0; $i < $jumlah_nama_hari; $i++) {
+                //Cek input jika ada maka 1, jika tidak maka 0
+                $jam1Checked = $this->input->post('shift1' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam2Checked = $this->input->post('shift2' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam3Checked = $this->input->post('shift3' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam4Checked = $this->input->post('shift4' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam5Checked = $this->input->post('shift5' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam6Checked = $this->input->post('shift6' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam7Checked = $this->input->post('shift7' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam8Checked = $this->input->post('shift8' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam9Checked = $this->input->post('shift9' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam10Checked = $this->input->post('shift10' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam11Checked = $this->input->post('shift11' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam12Checked = $this->input->post('shift12' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam13Checked = $this->input->post('shift13' . $nama_hari[$i]) == null ? 0 : 1;
+    
+                $id_hari = $nama_hari[$i];
+    
+                //siapin variabel buat dikirim
+                $data = [
+                    'nip' => $this->session->nip,
+                    'id_hari' => $nama_hari[$i],
+                    'shift1' => $jam1Checked,
+                    'shift2' => $jam2Checked,
+                    'shift3' => $jam3Checked,
+                    'shift4' => $jam4Checked,
+                    'shift5' => $jam5Checked,
+                    'shift6' => $jam6Checked,
+                    'shift7' => $jam7Checked,
+                    'shift8' => $jam8Checked,
+                    'shift9' => $jam9Checked,
+                    'shift10' => $jam10Checked,
+                    'shift11' => $jam11Checked,
+                    'shift12' => $jam12Checked,
+                    'shift13' => $jam13Checked,
+                ];
+    
+                // //jalanin query database
+                $this->db->insert('preferensi', $data);
+                // $this->db->update_string('preferensi', $data, 'nip = ' . $nip . ' AND id_hari = ' . $nama_hari[$i]);
+            }
+        } else {
+            $jumlah_nama_hari = count($nama_hari);
+            for ($i = 0; $i < $jumlah_nama_hari; $i++) {
+                //Cek input jika ada maka 1, jika tidak maka 0
+                $jam1Checked = $this->input->post('shift1' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam2Checked = $this->input->post('shift2' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam3Checked = $this->input->post('shift3' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam4Checked = $this->input->post('shift4' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam5Checked = $this->input->post('shift5' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam6Checked = $this->input->post('shift6' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam7Checked = $this->input->post('shift7' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam8Checked = $this->input->post('shift8' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam9Checked = $this->input->post('shift9' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam10Checked = $this->input->post('shift10' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam11Checked = $this->input->post('shift11' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam12Checked = $this->input->post('shift12' . $nama_hari[$i]) == null ? 0 : 1;
+                $jam13Checked = $this->input->post('shift13' . $nama_hari[$i]) == null ? 0 : 1;
+    
+                $id_hari = $nama_hari[$i];
+    
+                //siapin variabel buat dikirim
+                $data = [
+                    'nip' => $this->session->nip,
+                    'id_hari' => $nama_hari[$i],
+                    'shift1' => $jam1Checked,
+                    'shift2' => $jam2Checked,
+                    'shift3' => $jam3Checked,
+                    'shift4' => $jam4Checked,
+                    'shift5' => $jam5Checked,
+                    'shift6' => $jam6Checked,
+                    'shift7' => $jam7Checked,
+                    'shift8' => $jam8Checked,
+                    'shift9' => $jam9Checked,
+                    'shift10' => $jam10Checked,
+                    'shift11' => $jam11Checked,
+                    'shift12' => $jam12Checked,
+                    'shift13' => $jam13Checked,
+                ];
+    
+                // //jalanin query database
+                // $this->db->insert('preferensi', $data);
+                $this->db->update('preferensi', $data, ['nip' => $nip, 'id_hari' => $id_hari]);
+            }
         }
     }
 
