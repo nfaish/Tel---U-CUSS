@@ -327,7 +327,9 @@ class Fakultas_model extends CI_Model
     {
         $query = "SELECT * 
                     FROM jurusan 
-                    WHERE id_fakultas = $id_fakultas";
+                    JOIN angkatan_jurusan ON angkatan_jurusan.id_jurusan = jurusan.id_jurusan
+                    JOIN angkatan ON angkatan.id_angkatan = angkatan_jurusan.id_angkatan
+                    WHERE jurusan.id_fakultas = $id_fakultas";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }

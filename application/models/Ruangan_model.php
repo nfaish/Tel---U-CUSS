@@ -47,7 +47,9 @@ class Ruangan_model extends CI_Model
 
     public function daftar_ruangangedung($id_gedung)
     {
-        $query = "SELECT * FROM ruangan WHERE id_gedung = $id_gedung";
+        $query = "SELECT * FROM ruangan 
+                    JOIN gedung ON ruangan.id_gedung = gedung.id_gedung
+                    WHERE ruangan.id_gedung = $id_gedung";
         // $query = "SELECT 
         //             gedung.id_gedung,
         //             gedung.nama_gedung,
