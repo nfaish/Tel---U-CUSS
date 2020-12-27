@@ -129,7 +129,55 @@ class Preferensi_model extends CI_Model
      public function jadwaldosen()
      {
         $nip = $this->session->nip;
-        $query = $this->db->query("SELECT   preferensi.nip as nip ,
+
+        $query_check = $this->db->query("SELECT * FROM preferensi WHERE nip = $nip");
+
+        if($query_check->num_rows() == 0) {
+            $query1 = $this->db->query("SELECT * FROM hari");
+
+            $hari = $query1->result_array();
+            
+            for ($i = 0; $i < count($hari); $i++) {
+                //Cek input jika ada maka 1, jika tidak maka 0
+                $jam1Checked = 0;
+                $jam2Checked = 0;
+                $jam3Checked = 0;
+                $jam4Checked = 0;
+                $jam5Checked = 0;
+                $jam6Checked = 0;
+                $jam7Checked = 0;
+                $jam8Checked = 0;
+                $jam9Checked = 0;
+                $jam10Checked = 0;
+                $jam11Checked = 0;
+                $jam12Checked = 0;
+                $jam13Checked = 0;
+    
+                //siapin variabel buat dikirim
+                $data = [
+                    'nip' => $this->session->nip,
+                    'id_hari' => $hari[$i]['id_hari'],
+                    'shift1' => $jam1Checked,
+                    'shift2' => $jam2Checked,
+                    'shift3' => $jam3Checked,
+                    'shift4' => $jam4Checked,
+                    'shift5' => $jam5Checked,
+                    'shift6' => $jam6Checked,
+                    'shift7' => $jam7Checked,
+                    'shift8' => $jam8Checked,
+                    'shift9' => $jam9Checked,
+                    'shift10' => $jam10Checked,
+                    'shift11' => $jam11Checked,
+                    'shift12' => $jam12Checked,
+                    'shift13' => $jam13Checked,
+                ];
+    
+                // //jalanin query database
+                $this->db->insert('preferensi', $data);
+                // $this->db->update('preferensi', $data, ['nip' => $nip, 'id_hari' => $id_hari]);
+            }
+
+            $query = $this->db->query("SELECT   preferensi.nip as nip ,
                                             hari.id_hari as id_hari,
                                             hari.nama_hari as nama_hari,
                                             preferensi.shift1 as shift1, 
@@ -148,8 +196,33 @@ class Preferensi_model extends CI_Model
                                     FROM preferensi
                                     JOIN hari ON preferensi.id_hari = hari.id_hari
                                     WHERE nip = '$nip'");
+                                    
 
-        return $query->result_array();
+            return $query->result_array();
+        } else {
+            $query = $this->db->query("SELECT   preferensi.nip as nip ,
+                                            hari.id_hari as id_hari,
+                                            hari.nama_hari as nama_hari,
+                                            preferensi.shift1 as shift1, 
+                                            preferensi.shift2 as shift2, 
+                                            preferensi.shift3 as shift3,
+                                            preferensi.shift4 as shift4, 
+                                            preferensi.shift5 as shift5, 
+                                            preferensi.shift6 as shift6, 
+                                            preferensi.shift7 as shift7, 
+                                            preferensi.shift8 as shift8, 
+                                            preferensi.shift9 as shift9, 
+                                            preferensi.shift10 as shift10, 
+                                            preferensi.shift11 as shift11, 
+                                            preferensi.shift12 as shift12,  
+                                            preferensi.shift13 as shift13 
+                                    FROM preferensi
+                                    JOIN hari ON preferensi.id_hari = hari.id_hari
+                                    WHERE nip = '$nip'");
+                                    
+
+            return $query->result_array();
+        }
      }
 
     public function test()
