@@ -30,6 +30,16 @@
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-bullhorn"></i>
+            <span>Pengumuman</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="<?= base_url('/Pengumuman_controllers/inputPengumuman') ?>">Input Pengumuman</a>
+            <a class="dropdown-item" href="<?php echo site_url('pengumuman') ?>">List Pengumuman</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="	far fa-calendar-alt"></i>
             <span>Penjadwalan</span>
         </a>

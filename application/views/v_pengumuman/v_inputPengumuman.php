@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+  
   <head>
+    <title>Tel - U CUSS | Input Pengumuman</title>
     <?php $this->load->view("_partials/header.php") ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
   </head>
+
   <body id="page-top">
     <?php $this->load->view("_partials/js.php") ?>
-    <?php $this->load->view("_partials/navbar.php", $this->data) ?>
+    <?php $this->load->view("_partials/navbar.php") ?>
 
 
     <div id="wrapper">
-      <?php $this->load->view("_partials/sidebar.php") ?>
+        <?php $this->load->view("_partials/sidebar_admin.php") ?>
       <div id="content-wrapper">
        <div class="container-fluid">
           <div class="mb-3">

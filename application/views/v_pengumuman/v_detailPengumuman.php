@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <?php $this->load->view("_partials/header.php"); ?>
+    <title>Tel - U CUSS | Detail Pengumuman</title>
+    <?php $this->load->view("_partials/header.php") ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
   </head>
+
   <body id="page-top">
-    <?php $this->load->view("_partials/navbar.php", $this->data); ?>
+    <?php $this->load->view("_partials/js.php") ?>
+    <?php $this->load->view("_partials/navbar.php") ?>
 
     <div id="wrapper">
-      <?php $this->load->view("_partials/sidebar.php"); ?>
+      <?php $this->load->view("_partials/sidebar_admin.php") ?>
       <div id="content-wrapper">
        <div class="container-fluid">
           <div class="mb-3">
@@ -45,8 +49,7 @@
         </div>
       </div>
     </div>
-    <?php $this->load->view("_partials/footer.php"); ?>
-    <?php $this->load->view("_partials/js.php"); ?>
+    <?php $this->load->view("_partials/footer.php") ?>
     <script>
       $(document).ready(function(){
         $(document).on('click', '#do-hapus', function () {

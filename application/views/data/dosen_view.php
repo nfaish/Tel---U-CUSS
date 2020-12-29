@@ -96,7 +96,7 @@
                                                                 <td>
                                                                     <a href="<?= base_url('/dosen_controllers/accDosen/' . $value['nip']) ?>" class='btn btn-sm btn-dark col-sm-3'>Acc</a>
                                                                     <a href="<?= base_url('/dosen_controllers/hapusDosen/' . $value['nip']) ?>" class='btn btn-sm btn-danger col-sm-3'>Reject</a>
-                                                                    <!-- <a href='algoritma_linearprogramming/<?= $value['id_dosen'] ?>' class='btn btn-sm btn-info'>Jadwalkan</a> -->
+                                                                    
                                                                 </td>
                                                             </tr>
                                                         <?php }

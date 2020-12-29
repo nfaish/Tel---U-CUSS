@@ -9,10 +9,12 @@ class Home extends MY_Controller
         if (empty($this->session->userdata('username'))) {
             redirect(site_url("login"));
         }
+        $this->load->model("pengumuman_model");
     }
     public function index()
     {
-
-        $this->load->view('home');
+        $this->load->model("pengumuman_model");
+		$data['list_pengumuman'] = $this->pengumuman_model->load_pengumuman();
+        $this->load->view('home', $data);
     }
 }
