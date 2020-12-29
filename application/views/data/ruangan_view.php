@@ -27,42 +27,42 @@
                             Daftar Ruangan
                         </div>
                         <div class="card card-default">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">NAMA GEDUNG</th>
-                                                    <th scope="col">NAMA RUANGAN</th>
-                                                    <th scope="col">KAPASISTAS</th>
-                                                    <th scope="col">ACTION</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php if (!empty($list_ruangan)) { ?>
-                                                    <?php foreach ($list_ruangan as $row => $value) { ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?php echo $value['nama_gedung']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $value['nama_ruangan']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $value['kapasitas']; ?>
-                                                            </td>
-                                                            <td>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">NAMA GEDUNG</th>
+                                                <th scope="col">NAMA RUANGAN</th>
+                                                <th scope="col">KAPASISTAS</th>
+                                                <th scope="col">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($list_ruangan)) { ?>
+                                                <?php foreach ($list_ruangan as $row => $value) { ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $value['nama_gedung']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $value['nama_ruangan']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $value['kapasitas']; ?>
+                                                        </td>
+                                                        <td>
                                                             <a href="<?= base_url('/data_controllers/exploreRuangan/' . $value['id_ruangan']) ?>" class='btn btn-sm btn-dark'> Explore</a>
                                                             <a href="<?= base_url('/data_controllers/hapusRuangan/' . $value['id_ruangan']) ?>" class='btn btn-sm btn-danger'> Delete</a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php }
-                                                    ?>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php }
+                                                ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
                                 </div>
+                            </div>
                         </div>
                     </div>
 
@@ -73,49 +73,49 @@
                             Daftar Gedung
                         </div>
                         <div class="card card-default">
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ID GEDUNG</th>
-                                                    <th scope="col">NAMA GEDUNG</th>
-                                                    <th scope="col">ACTION</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php if (!empty($list_gedung)) { ?>
-                                                    <?php foreach ($list_gedung as $row => $value) { ?>
-                                                        <tr>
-                                                            <td>
-                                                                <?php echo $value['id_gedung']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php echo $value['nama_gedung']; ?>
-                                                            </td>
-                                                            <td>
-                                                                <a href="<?= base_url('/data_controllers/exploreGedung/' . $value['id_gedung']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                                <a href="<?= base_url('/data_controllers/hapusGedung/' . $value['id_gedung']) ?>" class='btn btn-sm btn-danger'>Delete</a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php }
-                                                    ?>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID GEDUNG</th>
+                                                <th scope="col">NAMA GEDUNG</th>
+                                                <th scope="col">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($list_gedung)) { ?>
+                                                <?php foreach ($list_gedung as $row => $value) { ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $value['id_gedung']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $value['nama_gedung']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <a href="<?= base_url('/data_controllers/exploreGedung/' . $value['id_gedung']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                            <a href="<?= base_url('/data_controllers/hapusGedung/' . $value['id_gedung']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php }
+                                                ?>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
                                 </div>
+                            </div>
                         </div>
                     </div>
 
-                        <a href="<?php print base_url('/assets/documents/template_xls/template_tambah_gedung.xls') ?>" class="btn btn-sm btn-success btn-skema" target="blank">
-                            <i class="fas fa-file-excel"></i> 
-                            Download Template Tambah Gedung
-                        </a>
-                        <a href="<?php print base_url('/assets/documents/template_xls/template_tambah_ruang.xls') ?>" class="btn btn-sm btn-success btn-skema" target="blank">
-                            <i class="fas fa-file-excel"></i> 
-                            Download Template Tambah Ruangan
-                        </a>
+                    <a href="<?php print base_url('/assets/documents/template_xls/template_tambah_gedung.xls') ?>" class="btn btn-sm btn-success btn-skema" target="blank">
+                        <i class="fas fa-file-excel"></i>
+                        Download Template Tambah Gedung
+                    </a>
+                    <a href="<?php print base_url('/assets/documents/template_xls/template_tambah_ruang.xls') ?>" class="btn btn-sm btn-success btn-skema" target="blank">
+                        <i class="fas fa-file-excel"></i>
+                        Download Template Tambah Ruangan
+                    </a>
 
                     <div class="row mt-3">
                         <div class="col-sm-6">
@@ -170,10 +170,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 align="center">Upload Data Gedung</h3>
-                                        <form method="post" id="import_form" enctype="multipart/form-data">
+                                        <form method="post" enctype="multipart/form-data" action="<?= base_url('Excel_import_controllers/import_gedung') ?>">
                                             <p><label>Pilih File Data Excel</label>
                                                 <input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
-                                            
+
                                             <input type="submit" name="import" value="Import" class="btn btn-info" />
                                         </form>
                                     </div>
@@ -185,17 +185,17 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 align="center">Upload Data Ruangan</h3>
-                                        <form method="post" id="import_form" enctype="multipart/form-data">
+                                        <form method="post" enctype="multipart/form-data" action="<?= base_url('Excel_import_controllers/import_ruangan') ?>">
                                             <p><label>Pilih File Data Excel</label>
                                                 <input type="file" name="file" id="file" required accept=".xls, .xlsx" /></p>
-                                            
+
                                             <input type="submit" name="import" value="Import" class="btn btn-info" />
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </div>
