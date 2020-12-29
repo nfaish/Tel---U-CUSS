@@ -15,7 +15,7 @@
       <div id="content-wrapper">
        <div class="container-fluid">
           <div class="mb-3">
-            <h1>Pengumuman</h1><hr>
+            <h2>Pengumuman</h2><hr>
             <?php if ($this->session->flashdata('alert_hapus')) {?>
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -30,7 +30,6 @@
                     <th>No</th>
                     <th>Judul</th>
                     <th>Tanggal dibuat</th>
-                    <th>Penerbit</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -42,7 +41,6 @@
                         <td><?= $no ?></td>
                         <td><?= $row['judul'] ?></td>
                         <td><?= $row['tgl_dibuat'] ?></td>
-                        <td><?= $row['nip'] ?></td>
                         <td>
                           <a href='pengumuman/detail/<?= $row['id_pengumuman'] ?>' class='btn btn-sm btn-info'>Detail</a>
                           <a href='pengumuman/edit/<?= $row['id_pengumuman'] ?>' class='btn btn-sm btn-success'><i class='far fa-edit'></i></a>

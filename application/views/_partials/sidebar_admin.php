@@ -34,8 +34,8 @@
             <span>Pengumuman</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="<?= base_url('/Pengumuman_controllers/inputPengumuman') ?>">Input Pengumuman</a>
-            <a class="dropdown-item" href="<?php echo site_url('pengumuman') ?>">List Pengumuman</a>
+            <!-- <a class="dropdown-item" href="<?= base_url('/Pengumuman_controllers/inputPengumuman') ?>">Input Pengumuman</a> -->
+            <a class="dropdown-item" href="<?php echo site_url('pengumuman') ?>">Daftar Pengumuman</a>
         </div>
     </li>
     <li class="nav-item dropdown">

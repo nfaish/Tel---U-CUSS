@@ -17,7 +17,7 @@
       <div id="content-wrapper">
        <div class="container-fluid">
           <div class="mb-3">
-            <h1>Input Pengumuman</h1><hr><br>
+            <h2>Tambah Pengumuman</h2><hr><br>
             <?php echo form_open_multipart('Pengumuman/simpanPengumuman/');?>
             <!-- <form method="post" class="form-horizontal" action=""> -->
                 <div class="form-group">

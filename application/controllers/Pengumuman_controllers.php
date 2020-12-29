@@ -3,39 +3,6 @@
 
     class Pengumuman_controllers extends CI_Controller
     {
-        // public function __construct()
-        // {
-        //     parent::__construct();
-        //     $this->load->model("pengumuman_model");
-        // }
-
-        // public function index($id_pengumuman)
-        // {
-        //     $data['list_pengumuman'] = $this->pengumuman_model->load_pengumuman();
-
-        //     $this->load->view("v_pengumuman/v_pengumuman", $data);
-        // }
-
-        // public function inputPengumuman()
-        // {
-        //     $this->load->view("v_pengumuman/v_inputPengumuman");
-        // }
-
-        // public function delete($id_pengumuman)
-        // {
-        //     $this->pengumuman_model->hapusPengumuman($id_pengumuman);
-        //     $this->session->set_flashdata('alert_hapus', 'Pengumuman Telah Dihapus');
-            
-        //     redirect (base_url("pengumuman"));
-        // }
-
-        // public function detail($id_pengumuman)
-        // {
-        //     $data['list_pengumuman'] = $this->pengumuman_model->load_pengumumanSelect($id_pengumuman);
-
-        //     $this->load->view('v_pengumuman/v_detailPengumuman', $data);
-        // }
-
         public function index()
         {
             $this->load->model("pengumuman_model");
@@ -53,7 +20,7 @@
         {
             $config['upload_path']          = './assets/documents/pengumuman/';
             $config['allowed_types']        = '*';
-            $config['max_size']             = 25600000;
+            $config['max_size']             = 2560000000;
     
             $this->load->library('upload', $config);
             
