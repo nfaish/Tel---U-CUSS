@@ -30,7 +30,8 @@
                         </ul>
                     </div>
                     <br>
-
+                    <a href="<?= base_url('/penjadwalan/cetak_jadwal') ?>" target="_blank" class="btn btn-primary fa fa-print">  Cetak</a>
+                    <br><br>
                     <div class="card mb-3">
                         <div class="card-header">
                             <i class="fas fa-table"></i>

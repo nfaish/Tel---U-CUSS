@@ -24,9 +24,17 @@
                                 <div class="card-header">Profil Dosen</div>
                                 <div class="card-body">
                                     <form action="" method="post">
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="nama_depan">Nama Anda</label>
                                             <input type="text" class="form-control" id="nama_depan" name="nama_depan" value="<?= $detailDosen['nama_depan'] . " " . $detailDosen['nama_belakang'] ?>" disabled>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label for="nama_depan">Nama Depan</label>
+                                            <input type="text" class="form-control" id="nama_depan" name="nama_depan" value="<?= $detailDosen['nama_depan']?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nama_depan">Nama Belakang</label>
+                                            <input type="text" class="form-control" id="nama_belakang" name="nama_belakang" value="<?= $detailDosen['nama_belakang']?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="nip">NIP</label>
@@ -34,11 +42,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="kode_dosen">Kode Dosen</label>
-                                            <input type="text" class="form-control" id="kode_dosen" name="kode_dosen" value="<?= $detailDosen['kode_dosen'] ?>" disabled>
+                                            <input type="text" class="form-control" id="kode_dosen" name="kode_dosen" value="<?= $detailDosen['kode_dosen'] ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" value="<?= $detailDosen['email'] ?>" disabled>
+                                            <input type="text" class="form-control" id="email" name="email" value="<?= $detailDosen['email'] ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="jab_fungsional">Jabatan Fungsional</label>

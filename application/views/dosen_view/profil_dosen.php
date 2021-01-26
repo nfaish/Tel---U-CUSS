@@ -24,13 +24,29 @@
                                 <div class="card-header">My Profile</div>
                                 <div class="card-body">
                                     <form action="" method="post">
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="nama_depan">Nama Anda</label>
-                                            <input type="text" class="form-control" id="nama_depan" name="nama_depan" value="<?= $my_profile['nama_depan'] . " " . $my_profile['nama_belakang'] ?>" disabled>
+                                            <input type="text" class="form-control" id="nama_depan" name="nama_depan" value="<?= $my_profile['nama_depan'] . " " . $my_profile['nama_belakang'] ?>">
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label for="nama_depan">Nama Depan</label>
+                                            <input type="text" class="form-control" id="nama_depan" name="nama_depan" value="<?= $my_profile['nama_depan']?>">
                                         </div>
                                         <div class="form-group">
+                                            <label for="nama_depan">Nama Belakang</label>
+                                            <input type="text" class="form-control" id="nama_belakang" name="nama_belakang" value="<?= $my_profile['nama_belakang']?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nip">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username" value="<?= $my_profile['username'] ?>" disabled>
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label for="nip">Password</label>
+                                            <input type="text" class="form-control" id="password" name="password" value="<?= $my_profile['password'] ?>">
+                                        </div> -->
+                                        <div class="form-group">
                                             <label for="nip">NIP</label>
-                                            <input type="text" class="form-control" id="nip" name="nip" value="<?= $my_profile['nip'] ?>">
+                                            <input type="text" class="form-control" id="nip" name="nip" value="<?= $my_profile['nip'] ?>" disabled>
                                         </div>
                                         <div class="form-group">
                                             <label for="kode_dosen">Kode Dosen</label>
@@ -38,7 +54,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email" name="email" value="<?= $my_profile['email'] ?>" disabled>
+                                            <input type="text" class="form-control" id="email" name="email" value="<?= $my_profile['email'] ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="jab_fungsional">Jabatan Fungsional</label>

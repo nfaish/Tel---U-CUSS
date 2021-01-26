@@ -37,4 +37,13 @@ class Penjadwalan_controllers extends CI_Controller
         }
     }
 
+    public function cetak()
+    {
+            $this->load->view("penjadwalan/cetak_jadwal");
+    }
+
+    public function cetak_jadwal()
+        {
+            $this->load->view('penjadwalan/cetak_jadwal');
+        }
 }
