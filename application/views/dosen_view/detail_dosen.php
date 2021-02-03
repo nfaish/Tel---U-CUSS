@@ -37,6 +37,13 @@
                                             <input type="text" class="form-control" id="nama_belakang" name="nama_belakang" value="<?= $detailDosen['nama_belakang']?>">
                                         </div>
                                         <div class="form-group">
+                                            <label for="jenis_kelamin">Jenis Kelamin</label>
+                                            <div class="form-group">
+                                                <input type="radio" id="jenis_kelamin" name="jenis_kelamin" value="Laki-laki" required=""> Laki-Laki <br>
+                                                <input type="radio" id="jenis_kelamin" name="jenis_kelamin" value="Perempuan" required=""> Prempuan
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="nip">NIP</label>
                                             <input type="text" class="form-control" id="nip" name="nip" value="<?= $detailDosen['nip'] ?>">
                                         </div>

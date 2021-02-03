@@ -36,6 +36,13 @@
                                             <label for="nama_depan">Nama Belakang</label>
                                             <input type="text" class="form-control" id="nama_belakang" name="nama_belakang" value="<?= $my_profile['nama_belakang']?>">
                                         </div>
+                                        <!-- <div class="form-group">
+                                            <label for="jenis_kelamin">Jenis Kelamin</label>
+                                            <div class="form-group">
+                                                <input type="radio" id="jenis_kelamin" name="jenis_kelamin"  value="<?= $my_profile['jenis_kelamin']?>" required=""> Laki-Laki <br>
+                                                <input type="radio" id="jenis_kelamin" name="jenis_kelamin"  value="<?= $my_profile['jenis_kelamin']?>" required=""> Prempuan
+                                            </div>
+                                        </div> -->
                                         <div class="form-group">
                                             <label for="nip">Username</label>
                                             <input type="text" class="form-control" id="username" name="username" value="<?= $my_profile['username'] ?>" disabled>

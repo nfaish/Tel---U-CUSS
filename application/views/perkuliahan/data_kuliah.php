@@ -72,7 +72,7 @@
                                                             </td>
                                                             <td>
                                                                 
-                                                                <a href="<?= base_url('/fakultas_controllers/hapusMatkul_ajarku/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                            <a href="<?= base_url('/perkuliahan_controllers/hapusMatkul_ajarkuu/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-danger'>Delete</a>
                                                             </td>
                                                         </tr>
                                                     <?php }

@@ -66,6 +66,7 @@ class Dosen_model extends CI_Model
         $nip                = $this->db->escape($_POST['nip']);
         $nama_depan         = $this->db->escape($_POST['nama_depan']);
         $nama_belakang      = $this->db->escape($_POST['nama_belakang']);
+        $jenis_kelamin      = $this->db->escape($_POST['jenis_kelamin']);
         // $username           = $this->db->escape($_POST['username']);
         // $password           = $this->db->escape($_POST['password']);
         $email              = $this->db->escape($_POST['email']);
@@ -80,6 +81,7 @@ class Dosen_model extends CI_Model
                     --nip             = $nip,
                     nama_depan      = $nama_depan,
                     nama_belakang   = $nama_belakang,
+                    jenis_kelamin   = $jenis_kelamin,
                     -- username        = $username,
                     email           = $email
                     WHERE nip       = $nip";
@@ -115,6 +117,7 @@ class Dosen_model extends CI_Model
                 dosen_additional.alamat,
                 dosen_additional.no_telp,
                 dosen.nip as nipDosen,
+                dosen.jenis_kelamin,
                 dosen.nama_depan,
                 dosen.nama_belakang,
                 dosen.email

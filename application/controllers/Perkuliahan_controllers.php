@@ -41,11 +41,18 @@ class Perkuliahan_controllers extends CI_Controller
 		$this->load->view('perkuliahan/ubah_index', $data);
     }
 
-    public function hapusMatkul($id_matkul)
+    public function hapusMatkul_ajarku($id_mengajar)
     {
 		$this->load->model('perkuliahan_model');
-		$this->perkuliahan_model->hapusMatkul($id_matkul);
-        redirect (base_url("perkuliahan_controllers/index"));
+		$this->perkuliahan_model->hapusMatkul_ajarku($id_mengajar);
+        redirect (base_url("perkuliahan_controllers/matkulAmpu"));
+        $this->session->set_flashdata('alert', 'Mata Kuliah Telah Dihapus');
+    }
+    public function hapusMatkul_ajarkuu($id_mengajar)
+    {
+		$this->load->model('perkuliahan_model');
+		$this->perkuliahan_model->hapusMatkul_ajarku($id_mengajar);
+        redirect (base_url("perkuliahan_controllers/dataKuliah"));
         $this->session->set_flashdata('alert', 'Mata Kuliah Telah Dihapus');
 	}
 
@@ -61,6 +68,14 @@ class Perkuliahan_controllers extends CI_Controller
             redirect("/Perkuliahan_controllers/matkulAmpu");
         }
     }
+
+    public function hapusMatkul($id_matkul)
+    {
+		$this->load->model('perkuliahan_model');
+		$this->perkuliahan_model->hapusMatkul($id_matkul);
+        redirect (base_url("perkuliahan_controllers/index"));
+        $this->session->set_flashdata('alert', 'Mata Kuliah Telah Dihapus');
+	}
 
     public function jadwalAjar()
     {

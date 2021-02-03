@@ -133,7 +133,14 @@
 								<input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
 							</div>
 						</div>
-						<label for="nama_depan">Jenis Kelamin</label>
+						<div class="form-group">
+							<label for="jenis_kelamin">Jenis Kelamin</label>
+							<div class="form-group">
+								<input type="radio" id="jenis_kelamin" name="jenis_kelamin" value="Laki-laki" required=""> Laki-Laki
+								<input type="radio" id="jenis_kelamin" name="jenis_kelamin" value="Perempuan" required=""> Prempuan
+							</div>
+                    	</div>
+						<!-- <label for="nama_depan">Jenis Kelamin</label>
 						<div class="form-check ml-4">
 							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
 								<label class="form-check-label" for="exampleRadios1">
@@ -145,7 +152,7 @@
 								<label class="form-check-label" for="exampleRadios2">
 									Perempuan
 								</label>
-						</div>
+						</div> -->
 						<button class="btn btn-dark mt-2" type="submit" name="buatAkun">Create My Account!</button>
 					</form>	
                 </div>
