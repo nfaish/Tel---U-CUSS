@@ -18,6 +18,17 @@ class Dosen_controllers extends CI_Controller
         $this->load->view('dosen_view');
     }
 
+    // public function exploreDosen($nip)
+    // {
+    //     $data['detailDosen'] = $this->dosen_model->exploredosenByNip($nip);
+    //     $data['detailAdditional'] = $this->dosen_model->exploreadditionalByNip($nip);
+    //     $this->load->view("dosen_view/detail_dosen", $data);
+    //     if (isset($_POST['updateDosen'])) {
+    //         $this->dosen_model->updateDosen($_POST, $nip);
+    //         redirect("Data_controllers/dosen");
+    //     }
+    // }
+
     public function exploreDosen($nip)
     {
         $data['detailDosen'] = $this->dosen_model->exploredosenByNip($nip);
@@ -25,6 +36,7 @@ class Dosen_controllers extends CI_Controller
         $this->load->view("dosen_view/detail_dosen", $data);
         if (isset($_POST['updateDosen'])) {
             $this->dosen_model->updateDosen($_POST, $nip);
+            $this->session->set_flashdata('alert', 'Data Dosen Berhasil Diperbarui');
             redirect("Data_controllers/dosen");
         }
     }

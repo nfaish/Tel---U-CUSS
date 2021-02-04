@@ -63,7 +63,7 @@
                                                             </td>
                                                             <td>
                                                                 <a href="<?= base_url('/perkuliahan_controllers/exploreMKDU_jurusan/' . $value['id_perkuliahan']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                                <a href="<?= base_url('/perkuliahan_controllers/exploreMKDU_jurusan/' . $value['id_perkuliahan']) ?>" class='btn btn-sm btn-danger'>Delete</a>
+                                                                <a href="<?= base_url('/perkuliahan_controllers/hapusMKDU_jurusan/' . $value['id_perkuliahan']) ?>" class='btn btn-sm btn-danger'>Delete</a>
                                                             </td>
                                                         </tr>
                                                     <?php }

@@ -130,11 +130,11 @@ class Perkuliahan_controllers extends CI_Controller
 		$this->load->view('perkuliahan/ubah_mkdu_fakultas', $data);
     }
 
-    public function hapusMKDU_jurusan($id_matkul)
+    public function hapusMKDU_jurusan($id_perkuliahan)
     {
 		$this->load->model('perkuliahan_model');
-		$this->perkuliahan_model->hapusMKDU($id_perkuliahan);
-        redirect (base_url("perkuliahan_controllers/mkdu_fakultas"));
+		$this->perkuliahan_model->hapusMKDU_jurusan($id_perkuliahan);
+        redirect (base_url("perkuliahan_controllers/dataMKDU_fakultas"));
         $this->session->set_flashdata('alert', 'Mata Kuliah Dasar Umum Jurusan Telah Dihapus');
 	}
 

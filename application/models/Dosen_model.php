@@ -61,14 +61,53 @@ class Dosen_model extends CI_Model
         $sql = $this->db->query($query);
     }
 
+    // function updateeDosen($post)
+    // {
+    //     $nip                = $this->db->escape($_POST['nip']);
+    //     $nama_depan         = $this->db->escape($_POST['nama_depan']);
+    //     $nama_belakang      = $this->db->escape($_POST['nama_belakang']);
+    //     $email              = $this->db->escape($_POST['email']);
+
+    //     $query = "UPDATE dosen SET
+    //                 -- nip             = $nip,
+    //                 nama_depan      = $nama_depan,
+    //                 nama_belakang   = $nama_belakang,
+    //                 email           = $email
+    //                 WHERE nip       = $nip";
+    //     // var_dump($query);exit;
+    //     $sql = $this->db->query($query);
+    // }
+
+    // function updateDosen($post)
+    // {
+    //     $nip                = $this->db->escape($_POST['nip']);
+    //     $jab_fungsional     = $this->db->escape($_POST['jab_fungsional']);
+    //     $jab_struktural     = $this->db->escape($_POST['jab_struktural']);
+    //     $kota_asal          = $this->db->escape($_POST['kota_asal']);
+    //     $tanggal_lahir      = $this->db->escape($_POST['tanggal_lahir']);
+    //     $alamat             = $this->db->escape($_POST['alamat']);
+    //     $no_telp            = $this->db->escape($_POST['no_telp']);
+
+    //     $query = "UPDATE dosen_additional SET
+    //                 -- nip             = $nip,
+    //                 jab_fungsional  = $jab_fungsional,
+    //                 jab_struktural  = $jab_struktural,
+    //                 kota_asal       = $kota_asal,
+    //                 tanggal_lahir   = $tanggal_lahir,
+    //                 alamat          = $alamat,
+    //                 no_telp         = $no_telp
+    //                 WHERE nip   = $nip";
+    //     var_dump($query);exit;
+    //     $sql = $this->db->query($query);
+    // }
+
     function updateDosen($post)
     {
         $nip                = $this->db->escape($_POST['nip']);
         $nama_depan         = $this->db->escape($_POST['nama_depan']);
         $nama_belakang      = $this->db->escape($_POST['nama_belakang']);
-        $jenis_kelamin      = $this->db->escape($_POST['jenis_kelamin']);
-        // $username           = $this->db->escape($_POST['username']);
-        // $password           = $this->db->escape($_POST['password']);
+        $username           = $this->db->escape($_POST['username']);
+        $password           = md5($_POST['password']);
         $email              = $this->db->escape($_POST['email']);
         $jab_fungsional     = $this->db->escape($_POST['jab_fungsional']);
         $jab_struktural     = $this->db->escape($_POST['jab_struktural']);
@@ -78,13 +117,14 @@ class Dosen_model extends CI_Model
         $no_telp            = $this->db->escape($_POST['no_telp']);
 
         $query = "UPDATE dosen SET
-                    --nip             = $nip,
+                    -- nip             = $nip,
                     nama_depan      = $nama_depan,
                     nama_belakang   = $nama_belakang,
-                    jenis_kelamin   = $jenis_kelamin,
-                    -- username        = $username,
+                    username        = $username,
+                    password        = $password,
                     email           = $email
                     WHERE nip       = $nip";
+        // var_dump($query);exit;
         $sql = $this->db->query($query);
 
         $query = "UPDATE dosen_additional SET

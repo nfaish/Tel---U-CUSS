@@ -2,20 +2,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ubah Data Logina</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Ubah Data Login</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form action="<?= base_url('Akun_dosen_controllers/ubahPassword') ?>" method="post">
+        <form action="<?= base_url('Pengaturan_controllers/ubahPassword') ?>" method="post">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="pass_old">Password Lama</label>
-                    <?php 
+                    <!-- <?php 
                         if ($this->session->userdata('user_role') == 1) 
                         { ?>
-                            <input type="hidden" name="id" value="<?= $dataMhs['nip'] ?>">
-                            <input type="hidden" name="passLama" id="passLama" value="<?= $dataMhs['password'] ?>">
+                            <input type="hidden" name="id" value="<?= $dataDosen['nip'] ?>">
+                            <input type="hidden" name="passLama" id="passLama" value="<?= $dataDosen['password'] ?>">
                             <input type="password" class="form-control" id="passLamaInput" name="passLama" >
                             <?php
                         }else 
@@ -25,11 +25,7 @@
                             <input type="password" class="form-control" id="passLamaInput" name="passLama">
                             <?php
                         }
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="pass_new">Username</label>
-                    <input type="text" class="form-control" id="username" name="username">
+                    ?> -->
                 </div>
                 <div class="form-group">
                     <label for="pass_new">Password Baru</label>
