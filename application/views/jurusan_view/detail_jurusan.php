@@ -77,7 +77,7 @@
                                                             <?php echo $value['dosen_wali']; ?>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= base_url('/fakultas_controllers/exploreKelas/' . $value['id_kelas']) ?>" class='btn btn-sm btn-dark'>Explore</a>
+                                                            <!-- <a href="<?= base_url('/fakultas_controllers/exploreKelas/' . $value['id_kelas']) ?>" class='btn btn-sm btn-dark'>Explore</a> -->
                                                             <a href="<?= base_url('/fakultas_controllers/hapuskelas/' . $value['id_kelas']) ?>" class='btn btn-sm btn-danger'>Delete</a>
                                                         </td>
                                                     </tr>

@@ -107,7 +107,7 @@ class Dosen_model extends CI_Model
         $nama_depan         = $this->db->escape($_POST['nama_depan']);
         $nama_belakang      = $this->db->escape($_POST['nama_belakang']);
         $username           = $this->db->escape($_POST['username']);
-        $password           = md5($_POST['password']);
+        // $password           = md5($_POST['password']);
         $email              = $this->db->escape($_POST['email']);
         $jab_fungsional     = $this->db->escape($_POST['jab_fungsional']);
         $jab_struktural     = $this->db->escape($_POST['jab_struktural']);
@@ -121,7 +121,7 @@ class Dosen_model extends CI_Model
                     nama_depan      = $nama_depan,
                     nama_belakang   = $nama_belakang,
                     username        = $username,
-                    password        = $password,
+                    -- password        = $password,
                     email           = $email
                     WHERE nip       = $nip";
         // var_dump($query);exit;
