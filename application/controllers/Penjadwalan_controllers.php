@@ -16,9 +16,16 @@ class Penjadwalan_controllers extends CI_Controller
     public function generate()
     {
         try{
-            $nip                    = $this->session->userdata("nip");
-            $data['my_profile']      = $this->dosen_model->exploredosenByNip($nip);
-            
+            $nip = $this->session->userdata("nip");
+            $data['my_profile'] = $this->dosen_model->exploredosenByNip($nip);
+
+            $data['data_class_requirement'] = $this->penjadwalan_model->getClassRequirements();
+            $data['data_preferensi_dosen'] = $this->penjadwalan_model->getDataDosen();
+
+            foreach ($data['data_preferensi_dosen'] as $key => $value) {
+                $data['data_preferensi_dosen'][$key]['no'] = $key;
+            }
+
             $this->load->view("penjadwalan/generate_jadwal", $data);
         } catch (Exception $e){
             show_error("Internal Server Error",500);
@@ -28,8 +35,8 @@ class Penjadwalan_controllers extends CI_Controller
     public function hasil_generate()
     {
         try{
-            $nip                    = $this->session->userdata("nip");
-            $data['my_profile']      = $this->dosen_model->exploredosenByNip($nip);
+            $nip = $this->session->userdata("nip");
+            $data['my_profile'] = $this->dosen_model->exploredosenByNip($nip);
             
             $this->load->view("penjadwalan/hasil_jadwal", $data);
         } catch (Exception $e){
