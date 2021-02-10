@@ -42,7 +42,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="nip">Username</label>
-                                                    <input type="text" class="form-control" id="username" name="username" value="<?= $my_profile['username'] ?>" disabled>
+                                                    <input type="text" class="form-control" id="username" name="username" value="<?= $my_profile['username'] ?>" >
                                                 </div>
                                                 <!-- <div class="form-group">
                                                     <label for="nip">Password</label>

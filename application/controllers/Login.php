@@ -14,6 +14,7 @@ class Login extends CI_Controller
 		$this->load->view('login');
 		if (isset($_POST['buatAkun'])) {
 			$this->akun_model->buatAkun($_POST);
+			$this->session->set_flashdata('alert', 'Akun Berhasil Dibuat');
 			redirect("Login");
 		}
 	}

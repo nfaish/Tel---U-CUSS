@@ -16,6 +16,12 @@
 			<?php echo $this->session->flashdata('alert_gagal'); ?>
 		</div>
 	<?php } ?>
+	<?php if ($this->session->flashdata('alert')) {?>
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php echo $this->session->flashdata('alert'); ?>
+        </div>
+    <?php } ?>
 	
 	<!-- Navbar 2 -->
 	<!-- <div class="pos-f-t">
@@ -99,22 +105,22 @@
                 <form action="" method="post">
 					<div class="form-row">
 						<div class="col-md-6 mb-3">
-							<label for="nama_depan">First Name</label>
-							<input type="text" class="form-control" id="nama_depan" name="nama_depan" placeholder="First name" required>
+							<label for="nama_depan">Nama Depan</label>
+							<input type="text" class="form-control" id="nama_depan" name="nama_depan" placeholder="Nama Depan" required>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="nama_belakang">Last Name</label>
-							<input type="text" class="form-control" id="nama_belakang" name="nama_belakang" placeholder="Last name">
+							<label for="nama_belakang">Nama Belakang</label>
+							<input type="text" class="form-control" id="nama_belakang" name="nama_belakang" placeholder="Nama Belakang">
 						</div>
 						</div>
 						<div class="form-row">
 							<div class="col-md-6 mb-3">
 								<label for="username">Username</label>
-								<input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+								<input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
 							</div>
 							<div class="col-md-6 mb-3">
 								<label for="password">Password</label>
-								<input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -124,7 +130,7 @@
 							</div>
 							<div class="col-md-3 mb-3">
 								<label for="kode_dosen">Kode Dosen</label>
-								<input type="text" class="form-control" id="kode_dosen" name="kode_dosen" placeholder="Kode" required>
+								<input type="text" class="form-control" id="kode_dosen" name="kode_dosen" placeholder="Kode Dosen" required>
 							</div>
 						</div>
 						<div class="form-row">
@@ -153,7 +159,7 @@
 									Perempuan
 								</label>
 						</div> -->
-						<button class="btn btn-dark mt-2" type="submit" name="buatAkun">Create My Account!</button>
+						<button class="btn btn-dark mt-2" type="submit" name="buatAkun">Buat Akun</button>
 					</form>	
                 </div>
             </div>
