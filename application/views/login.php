@@ -166,14 +166,13 @@
 	<script src="<?php echo base_url('assets/login/vendor/select2/select2.min.js') ?>"></script>
 	<script src="<?php echo base_url('assets/login/js/main.js') ?>"></script>
 	
-	
-	<footer class="footer">
+	<div id="footer">
 		<div class="container my-auto">
 			<div class="copyright text-center my-auto">
 			<span><strong>Telkom University - Course Scheduling System &copy; 2020 All rights reserved.</span>
 			</div>
 		</div>
-	</footer>
+	</div>
 </body>
 
 </html>
