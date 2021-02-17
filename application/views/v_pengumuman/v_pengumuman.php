@@ -22,7 +22,7 @@
                     <?php echo $this->session->flashdata('alert_hapus'); ?>
                 </div>
             <?php } ?>
-            <a href="<?= base_url('/Pengumuman/inputPengumuman') ?>" class="btn btn-sm btn-primary"><i class='far fa-fw fa-plus-square'></i> Input Pengumuman</a>
+            <a href="<?= base_url('/Pengumuman_controllers/inputPengumuman') ?>" class="btn btn-sm btn-primary"><i class='far fa-fw fa-plus-square'></i> Input Pengumuman</a>
             <br><br>
             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>

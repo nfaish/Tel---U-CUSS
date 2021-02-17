@@ -4,10 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Dosen_model extends CI_Model
 {
-
-    // public function index()
-    // {
-    // }
     public function daftar_dosen()
     {
         $query = "SELECT * FROM dosen WHERE id_status = 2 ";
@@ -60,46 +56,6 @@ class Dosen_model extends CI_Model
         // var_dump($query);exit;
         $sql = $this->db->query($query);
     }
-
-    // function updateeDosen($post)
-    // {
-    //     $nip                = $this->db->escape($_POST['nip']);
-    //     $nama_depan         = $this->db->escape($_POST['nama_depan']);
-    //     $nama_belakang      = $this->db->escape($_POST['nama_belakang']);
-    //     $email              = $this->db->escape($_POST['email']);
-
-    //     $query = "UPDATE dosen SET
-    //                 -- nip             = $nip,
-    //                 nama_depan      = $nama_depan,
-    //                 nama_belakang   = $nama_belakang,
-    //                 email           = $email
-    //                 WHERE nip       = $nip";
-    //     // var_dump($query);exit;
-    //     $sql = $this->db->query($query);
-    // }
-
-    // function updateDosen($post)
-    // {
-    //     $nip                = $this->db->escape($_POST['nip']);
-    //     $jab_fungsional     = $this->db->escape($_POST['jab_fungsional']);
-    //     $jab_struktural     = $this->db->escape($_POST['jab_struktural']);
-    //     $kota_asal          = $this->db->escape($_POST['kota_asal']);
-    //     $tanggal_lahir      = $this->db->escape($_POST['tanggal_lahir']);
-    //     $alamat             = $this->db->escape($_POST['alamat']);
-    //     $no_telp            = $this->db->escape($_POST['no_telp']);
-
-    //     $query = "UPDATE dosen_additional SET
-    //                 -- nip             = $nip,
-    //                 jab_fungsional  = $jab_fungsional,
-    //                 jab_struktural  = $jab_struktural,
-    //                 kota_asal       = $kota_asal,
-    //                 tanggal_lahir   = $tanggal_lahir,
-    //                 alamat          = $alamat,
-    //                 no_telp         = $no_telp
-    //                 WHERE nip   = $nip";
-    //     var_dump($query);exit;
-    //     $sql = $this->db->query($query);
-    // }
 
     function updateDosen($post)
     {

@@ -1,6 +1,6 @@
 <?php
     $success = true;
-    $a = 10;
+    $a = 15;
     $b = 25;
     $c = 75;
     $d = 25;
@@ -62,7 +62,7 @@
                                             <label>Maksimal Generasi</label>
                                             <input class="form-control" type="text" id="max_generation"
                                                 name="max_generation" value="<?=$max_generation?>" />
-                                            <p class="help-block">Masukkan antara <?=$b?>-500</p>
+                                            <p class="help-block">Masukkan antara <?=$b?>-100</p>
                                         </div>
                                         <div class="checkbox">
                                             <label>
