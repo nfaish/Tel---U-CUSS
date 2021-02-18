@@ -30,15 +30,15 @@ class Fakultas_controllers extends CI_Controller
     {
         $this->load->model('Fakultas_model');
         $data['list_gedung'] = $this->fakultas_model->daftar_gedung();
+        $data['gedung_select'] = $this->fakultas_model->daftar_gedungByID($id_fakultas);
         $data['list_jurusanfakultas'] = $this->fakultas_model->daftar_jurusanfakultas($id_fakultas);
         $data['dataFakultas'] = $this->fakultas_model->load_FakultasSelect($id_fakultas);
         // $data['dataLokasiGedung'] = $this->fakultas_model->load_Lokasi_GedungSelect($id_gedung_fakultas);
-        if (isset($_POST['updateFakultas'])) 
-        {
+        if (isset($_POST['updateFakultas'])) {
             $this->fakultas_model->updateFakultas($id_fakultas);
-			redirect("data_controllers/fakultas");
-		}
-		$this->load->view('jurusan_view/detail_fakultas', $data);
+            redirect("data_controllers/fakultas");
+        }
+        $this->load->view('jurusan_view/detail_fakultas', $data);
     }
 
     // public function exploreFakultas($id_fakultas)
@@ -49,9 +49,9 @@ class Fakultas_controllers extends CI_Controller
     //     if (isset($_POST['updateFakultas'])) 
     //     {
     //         $this->fakultas_model->updateFakultas($id_fakultas);
-	// 		redirect("fakultas_controllers/detail_fakultas");
-	// 	}
-        
+    // 		redirect("fakultas_controllers/detail_fakultas");
+    // 	}
+
     //     $this->load->view("jurusan_view/detail_fakultas", $data);
     // }
 

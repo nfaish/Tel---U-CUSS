@@ -132,6 +132,27 @@ class Fakultas_model extends CI_Model
     }
 
 
+    public function daftar_gedungByID($id_fakultas)
+    {
+        $query = "SELECT 
+                    gedung.id_gedung,
+                    gedung.nama_gedung,
+                    gedung_fakultas.id_gedung as gedung_id,
+                    gedung_fakultas.id_fakultas as fakultas_id
+                    FROM gedung
+                    JOIN gedung_fakultas ON
+                        gedung_fakultas.id_gedung = gedung.id_gedung
+                    WHERE gedung_fakultas.id_fakultas = " . $id_fakultas;
+
+        // $query = " SELECT * FROM gedung_fakultas WHERE id_fakultas = " . $id_fakultas;
+
+        $sql = $this->db->query($query);
+        if ($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
+    }
+
+
     public function tambahJurusan($post)
     {
         $id_fakultas    = $this->db->escape($_POST['id_fakultas']);
@@ -148,10 +169,10 @@ class Fakultas_model extends CI_Model
         $sql1 = $this->db->query($query1);
 
         // BACA ANGKATAN YANG KITA INPUT
-        
+
         $query2 = "SELECT * FROM angkatan WHERE angkatan = $angkatan";
         $sql2 = $this->db->query($query2);
-        $hasilquery = $sql2->result_array(); 
+        $hasilquery = $sql2->result_array();
         $id_angkatan = $hasilquery[0]['id_angkatan'];
 
         // INSERT JURUSAN
@@ -168,7 +189,7 @@ class Fakultas_model extends CI_Model
 
         $query4 = "SELECT * FROM jurusan WHERE kode_jurusan = $kode_jurusan AND id_fakultas = $id_fakultas";
         $sql4 = $this->db->query($query4);
-        $hasilquery = $sql4->result_array(); 
+        $hasilquery = $sql4->result_array();
         $id_jurusan = $hasilquery[0]['id_jurusan'];
 
         // INSERT BRIDGE TABEL ANGKATAN_JURUSAN
@@ -181,7 +202,7 @@ class Fakultas_model extends CI_Model
                 WHERE NOT EXISTS (SELECT id_angkatan_jurusan FROM angkatan_jurusan WHERE id_jurusan = $id_jurusan AND id_angkatan = $id_angkatan) ";
         $sql5 = $this->db->query($query5);
     }
-    
+
 
     public function tambahFakultas($post)
     {
@@ -251,50 +272,52 @@ class Fakultas_model extends CI_Model
         $this->db->insert_batch('kelas', $data);
     }
 
-    public function jurusanByFakultasId($id_fakultas){
+    public function jurusanByFakultasId($id_fakultas)
+    {
         return $this->db->select('*')->where('id_fakultas', $id_fakultas)->get('jurusan')->result_array();
         // SELECT * FROM FAKULTAS WHERE id_fakultas = $id_fakultas
 
         // ANGKATAN 
-        
+
         // JURUSAN
     }
 
-    public function angkatanByJurusanId($id_jurusan){
+    public function angkatanByJurusanId($id_jurusan)
+    {
         return $this->db
             ->select('angkatan.*')
             ->where('angkatan_jurusan.id_jurusan', $id_jurusan)
-            ->join('angkatan_jurusan','angkatan.id_angkatan = angkatan_jurusan.id_angkatan')
+            ->join('angkatan_jurusan', 'angkatan.id_angkatan = angkatan_jurusan.id_angkatan')
             ->get('angkatan')->result_array();
     }
 
     public function updateFakultas()
     {
-            $id_fakultas   = $this->db->escape($_POST['id_fakultas']);
-            $kode_fakultas  = $this->db->escape($_POST['kode_fakultas']);
-            $nama_fakultas  = $this->db->escape($_POST['nama_fakultas']);
-			$query = "UPDATE fakultas SET
+        $id_fakultas   = $this->db->escape($_POST['id_fakultas']);
+        $kode_fakultas  = $this->db->escape($_POST['kode_fakultas']);
+        $nama_fakultas  = $this->db->escape($_POST['nama_fakultas']);
+        $query = "UPDATE fakultas SET
                         id_fakultas = $id_fakultas,
 						kode_fakultas = $kode_fakultas,
                         nama_fakultas = $nama_fakultas
 					WHERE id_fakultas = $id_fakultas 
 					";
-			$sql = $this->db->query($query);
-			$this->session->set_flashdata('alert', 'Data Fakultas Telah Diubah');
+        $sql = $this->db->query($query);
+        $this->session->set_flashdata('alert', 'Data Fakultas Telah Diubah');
     }
 
     public function load_FakultasSelect($id_fakultas)
     {
-        $query = "SELECT * FROM fakultas WHERE id_fakultas = ".intval($id_fakultas);
+        $query = "SELECT * FROM fakultas WHERE id_fakultas = " . intval($id_fakultas);
         $sql = $this->db->query($query);
-        if($sql->num_rows() > 0)
+        if ($sql->num_rows() > 0)
             return $sql->row_array();
         return false;
     }
 
     function hapusFakultas($id_fakultas)
     {
-        $this->db->query("DELETE FROM fakultas WHERE id_fakultas = ".intval($id_fakultas));
+        $this->db->query("DELETE FROM fakultas WHERE id_fakultas = " . intval($id_fakultas));
     }
 
     public function daftarGedung_fakultas()
@@ -318,7 +341,7 @@ class Fakultas_model extends CI_Model
                     JOIN gedung ON gedung.id_gedung = gedung_fakultas.id_gedung
                     WHERE id_gedung_fakultas = $id_gedung_fakultas";
         $sql = $this->db->query($query);
-        if($sql->num_rows() > 0)
+        if ($sql->num_rows() > 0)
             return $sql->row_array();
         return false;
     }
@@ -333,6 +356,4 @@ class Fakultas_model extends CI_Model
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
-
-
 }
