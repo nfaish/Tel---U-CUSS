@@ -36,7 +36,7 @@ class Pengaturan_controllers extends MY_Controller
 
         if($this->form_validation->run() == false)
         {
-            $this->load->view('Pengaturan_controllers/ubahPassword');
+            $this->load->view('data/ubah_passwordd');
         }
 		else
 		{
@@ -45,14 +45,14 @@ class Pengaturan_controllers extends MY_Controller
 			if (!password_verify($current_password, $data['dosen']['password'])) 
 			{
 				$this->session->set_flashdata('alert_gagal', 'Password Lama Salah!');
-				redirect(base_url('Pengaturan_controllers/ubahPassword'));
+				redirect('pengaturan_controllers/ubahPassword');
 			}
 			else
 			{
 				if($current_password == $new_password)
 				{
 					$this->session->set_flashdata('alert_gagal', 'Password Baru Tidak Boleh Sama dengan Password Lama!');
-					redirect(base_url('Pengaturan_controllers/ubahPassword'));
+					redirect('pengaturan_controllers/ubahPassword');
 				}
 				else
 				{
@@ -63,7 +63,7 @@ class Pengaturan_controllers extends MY_Controller
 					$this->db->update('dosen');
 
 					$this->session->set_flashdata('alert', 'Password Berhasil Diubah!');
-					redirect(base_url('Pengaturan_controllers/ubahPassword'));
+					redirect('pengaturan_controllers/ubahPassword');
 				}
 			}
 		}
