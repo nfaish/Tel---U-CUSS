@@ -109,10 +109,103 @@
                                 </td>
                             </tr>
                         </table>
+                        <br><br>
+                        <table class="table-detail">
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default fas fa-key" data-toggle="modal" data-target="#exampleModal">
+                                        <b>Ubah Password</b>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+        <?php $this->load->view('data/ubah_password') ?>
+
+        <script>
+        $(document).ready(function()
+        {
+            function cekValidasi()
+            {
+                var passBaruConfirm = $('#passBaruConfirm').val()
+                var passBaru = $('#passBaru').val()
+                var passLamaInput = $('#passLamaInput').val()
+                if (passBaruConfirm && passBaru && passLamaInput) 
+                {
+                    $('#btn-simpan').attr('disabled', false)
+                }
+                else
+                {
+                    $('#btn-simpan').attr('disabled', 'disabled')
+                }
+            }
+            $(document).on('keyup', '#passBaruConfirm',function()
+            {
+                var passBaru        = $('#passBaru').val()
+                var passBaruConfirm = $(this).val()
+                if (passBaruConfirm) 
+                {
+                    if (passBaru !== passBaruConfirm) 
+                    {
+                        cekValidasi()
+                        $(this).addClass('is-invalid')
+                        $('#btn-simpan').attr('disabled', 'disabled')
+                    }
+                    else
+                    {
+                        $(this).removeClass('is-invalid')
+                        $('#btn-simpan').attr('disabled', false)
+                        cekValidasi()
+                    }
+                }
+                else
+                {
+                    $(this).removeClass('is-invalid')
+                    $('#btn-simpan').attr('disabled', 'disabled')
+                    cekValidasi()
+                }
+                cekValidasi()
+            })
+            $(document).on('keyup', '#passLamaInput',function()
+            {
+                var passLama      = $('#passLama').val()
+                var passLamaInput = $(this).val()
+                if (passLamaInput) 
+                {
+                    $.ajax({
+                        url     : '<?= base_url('Pengaturan/md5Generate') ?>/'+passLama+'/'+passLamaInput,
+                        type    : 'get',
+                        success : function (res) 
+                        {
+                            if (res.error) 
+                            {
+                                cekValidasi()
+                                $('#passLamaInput').addClass('is-invalid')
+                                $('#btn-simpan').attr('disabled', 'disabled')
+                            }
+                            else
+                            {
+                                $('#passLamaInput').removeClass('is-invalid')
+                                $('#btn-simpan').attr('disabled', false)
+                                cekValidasi()
+                            }
+                        }
+                    })
+                }
+                else
+                {
+                    $('#passLamaInput').removeClass('is-invalid')
+                    $('#btn-simpan').attr('disabled', 'disabled')
+                    cekValidasi()
+                }
+                cekValidasi()
+            })
+            $('#btn-simpan').attr('disabled', 'disabled')
+            })
+        </script>
 </body>
 
 </html>

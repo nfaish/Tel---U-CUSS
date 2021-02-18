@@ -18,13 +18,24 @@ class Pengaturan_controllers extends MY_Controller
 	{
 		$this->load->model('pengaturan_model');
 		$this->load->view('dosen_view/profil_dosen', $data);
+		$this->load->model('akun_model');
+		$this->load->model('pengaturan_model');
+		if ($this->session->userdata('user_role') == 1) 
+		{
+			$data['dataDosen'] = $this->akun_model->dataDosenSession();
+		}
+		else 
+		{
+			$data['dataDosen'] = $this->akun_model->dataDosenSession();
+		}
 	}
 
+	//untuk ubah password tombol pertama
 	public function ubahPass()
     {
         $this->load->view('data/ubah_passwordd');
     }
-
+	//untuk ubah password tombol pertama
 	public function ubahPassword()
     {
         $nip                    = $this->session->userdata("nip");
@@ -69,5 +80,60 @@ class Pengaturan_controllers extends MY_Controller
 		}
         
     }
+
+	//untuk ubah password tombol kedua
+	function changePassword ()
+	{
+		$user_role 	= $this->session->userdata("user_role");
+		$id 		= $_POST['id'];
+		$passLama 	= md5($_POST['passLama']);
+		$passBaru 	= md5($_POST['passBaru']);
+		if ($user_role == 1) 
+		{
+			$query = "	UPDATE dosen
+						SET 
+							password = '$passBaru'
+						WHERE
+							nip = '$id' AND password = '$passLama'
+						";
+		}
+		else 
+		{
+			$query = "	UPDATE dosen
+						SET 
+							password = '$passBaru'
+						WHERE
+							nip = '$id' AND password = '$passLama'
+						";
+		}
+		$sql = $this->db->query($query);
+		$this->session->set_flashdata('alert', 'Password Berhasil Diubah!');
+		redirect(base_url('akun_dosen_controllers'));
+	}
+
+	function md5Generate($passLama, $passLamaInput)
+	{
+		$passLamaInput = md5($passLamaInput);
+		if ($passLama !== $passLamaInput) {
+			header('Content-Type: application/json');
+			echo json_encode(['error' => true]);
+		}else {
+			header('Content-Type: application/json');
+			echo json_encode(['error' => false]);
+		}
+	}
+
+	public function penggunaDosen()
+	{
+		$this->load->model("pengaturan_model");
+		$data['dataDosen'] 	 = $this->pengaturan_model->dataDosen();
+
+		if(isset($_POST['simpanDosen'])){
+			$this->pengaturan_model->simpanDosen($_POST);
+			redirect("pengaturan_controllers/penggunaDosen");
+		}
+
+		$this->load->view('data/profi_dosen', $data);
+	}
 
 }

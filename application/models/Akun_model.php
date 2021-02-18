@@ -57,14 +57,11 @@ class Akun_model extends CI_Model
 
     function dataDosenSession()
     {
-        $nip = $this->session->userdata("nip");
-        $sql = "SELECT d.*, b.nama_bidang as bidang, jb.jabatan AS jabatan_fungsional  FROM dosen d
-                JOIN bidang b ON b.id_bidang = d.id_bidang
-                JOIN jabatan jb ON jb.id_jabatan = d.id_jabatan
-                WHERE nip = $nip ";
-        $query = $this->db->query($sql);
-        if($query->num_rows() > 0)
-            return $query->row_array();
+        $nip    = $this->session->userdata("nip");
+        $query  = "SELECT * FROM dosen WHERE nip = $nip ";
+        $sql    = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
         return false;
     }
 }
