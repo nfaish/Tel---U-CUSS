@@ -18,12 +18,7 @@
        <div class="container-fluid">
           <div class="mb-3">
             <h2>Ubah Password</h2><hr><br>
-                <?php if ($this->session->flashdata('alert')) {?>
-                        <div class="alert alert-success">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <?php echo $this->session->flashdata('alert'); ?>
-                        </div>
-                    <?php } ?>
+                <?= $this->session->flashdata('message'); ?>
                 <form action="<?= base_url('pengaturan_controllers/ubahPassword') ?>" method="post">
                     <div class="modal-body">
                         <div class="form-group">
