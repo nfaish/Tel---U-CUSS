@@ -1,7 +1,7 @@
 <?php
     $success = true;
-    $a = 15;
-    $b = 25;
+    $a = 5;
+    $b = 5;
     $c = 75;
     $d = 25;
     $num_kromosom = $a;
@@ -56,7 +56,7 @@
                                             <label>Jumlah Kromosom Dibangkitkan</label>
                                             <input class="form-control" type="text" id="num_kromosom"
                                                 name="num_kromosom" value="<?=$num_kromosom?>" />
-                                            <p class="help-block">Masukkan antara <?=$a?>-500</p>
+                                            <p class="help-block">Masukkan antara <?=$a?>-75</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Maksimal Generasi</label>
@@ -142,8 +142,10 @@
     <script src="<?= base_url()?>assets/js/evolution/evolutionarry-algoritm.js"> </script>
     <script>
     let data_preferensi_dosen;
+    //let temp_pref_dosen;
     let data_class_requirement;
-    let data_scheduled_class;
+    // let data_scheduled_class;
+    let unique_sks;
     let num_kromosom = parseInt(document.getElementById("num_kromosom").value);
     let max_generation = parseInt(document.getElementById("max_generation").value);
     let crossover_rate = parseFloat(document.getElementById("crossover_rate").value);
@@ -155,49 +157,33 @@
     let uncomplete_data_matkul;
 
     function generate() {
+        
         group_pref_per_matkul = [];
         uncomplete_data_matkul = [];
 
-        let initInd = [];
+        //temp_pref_dosen = [];
+        unique_sks = <?= json_encode($data_unique_sks) ?>;
+        for (let idx = 0; idx < unique_sks.length; idx++) {
+            // console.log("unique_sks[idx]", unique_sks[idx]);
+            unique_sks[idx] = parseInt(unique_sks[idx]["sks"]);
+            
+        }
+        console.log("unique_sks", unique_sks);
+
         data_preferensi_dosen = <?= json_encode($data_preferensi_dosen) ?>;
         data_class_requirement = <?= json_encode($data_class_requirement) ?>;
-        data_scheduled_class = [];
 
         num_kromosom = parseInt(document.getElementById("num_kromosom").value);
         max_generation = parseInt(document.getElementById("max_generation").value);
         crossover_rate = parseFloat(document.getElementById("crossover_rate").value);
         mutation_rate = parseFloat(document.getElementById("mutation_rate").value);
 
-
-        for (let idx = 0; idx < data_preferensi_dosen.length; idx++) {
-            if (group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] == undefined) {
-                group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] = [];
-            }
-            group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']].push(data_preferensi_dosen[idx]);
-        }
-
-        console.log("group_pref_per_matkul", group_pref_per_matkul);
         console.log("data_preferensi_dosen", data_preferensi_dosen);
         console.log("data_class_requirement", data_class_requirement);
 
-        for (let idx = 0; idx < data_class_requirement.length; idx++) {
-            let cari_matkul = data_class_requirement[idx]["id_matkul"];
-
-            // console.log("group_pref_per_matkul[cari_matkul]",group_pref_per_matkul[cari_matkul]);
-            if (group_pref_per_matkul[cari_matkul] == undefined) {
-                uncomplete_data_matkul.push(cari_matkul);
-                // initInd.push(0);
-            } else {
-                initInd.push(parseInt(group_pref_per_matkul[cari_matkul][Math.floor(Math.random() *
-                    group_pref_per_matkul[cari_matkul].length)]['no']));
-                data_scheduled_class.push(data_class_requirement[idx]);
-            }
-        }
-        console.log("data_scheduled_class", data_scheduled_class);
-        console.log("initInd", initInd);
-        mod = initInd;
         generateInit();
     }
+
     </script>
     <script src="<?= base_url()?>assets/js/evolution/evo_jadwal_matkul.js"></script>
 </body>

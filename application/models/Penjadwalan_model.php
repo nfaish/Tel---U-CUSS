@@ -1,14 +1,13 @@
 <?php
 class Penjadwalan_model extends CI_Model {
     
-    public function getDataDosen()
-    {
+    public function getDataDosen(){
         $query = "SELECT dosen.nip, dosen.kode_dosen, 
         preferensi.id_preferensi, preferensi.id_hari, 
         preferensi.shift1, preferensi.shift2, preferensi.shift3, preferensi.shift4, preferensi.shift5,
         preferensi.shift6, preferensi.shift7, preferensi.shift8, preferensi.shift9, preferensi.shift10,
         preferensi.shift11, preferensi.shift12, preferensi.shift13,
-        matkul.id_matkul, matkul.nama_matkul, matkul.kode_matkul
+        matkul.id_matkul, matkul.nama_matkul, matkul.kode_matkul, matkul.sks
         FROM dosen 
         JOIN preferensi ON dosen.nip=preferensi.nip
         JOIN mengajar ON dosen.nip=mengajar.nip
@@ -17,8 +16,7 @@ class Penjadwalan_model extends CI_Model {
         return $this->db->query($query)->result_array();
     }
 
-    public function getClassRequirements()
-    {
+    public function getClassRequirements(){
         $query = "SELECT kelas.id_kelas, kelas.nama_kelas, perkuliahan.id_jurusan,
         perkuliahan.id_perkuliahan,
         kelas.id_jurusan, jurusan.kode_jurusan, jurusan.nama_jurusan,
@@ -31,7 +29,16 @@ class Penjadwalan_model extends CI_Model {
 
         return $this->db->query($query)->result_array();
     }
+
+    public function getUniqueSks(){
+        $query = "SELECT DISTINCT(sks) FROM `matkul`";
+
+        return $this->db->query($query)->result_array();
+    }
     
+
+
+
     // public function tampil()
     // {   
 
