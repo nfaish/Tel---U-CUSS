@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Tel - U CUSS | Pengumuman</title>
     <?php $this->load->view("_partials/header.php") ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
   </head>
+
   <body id="page-top">
     <?php $this->load->view("_partials/js.php") ?>
-    <?php $this->load->view("_partials/navbar.php", $this->data) ?>
+    <?php $this->load->view("_partials/navbar.php") ?>
 
     <div id="wrapper">
-      <?php $this->load->view("_partials/sidebar.php") ?>
+      <?php $this->load->view("_partials/sidebar_admin.php") ?>
       <div id="content-wrapper">
        <div class="container-fluid">
           <div class="mb-3">
-            <h1>Pengumuman</h1><hr>
+            <h2>Pengumuman</h2><hr>
             <?php if ($this->session->flashdata('alert_hapus')) {?>
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <?php echo $this->session->flashdata('alert_hapus'); ?>
                 </div>
             <?php } ?>
-            <a href="<?= base_url('/Pengumuman/inputPengumuman') ?>" class="btn btn-sm btn-primary"><i class='far fa-fw fa-plus-square'></i> Input Pengumuman</a>
+            <a href="<?= base_url('/Pengumuman_controllers/inputPengumuman') ?>" class="btn btn-sm btn-primary"><i class='far fa-fw fa-plus-square'></i> Input Pengumuman</a>
             <br><br>
             <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                 <thead>
@@ -27,7 +30,6 @@
                     <th>No</th>
                     <th>Judul</th>
                     <th>Tanggal dibuat</th>
-                    <th>Penerbit</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -39,7 +41,6 @@
                         <td><?= $no ?></td>
                         <td><?= $row['judul'] ?></td>
                         <td><?= $row['tgl_dibuat'] ?></td>
-                        <td><?= $row['nip'] ?></td>
                         <td>
                           <a href='pengumuman/detail/<?= $row['id_pengumuman'] ?>' class='btn btn-sm btn-info'>Detail</a>
                           <a href='pengumuman/edit/<?= $row['id_pengumuman'] ?>' class='btn btn-sm btn-success'><i class='far fa-edit'></i></a>

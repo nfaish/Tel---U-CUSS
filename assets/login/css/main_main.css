@@ -199,10 +199,146 @@ iframe {
 
 /*//////////////////////////////////////////////////////////////////
   [ login ]*/
+  .container{
+    margin: 20px auto;
+    overflow: hidden;
+    padding: 10px;
+    
+}
+
+
+.header{
+    border: 1px solid #dedede;
+    padding: 10px;
+    margin: 10px;
+}
+
+/* Bagian Main */
+    .left{
+        width: 500px;
+        border: 1px solid #dedede;
+        background: #eaeaea;
+        padding: 10px;
+        margin: 10px;
+        float: left;
+    }
+
+    .middle{
+        width: 500px;
+        border: 1px solid #dedede;
+        padding: 10px;
+        margin: 10px;
+        float: left;
+    }
+        .middle img{
+            max-width: 100%;
+            height: auto;
+        }
+
+    .right{
+        width: 900px;
+        float: right;
+        padding: 15px;
+        opacity: 0.9;
+    }
+    .right-tittle{
+      font-size: 40px;
+			font-weight: bold;
+			color: white;
+			font-family: fantasy;
+  }
+  .right-subtittle{
+    font-size: 20px;
+    color: white;
+		font-family: fantasy;
+		font-style: oblique
+}
+
+#footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  bottom:0;
+  width:100%;
+  height:80px;   /* tinggi dari footer */
+  background:rgb(202,3,61);
+  /* background-color: rgba(202,3,61,255); */
+}
+
+.footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: calc(100%);
+  height: 10px;
+}
+    .footer a{
+        color: #fff;
+    }
+        .footer a:hover{
+            color: #eaeaea;
+        }
+
+        @media screen and (max-width: 1080px) {
+    
+          .container {
+              width: 100%;
+          }
+          .left {
+              width: 25%;
+              background-color: #89d0ff;
+          }
+          .middle {
+              width: 68%;
+              float: right;
+          }
+          
+          .right {
+              clear: both;
+              padding: 1% 4%;
+              width: auto;
+              float: none;
+          }
+      }
+
+      @media screen and (max-width: 780px) {
+    
+        .header, 
+        .footer{
+            text-align: center;
+        }
+        .left {
+            width: auto;
+            float: none;
+        }
+        
+        .middle {
+            width: auto;
+            float: none;
+        }
+        
+        .right {
+            width: auto;
+            float: none;
+        }
+    
+    }
+
+    .datadata {
+      width: 100%;
+      min-height: 100vh;
+      background-image: url("../images/DEPAN.JPG");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
 
 .limiter {
   width: 100%;
   margin: 0 auto;
+  /* width: 100%;
+  min-height: 200px; */
 }
 
 .container-login100 {
@@ -214,19 +350,35 @@ iframe {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  padding: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.container-login1 {
+  width: 100%;
+  min-height: 100vh;
   padding: 15px;
   background-image: url("../images/DEPAN.JPG");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  position: relative;
+  position: fixed;
   z-index: 1;
 }
 
+.container-form {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+  opacity: 0.9;
+  position: absolute;
+}
+
+
 .wrap-login100 {
   width: 450px;
+  /* width: 100%; */
   background: #fff;
   border-radius: 3px;
   overflow: hidden;

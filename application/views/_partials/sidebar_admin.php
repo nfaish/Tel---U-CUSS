@@ -14,6 +14,7 @@
             <a class="dropdown-item" href="<?= base_url('data_controllers/dosen') ?>">Dosen</a>
             <a class="dropdown-item" href="<?= base_url('data_controllers/ruangan') ?>">Ruangan</a>
             <a class="dropdown-item" href="<?= base_url('data_controllers/fakultas') ?>">Fakultas</a>
+            <a class="dropdown-item" href="<?= base_url('data_controllers/fakultas_gedung') ?>">Fakultas - Gedung</a>
             <a class="dropdown-item" href="<?= base_url('data_controllers/waktu') ?>">Waktu</a>
         </div>
     </li>
@@ -26,6 +27,16 @@
             <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/dataKuliah') ?>">Data Kuliah</a>
             <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers') ?>">Daftar Mata Kuliah</a>
             <a class="dropdown-item" href="<?= base_url('/Perkuliahan_controllers/dataMKDU_fakultas') ?>">Daftar Mata Kuliah <br>Dasar Umum Jurusan</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-bullhorn"></i>
+            <span>Pengumuman</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <!-- <a class="dropdown-item" href="<?= base_url('/Pengumuman_controllers/inputPengumuman') ?>">Input Pengumuman</a> -->
+            <a class="dropdown-item" href="<?php echo site_url('pengumuman') ?>">Daftar Pengumuman</a>
         </div>
     </li>
     <li class="nav-item dropdown">

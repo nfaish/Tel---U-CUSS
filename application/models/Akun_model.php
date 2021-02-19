@@ -13,6 +13,7 @@ class Akun_model extends CI_Model
         $email          = $this->db->escape($_POST['email']);
         $username       = $this->db->escape($_POST['username']);
         $password       = md5($this->db->escape($_POST['password']));
+        $jenis_kelamin  = $this->db->escape($_POST['jenis_kelamin']);
         $query = "INSERT INTO dosen (
                     nip,
                     nama_depan,
@@ -21,6 +22,7 @@ class Akun_model extends CI_Model
                     email,
                     username,
                     password,
+                    jenis_kelamin,
                     id_status
                 )
                 VALUES
@@ -32,6 +34,7 @@ class Akun_model extends CI_Model
                         $email,
                         $username,
                         '$password',
+                        $jenis_kelamin,
                         1
                     )";
         $sql = $this->db->query($query);
@@ -50,5 +53,15 @@ class Akun_model extends CI_Model
     {
         $this->db->delete('dosen_additional', array('nip' => $nip));
          return true;
+    }
+
+    function dataDosenSession()
+    {
+        $nip    = $this->session->userdata("nip");
+        $query  = "SELECT * FROM dosen WHERE nip = $nip ";
+        $sql    = $this->db->query($query);
+        if($sql->num_rows() > 0)
+            return $sql->row_array();
+        return false;
     }
 }

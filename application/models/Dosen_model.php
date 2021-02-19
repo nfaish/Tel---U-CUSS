@@ -4,10 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Dosen_model extends CI_Model
 {
-
-    // public function index()
-    // {
-    // }
     public function daftar_dosen()
     {
         $query = "SELECT * FROM dosen WHERE id_status = 2 ";
@@ -64,6 +60,11 @@ class Dosen_model extends CI_Model
     function updateDosen($post)
     {
         $nip                = $this->db->escape($_POST['nip']);
+        $nama_depan         = $this->db->escape($_POST['nama_depan']);
+        $nama_belakang      = $this->db->escape($_POST['nama_belakang']);
+        $username           = $this->db->escape($_POST['username']);
+        // $password           = md5($_POST['password']);
+        $email              = $this->db->escape($_POST['email']);
         $jab_fungsional     = $this->db->escape($_POST['jab_fungsional']);
         $jab_struktural     = $this->db->escape($_POST['jab_struktural']);
         $kota_asal          = $this->db->escape($_POST['kota_asal']);
@@ -71,6 +72,16 @@ class Dosen_model extends CI_Model
         $alamat             = $this->db->escape($_POST['alamat']);
         $no_telp            = $this->db->escape($_POST['no_telp']);
 
+        $query = "UPDATE dosen SET
+                    -- nip             = $nip,
+                    nama_depan      = $nama_depan,
+                    nama_belakang   = $nama_belakang,
+                    username        = $username,
+                    -- password        = $password,
+                    email           = $email
+                    WHERE nip       = $nip";
+        // var_dump($query);exit;
+        $sql = $this->db->query($query);
 
         $query = "UPDATE dosen_additional SET
                     -- nip             = $nip,
@@ -102,6 +113,7 @@ class Dosen_model extends CI_Model
                 dosen_additional.alamat,
                 dosen_additional.no_telp,
                 dosen.nip as nipDosen,
+                dosen.jenis_kelamin,
                 dosen.nama_depan,
                 dosen.nama_belakang,
                 dosen.email

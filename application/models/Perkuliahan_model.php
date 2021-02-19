@@ -167,6 +167,11 @@ class Perkuliahan_model extends CI_Model
         }
     }
 
+    function hapusMatkul_ajarku($id_mengajar)
+    {
+        $this->db->query("DELETE FROM mengajar WHERE id_mengajar = ".intval($id_mengajar));
+    }
+
     public function daftarMatkulByDosen($nip)
     {
         $query = "SELECT matkul.nama_matkul as nama_matkul, 

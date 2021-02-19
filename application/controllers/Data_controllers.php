@@ -236,4 +236,14 @@ class Data_controllers extends CI_Controller
             redirect(base_url("fakultas_controllers/exploreJurusan/" . $_POST['id_jurusan']));
         }
     }
+
+    public function fakultas_gedung()
+    {
+        $this->load->model("fakultas_model");
+        $data['list_jurusan'] = $this->fakultas_model->daftar_jurusan();
+        $data['list_fakultas_gedung'] = $this->fakultas_model->daftar_fakultas_gedung();
+        
+        $this->load->view("data/fakultas_gedung_view", $data);
+        
+    }
 }

@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+  
   <head>
+    <title>Tel - U CUSS | Input Pengumuman</title>
     <?php $this->load->view("_partials/header.php") ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
   </head>
+
   <body id="page-top">
     <?php $this->load->view("_partials/js.php") ?>
-    <?php $this->load->view("_partials/navbar.php", $this->data) ?>
+    <?php $this->load->view("_partials/navbar.php") ?>
 
 
     <div id="wrapper">
-      <?php $this->load->view("_partials/sidebar.php") ?>
+        <?php $this->load->view("_partials/sidebar_admin.php") ?>
       <div id="content-wrapper">
        <div class="container-fluid">
           <div class="mb-3">
-            <h1>Input Pengumuman</h1><hr><br>
+            <h2>Tambah Pengumuman</h2><hr><br>
             <?php echo form_open_multipart('Pengumuman/simpanPengumuman/');?>
             <!-- <form method="post" class="form-horizontal" action=""> -->
                 <div class="form-group">
