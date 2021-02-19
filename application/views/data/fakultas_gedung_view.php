@@ -31,8 +31,6 @@
                                                 <th scope="col">NAMA FAKULTAS</th>
                                                 <th scope="col">KODE FAKULTAS</th>
                                                 <th scope="col">NAMA GEDUNG</th>
-                                                <th scope="col">KODE GEDUNG</th>
-                                                <th scope="col">ACTION</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -48,13 +46,6 @@
                                                         </td>
                                                         <td>
                                                             <?php echo $value['nama_gedung']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?php echo $value['id_gedung']; ?>
-                                                        </td>
-                                                        <td>
-                                                            <!-- <a href="<?= base_url('/fakultas_controllers/exploreJurusan/' . $value['id_jurusan']) ?>" class='btn btn-sm btn-dark'>Explore</a>
-                                                            <a href="<?= base_url('/fakultas_controllers/hapusJurusan/' . $value['id_jurusan']) ?>" class='btn btn-sm btn-danger'>Delete</a> -->
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
