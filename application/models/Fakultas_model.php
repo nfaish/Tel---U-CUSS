@@ -356,4 +356,40 @@ class Fakultas_model extends CI_Model
         $sql = $this->db->query($query);
         return $sql->result_array();
     }
+
+    public function daftar_fakultas_gedung()
+    {
+        $query = "SELECT 
+                    gedung_fakultas.id_gedung_fakultas,
+                    fakultas.id_fakultas,
+                    fakultas.kode_fakultas,
+                    fakultas.nama_fakultas,
+                    gedung.id_gedung,
+                    gedung.nama_gedung
+                    
+                    FROM gedung_fakultas
+                    JOIN fakultas ON gedung_fakultas.id_fakultas = fakultas.id_fakultas
+                    JOIN gedung ON gedung_fakultas.id_gedung = gedung.id_gedung";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
+    // public function daftar_fakultas_gedung($id_gedung_fakultas)
+    // {
+    //     $query = "SELECT 
+    //                 gedung_fakultas.id_gedung_fakultas as id_gedung_fakultas,
+    //                 fakultas.id_fakultas as id_fakultas,
+    //                 fakultas.kode_fakultas as kode_fakultas,
+    //                 fakultas.nama_fakultas as nama_fakultas,
+    //                 gedung.id_gedung as id_gedung,
+    //                 gedung.nama_gedung as nama_gedung
+    //                 FROM gedung_fakultas
+    //                 JOIN fakultas ON gedung_fakultas.id_fakultas = fakultas.id_fakultas 
+    //                 JOIN gedung ON gedung.id_gedung = gedung_fakultas.id_gedung
+    //                 WHERE id_gedung_fakultas = $id_gedung_fakultas";
+    //     $sql = $this->db->query($query);
+    //     if ($sql->num_rows() > 0)
+    //         return $sql->row_array();
+    //     return false;
+    // }
 }

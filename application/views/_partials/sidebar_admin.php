@@ -14,6 +14,7 @@
             <a class="dropdown-item" href="<?= base_url('data_controllers/dosen') ?>">Dosen</a>
             <a class="dropdown-item" href="<?= base_url('data_controllers/ruangan') ?>">Ruangan</a>
             <a class="dropdown-item" href="<?= base_url('data_controllers/fakultas') ?>">Fakultas</a>
+            <a class="dropdown-item" href="<?= base_url('data_controllers/fakultas_gedung') ?>">Fakultas - Gedung</a>
             <a class="dropdown-item" href="<?= base_url('data_controllers/waktu') ?>">Waktu</a>
         </div>
     </li>
