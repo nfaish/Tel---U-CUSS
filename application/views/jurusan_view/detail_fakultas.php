@@ -36,41 +36,8 @@
                                                 <label for="nama_jurusan">Kode Fakultas</label>
                                                 <input type="text" class="form-control" id="<?php echo $dataFakultas['kode_fakultas']; ?>" name="kode_fakultas" value="<?= $dataFakultas['kode_fakultas'] ?>">
                                             </div>
-<<<<<<< HEAD
                                             <label for="kode_fakultas">Lokasi Gedung</label>
                                             <?php if (!empty($list_gedung)) { ?>
-=======
-                                            <!-- Tampilan Lokasi Gedung dalam tabel responsiv -->
-                                            <div class="form-group">
-                                                <table class="table table-bordered table-hover" width="100%" cellspacing="0">
-                                                <label for="kode_fakultas">Lokasi Gedung</label>
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">ID GEDUNG</th>
-                                                            <th scope="col">NAMA GEDUNG</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php if (!empty($list_gedungfakultas)) { ?>
-                                                            <?php foreach ($list_gedungfakultas as $row => $value) { ?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php echo $value['id_gedung']; ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php echo $value['nama_gedung']; ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php }
-                                                            ?>
-                                                        <?php } ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- Tampilan Lokasi Gedung dalam list gedung -->
-                                            <!-- <?php if (!empty($list_gedung)) 
-                                            { ?>
->>>>>>> origin
                                                 <?php foreach ($list_gedung as $key => $value) : ?>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" name="id_gedung[]" value="<?= $value['id_gedung']; ?>" <?php echo $value['id_gedung'] == $gedung_select['gedung_id'] ? 'checked' : ''; ?>>
@@ -78,11 +45,7 @@
                                                     </div>
                                                 <?php endforeach; ?>
                                             <?php } ?>
-<<<<<<< HEAD
                                             <br><br>
-=======
-                                            <br><br> -->
->>>>>>> origin
                                             <button type="submit" class="btn btn-dark mt-3" name="updateFakultas">Ubah Data</button>
                                         </form>
                                     </table>
