@@ -357,6 +357,17 @@ class Fakultas_model extends CI_Model
         return $sql->result_array();
     }
 
+    public function daftar_gedungfakultas($id_fakultas)
+    {
+        $query = "SELECT * 
+                    FROM gedung
+                    JOIN gedung_fakultas ON gedung_fakultas.id_gedung = gedung.id_gedung
+                    JOIN fakultas ON fakultas.id_fakultas = gedung_fakultas.id_fakultas
+                    WHERE gedung_fakultas.id_fakultas = $id_fakultas";
+        $sql = $this->db->query($query);
+        return $sql->result_array();
+    }
+
     public function daftar_fakultas_gedung()
     {
         $query = "SELECT 
@@ -372,23 +383,5 @@ class Fakultas_model extends CI_Model
                     JOIN gedung ON gedung_fakultas.id_gedung = gedung.id_gedung";
         $sql = $this->db->query($query);
         return $sql->result_array();
-    }
-
-    public function daftar_fakultas_gedungByID($id_fakultas)
-    {
-        $query = "SELECT 
-                    fakultas.id_fakultas,
-                    fakultas.nama_fakultas,
-                    fakultas.kode_fakultas,
-                    gedung_fakultas.id_gedung as gedung_id,
-                    gedung_fakultas.id_fakultas as fakultas_id
-                    FROM fakultas JOIN gedung_fakultas
-                    ON gedung_fakultas.id_fakultas = fakultas.id_fakultas
-                    WHERE gedung_fakultas.id_fakultas = " . $id_fakultas;
-
-        $sql = $this->db->query($query);
-        if ($sql->num_rows() > 0)
-            return $sql->row_array();
-        return false;
     }
 }

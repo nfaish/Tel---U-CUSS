@@ -38,37 +38,33 @@
                                             </div>
                                             <!-- Tampilan Lokasi Gedung dalam tabel responsiv -->
                                             <div class="form-group">
+                                                <table class="table table-bordered table-hover" width="100%" cellspacing="0">
                                                 <label for="kode_fakultas">Lokasi Gedung</label>
-                                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                                     <thead>
                                                         <tr>
+                                                            <th scope="col">ID GEDUNG</th>
                                                             <th scope="col">NAMA GEDUNG</th>
-                                                            <th scope="col">ACTION</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php if (!empty($list_fakultas_gedung)) 
-                                                        { ?>
-                                                            <?php foreach ($list_gedung as $row => $value) { ?>
+                                                        <?php if (!empty($list_gedungfakultas)) { ?>
+                                                            <?php foreach ($list_gedungfakultas as $row => $value) { ?>
                                                                 <tr>
+                                                                    <td>
+                                                                        <?php echo $value['id_gedung']; ?>
+                                                                    </td>
                                                                     <td>
                                                                         <?php echo $value['nama_gedung']; ?>
                                                                     </td>
-                                                                    <td>
-                                                                            <div class="form-check">
-                                                                                <input class="form-check-input" type="checkbox" name="id_gedung[]" value="<?= $value['id_gedung']; ?>" <?php echo $value['id_gedung'] == $gedung_select['gedung_id'] ? 'checked' : ''; ?>>
-                                                                            </div>
-                                                                    </td>
                                                                 </tr>
-                                                            <?php } ?>
+                                                            <?php }
+                                                            ?>
                                                         <?php } ?>
                                                     </tbody>
                                                 </table>
                                             </div>
                                             <!-- Tampilan Lokasi Gedung dalam list gedung -->
-                                            <br>
-                                            <label for="kode_fakultas">Lokasi Gedung</label>
-                                            <?php if (!empty($list_gedung)) 
+                                            <!-- <?php if (!empty($list_gedung)) 
                                             { ?>
                                                 <?php foreach ($list_gedung as $key => $value) : ?>
                                                     <div class="form-check">
@@ -77,7 +73,7 @@
                                                     </div>
                                                 <?php endforeach; ?>
                                             <?php } ?>
-                                            <br><br>
+                                            <br><br> -->
                                             <button type="submit" class="btn btn-dark mt-3" name="updateFakultas">Ubah Data</button>
                                         </form>
                                     </table>

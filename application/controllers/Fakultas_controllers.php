@@ -33,8 +33,9 @@ class Fakultas_controllers extends CI_Controller
         $data['gedung_select'] = $this->fakultas_model->daftar_gedungByID($id_fakultas);
         $data['list_jurusanfakultas'] = $this->fakultas_model->daftar_jurusanfakultas($id_fakultas);
         $data['dataFakultas'] = $this->fakultas_model->load_FakultasSelect($id_fakultas);
-        $data['list_fakultas_gedung'] = $this->fakultas_model->daftar_fakultas_gedung();
-        $data['fakultas_gedung_select'] = $this->fakultas_model->daftar_fakultas_gedungByID($id_fakultas);
+        $data['list_gedungfakultas'] = $this->fakultas_model->daftar_gedungfakultas($id_fakultas);
+        $data['list_fakultas_gedung'] = $this->fakultas_model->daftar_fakultas_gedung($id_fakultas);
+        // $data['fakultas_gedung_select'] = $this->fakultas_model->daftar_fakultas_gedungByID($id_fakultas);
         // $data['dataLokasiGedung'] = $this->fakultas_model->load_Lokasi_GedungSelect($id_gedung_fakultas);
         if (isset($_POST['updateFakultas'])) {
             $this->fakultas_model->updateFakultas($id_fakultas);
