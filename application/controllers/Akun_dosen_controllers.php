@@ -10,7 +10,7 @@ class Akun_dosen_controllers extends CI_Controller
         parent::__construct();
         $this->load->model('dosen_model');
     }
-    
+
     public function index()
     {
         $nip                    = $this->session->userdata("nip");

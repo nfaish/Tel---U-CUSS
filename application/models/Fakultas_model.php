@@ -320,9 +320,12 @@ class Fakultas_model extends CI_Model
         $this->db->query("DELETE FROM fakultas WHERE id_fakultas = " . intval($id_fakultas));
     }
 
-    public function daftarGedung_fakultas()
+    public function daftar_gedungfakultas()
     {
-        $query = "SELECT * FROM gedung_fakultas";
+        $query = "SELECT * 
+                    FROM gedung
+                    JOIN gedung_fakultas ON gedung_fakultas.id_gedung = gedung.id_gedung
+                    JOIN fakultas ON fakultas.id_fakultas = gedung_fakultas.id_fakultas";
         $sql = $this->db->query($query);
         return $sql->result_array();
     }

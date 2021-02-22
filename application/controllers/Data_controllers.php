@@ -69,25 +69,23 @@ class Data_controllers extends CI_Controller
         $this->load->model('ruangan_model');
         $data['dataRuangan'] = $this->ruangan_model->load_RuanganSelect($id_ruangan);
         $data['list_gedung'] = $this->fakultas_model->daftar_gedung();
-        if (isset($_POST['updateRuangan'])) 
-        {
+        if (isset($_POST['updateRuangan'])) {
             $this->ruangan_model->updateRuangan($id_ruangan);
-			redirect("data_controllers/ruangan");
-		}
-		$this->load->view('data/ubah_ruangan_view', $data);
+            redirect("data_controllers/ruangan");
+        }
+        $this->load->view('data/ubah_ruangan_view', $data);
     }
 
     public function exploreGedung($id_gedung)
     {
         $this->load->model('ruangan_model');
         $data['list_ruangangedung'] = $this->ruangan_model->daftar_ruangangedung($id_gedung);
-		$data['dataGedung'] = $this->ruangan_model->load_GedungSelect($id_gedung);
-        if (isset($_POST['updateGedung'])) 
-        {
+        $data['dataGedung'] = $this->ruangan_model->load_GedungSelect($id_gedung);
+        if (isset($_POST['updateGedung'])) {
             $this->ruangan_model->updateGedung($id_gedung);
-			redirect("data_controllers/ruangan");
-		}
-		$this->load->view('data/ubah_gedung_view', $data);
+            redirect("data_controllers/ruangan");
+        }
+        $this->load->view('data/ubah_gedung_view', $data);
     }
 
     public function tambahRuangan()
@@ -100,11 +98,11 @@ class Data_controllers extends CI_Controller
 
     public function hapusRuangan($id_ruangan)
     {
-		$this->load->model('ruangan_model');
-		$this->ruangan_model->hapusRuangan($id_ruangan);
-		$this->session->set_flashdata('alert', 'Ruangan Telah Dihapus');
-		redirect (base_url("data_controllers/ruangan"));
-	}
+        $this->load->model('ruangan_model');
+        $this->ruangan_model->hapusRuangan($id_ruangan);
+        $this->session->set_flashdata('alert', 'Ruangan Telah Dihapus');
+        redirect(base_url("data_controllers/ruangan"));
+    }
 
     public function gedung()
     {
@@ -127,11 +125,11 @@ class Data_controllers extends CI_Controller
 
     public function hapusGedung($id_gedung)
     {
-		$this->load->model('ruangan_model');
-		$this->ruangan_model->hapusGedung($id_gedung);
-		$this->session->set_flashdata('alert', 'Gedung Telah Dihapus');
-		redirect (base_url("data_controllers/ruangan"));
-	}
+        $this->load->model('ruangan_model');
+        $this->ruangan_model->hapusGedung($id_gedung);
+        $this->session->set_flashdata('alert', 'Gedung Telah Dihapus');
+        redirect(base_url("data_controllers/ruangan"));
+    }
 
     public function waktu()
     {
@@ -158,23 +156,22 @@ class Data_controllers extends CI_Controller
     public function exploreHari1($id_hari)
     {
         $this->load->model('waktu_model');
-		$data['dataHari'] = $this->waktu_model->load_HariSelect($id_hari);
-        if (isset($_POST['updateHari'])) 
-        {
+        $data['dataHari'] = $this->waktu_model->load_HariSelect($id_hari);
+        if (isset($_POST['updateHari'])) {
             $this->waktu_model->updateHari($id_hari);
-			$this->session->set_flashdata('alert', 'Data Hari Telah Diubah');
-			redirect("data_controllers/waktu");
-		}
-		$this->load->view('data/ubah_hari_view', $data);
+            $this->session->set_flashdata('alert', 'Data Hari Telah Diubah');
+            redirect("data_controllers/waktu");
+        }
+        $this->load->view('data/ubah_hari_view', $data);
     }
-    
+
     public function hapusHari1($id_hari)
     {
-		$this->load->model('waktu_model');
-		$this->waktu_model->hapusHari1($id_hari);
-		$this->session->set_flashdata('alert', 'Hari Telah Dihapus');
-		redirect (base_url("data_controllers/waktu"));
-	}
+        $this->load->model('waktu_model');
+        $this->waktu_model->hapusHari1($id_hari);
+        $this->session->set_flashdata('alert', 'Hari Telah Dihapus');
+        redirect(base_url("data_controllers/waktu"));
+    }
 
     public function tambahJam()
     {
@@ -187,23 +184,22 @@ class Data_controllers extends CI_Controller
     public function exploreJam1($kode_jam)
     {
         $this->load->model('waktu_model');
-		$data['dataJam'] = $this->waktu_model->load_JamSelect($kode_jam);
-        if (isset($_POST['updateJam'])) 
-        {
+        $data['dataJam'] = $this->waktu_model->load_JamSelect($kode_jam);
+        if (isset($_POST['updateJam'])) {
             $this->waktu_model->updateJam($kode_jam);
-			$this->session->set_flashdata('alert', 'Data Jam Telah Diubah');
-			redirect("data_controllers/waktu");
-		}
-		$this->load->view('data/ubah_jam_view', $data);
+            $this->session->set_flashdata('alert', 'Data Jam Telah Diubah');
+            redirect("data_controllers/waktu");
+        }
+        $this->load->view('data/ubah_jam_view', $data);
     }
 
     public function hapusJam1($kode_jam)
     {
-		$this->load->model('waktu_model');
-		$this->waktu_model->hapusJam1($kode_jam);
-		$this->session->set_flashdata('alert', 'Jam Telah Dihapus');
-		redirect (base_url("data_controllers/waktu"));
-	}
+        $this->load->model('waktu_model');
+        $this->waktu_model->hapusJam1($kode_jam);
+        $this->session->set_flashdata('alert', 'Jam Telah Dihapus');
+        redirect(base_url("data_controllers/waktu"));
+    }
 
     public function tambahWaktu()
     {
@@ -223,7 +219,6 @@ class Data_controllers extends CI_Controller
         $this->load->view("data/kelas_view", $data);
         if (isset($_POST['tambahKelas'])) {
             $this->kelas_model->tambahRuangan($_POST);
-            
         }
     }
 
@@ -241,9 +236,8 @@ class Data_controllers extends CI_Controller
     {
         $this->load->model("fakultas_model");
         $data['list_jurusan'] = $this->fakultas_model->daftar_jurusan();
-        $data['list_fakultas_gedung'] = $this->fakultas_model->daftar_fakultas_gedung();
-        
+        $data['list_fakultas_gedung'] = $this->fakultas_model->daftar_gedungfakultas();
+
         $this->load->view("data/fakultas_gedung_view", $data);
-        
     }
 }
