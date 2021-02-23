@@ -1,7 +1,7 @@
 //Fungsi untuk Persiapan Individu
 function generateIndividual() {
     let new_indv = [];
-    
+
     for (let idx = 0; idx < data_preferensi_dosen.length; idx++) {
 
         data_preferensi_dosen[idx]['possible_sks'] = setPossibleSks(data_preferensi_dosen[idx]);
@@ -11,34 +11,34 @@ function generateIndividual() {
         }
         group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']].push(data_preferensi_dosen[idx]);
     }
-    
+
     for (let idx = 0; idx < data_class_requirement.length; idx++) {
         let cari_matkul = data_class_requirement[idx]["id_matkul"];
 
-       if (group_pref_per_matkul[cari_matkul] == undefined) {
+        if (group_pref_per_matkul[cari_matkul] == undefined) {
             uncomplete_data_matkul.push(cari_matkul);
             data_class_requirement[idx]["pref"] = false;
 
         } else {
 
             let list_option_prefs = filterChancePref(cari_matkul);
-            
-            if(list_option_prefs.length == 0){
+
+            if (list_option_prefs.length == 0) {
                 data_class_requirement[idx]["pref"] = false;
-            }else{
+            } else {
 
                 let random_idx = list_option_prefs[Math.floor(Math.random() * list_option_prefs.length)];
-                
+
                 let random_pref = group_pref_per_matkul[cari_matkul][random_idx];
                 random_pref = takeOneTime(random_pref);
-                
+
                 data_preferensi_dosen[parseInt(random_pref["no"])] = random_pref;
                 data_class_requirement[idx]["pref"] = parseInt(random_pref["no"]);
 
             }
 
             new_indv.push(data_class_requirement[idx]["pref"]);
-        
+
         }
     }
     return new_indv;
@@ -48,28 +48,27 @@ function generateIndividual() {
 //Fungsi untuk Mencari Nilai Fitness 
 function getFitness(indv) {
     let unique = indv.filter((item, i, ar) => ar.indexOf(item) === i);
-    let err = indv.filter(element => element === false);
-    // console.log("err", err);
+    let err = indv.filter(element => element === false).length;
 
     // let sum_count = 0;
     // for (let idx_unique = 0; idx_unique < unique.length; idx_unique++) {
     //     sum_count++;
     // }
 
-    return calculateErrorFitness([err.length,unique.length]);
+    return calculateErrorFitness([err, unique]);
 }
 
-function calculateErrorFitness(score){
-    return 1.0/(1.0+(sum_arr(score)));
+function calculateErrorFitness(score) {
+    return 1.0 / (1.0 + (sum_arr(score)));
 }
 
-function sum_arr(arrays){
+function sum_arr(arrays) {
     let total_sum = 0;
     for (let arr_idx = 0; arr_idx < arrays.length; arr_idx++) {
         for (let el_idx = 0; el_idx < arrays[arr_idx].length; el_idx++) {
             total_sum += arrays[arr_idx][el_idx];
         }
-        
+
     }
     return total_sum;
 }
@@ -105,17 +104,17 @@ function parseShiftData(schedule) {
 function mutate(indv) {
 
     let err = indv.filter(element => element === false);
-    
+
 
 
     // for (let idx = 0; idx < err.length; idx++) {
     //     // let selectProblem = Math.floor(Math.random() * problem.length);
     //     let matkul = parseInt(data_preferensi_dosen[parseInt(err[idx]["no"])]['id_matkul']);
     //     let selectPref = Math.floor(Math.random() * group_pref_per_matkul[matkul].length);
-        
+
     //     indv[err[idx]] = parseInt(group_pref_per_matkul[matkul][selectPref]['no']);
     // }
-    
+
 
 
     // let shiftSelection = Math.floor(Math.random() * 4);
@@ -129,12 +128,12 @@ function mutate(indv) {
     // indv[mutatedIndex] = 0;
     // indv[mutatedIndexLess] = 1;
     let new_indv = [];
-    
+
     for (let idx = 0; idx < data_preferensi_dosen.length; idx++) {
         // if (!unique_sks.includes(parseInt(data_preferensi_dosen[idx].sks))){
         //     unique_sks.push(parseInt(data_preferensi_dosen[idx].sks));
         // }
-        
+
         data_preferensi_dosen[idx]['possible_sks'] = setPossibleSks(data_preferensi_dosen[idx]);
         data_preferensi_dosen[idx]['shift_selected'] = shift_zeros();
         // if (group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] == undefined) {
@@ -142,7 +141,7 @@ function mutate(indv) {
         // }
         // group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']].push(data_preferensi_dosen[idx]);
     }
-    
+
     for (let idx = 0; idx < data_class_requirement.length; idx++) {
         let cari_matkul = data_class_requirement[idx]["id_matkul"];
 
@@ -155,15 +154,15 @@ function mutate(indv) {
 
             let list_option_prefs = filterChancePref(cari_matkul);
             // console.log("list_option_prefs", idx, list_option_prefs)
-            if(list_option_prefs.length == 0){
+            if (list_option_prefs.length == 0) {
                 data_class_requirement[idx]["pref"] = false;
-            }else{
+            } else {
                 // let random_pref =  group_pref_per_matkul[cari_matkul][Math.floor(Math.random() *
                 // group_pref_per_matkul[cari_matkul].length)];
                 // let random_pref =  group_pref_per_matkul[cari_matkul][Math.floor(Math.random() *
                 // group_pref_per_matkul[cari_matkul].length)];
                 let random_idx = list_option_prefs[Math.floor(Math.random() * list_option_prefs.length)];
-                
+
                 let random_pref = group_pref_per_matkul[cari_matkul][random_idx];
                 random_pref = takeOneTime(random_pref);
                 // console.log("terpilih", parseInt(random_pref["no"]));
@@ -172,7 +171,7 @@ function mutate(indv) {
                 data_class_requirement[idx]["pref"] = parseInt(random_pref["no"]);
 
             }
-            
+
             // if (checkAvaibleSKS(random_pref["no"], 1, random_pref["sks"])){
 
             // }
@@ -203,68 +202,48 @@ function generateInit() {
     // Create evolution algorithm and evolve individuals
     var gen = new EvolutionarryAlgorithm(toolbox, popSize, mutProb, Algorithms.crossBreed, true);
 
-    var results = gen.evolve(generations);
+    results = gen.evolve(generations);
     console.log("Result Evolution:", results);
     console.log("result", results);
-    generateResult(results);
+    generateResult();
 
 }
 
-// function getSumDayPerPref(idx){
-//     let sum = 0;
-//     for (let shift_idx = 1; shift_idx <= 13; shift_idx++) {
-//         var shift = "shift" + shift_idx;
-//         sum += parseInt(data_preferensi_dosen[idx][shift]);
-//     }
-//     return sum;
-// }
-
-// function getCountSamePref(indv, idx){
-//     let count = 0;
-//     for (let indv_idx = 0; indv_idx < indv.length; indv_idx++) {
-//         if(indv[indv_idx] == idx){
-//             count++;
-//         }
-//     }
-//     return count;
-// }
-
-function setPossibleSks(preferensi_){
+function setPossibleSks(preferensi_) {
     let set_possible = [];
     for (let index = 13; index > 0; index--) {
-        if(preferensi_["shift"+index] == "1"){
+        if (preferensi_["shift" + index] == "1") {
             if (index != 13) {
                 if (set_possible[index] != 0) {
-                    set_possible[parseInt(index-1)] = set_possible[index] + 1; 
-                }else{
-                    set_possible[parseInt(index-1)] = 1; 
+                    set_possible[parseInt(index - 1)] = set_possible[index] + 1;
+                } else {
+                    set_possible[parseInt(index - 1)] = 1;
                 }
-            }else{
-                set_possible[parseInt(index-1)] = 1; 
+            } else {
+                set_possible[parseInt(index - 1)] = 1;
             }
-        }else{
-            set_possible[parseInt(index-1)] = 0; 
+        } else {
+            set_possible[parseInt(index - 1)] = 0;
         }
-        
+
     }
     set_possible = requiredPossibleSks(set_possible);
     return set_possible;
 }
 
-function requiredPossibleSks(possible_sks){
-    // console.log("unique_sks",unique_sks);
+function requiredPossibleSks(possible_sks) {
     let new_possible = [];
     for (let index = 0; index < possible_sks.length; index++) {
-        if(unique_sks.includes(possible_sks[index])){
+        if (unique_sks.includes(possible_sks[index])) {
             new_possible.push(possible_sks[index]);
-        }else{
+        } else {
             new_possible.push(0);
         }
     }
     return new_possible;
 }
 
-function shift_zeros(){
+function shift_zeros() {
     let arr_zeros = [];
     for (let i = 0; i < 13; i++) {
         arr_zeros[i] = 0;
@@ -272,18 +251,18 @@ function shift_zeros(){
     return arr_zeros;
 }
 
-function sumArr(arr){
+function sumArr(arr) {
     var res = 0;
-    for(var i = 0; i < arr.length; i++){
+    for (var i = 0; i < arr.length; i++) {
         res += arr[i];
     }
     return res;
 }
 
-function checkChance(pref){
+function checkChance(pref) {
     for (let pos_idx = 0; pos_idx < pref["possible_sks"].length; pos_idx++) {
-        if(parseInt(pref["sks"]) == pref["possible_sks"][pos_idx]){
-            if(sumArr(pref["shift_selected"].slice(pos_idx, pos_idx + parseInt(pref["sks"]))) == 0){
+        if (parseInt(pref["sks"]) == pref["possible_sks"][pos_idx]) {
+            if (sumArr(pref["shift_selected"].slice(pos_idx, pos_idx + parseInt(pref["sks"]))) == 0) {
                 return true;
             }
         }
@@ -291,10 +270,10 @@ function checkChance(pref){
     return false;
 }
 
-function takeOneTime(pref){
+function takeOneTime(pref) {
     for (let pos_idx = 0; pos_idx < pref["possible_sks"].length; pos_idx++) {
-        if(parseInt(pref["sks"]) == pref["possible_sks"][pos_idx]){
-            if(sumArr(pref["shift_selected"].slice(pos_idx, pos_idx + parseInt(pref["sks"]))) == 0){
+        if (parseInt(pref["sks"]) == pref["possible_sks"][pos_idx]) {
+            if (sumArr(pref["shift_selected"].slice(pos_idx, pos_idx + parseInt(pref["sks"]))) == 0) {
                 pref["shift_selected"][pos_idx] = 1;
                 return pref;
             }
@@ -303,15 +282,60 @@ function takeOneTime(pref){
     return pref;
 }
 
-function filterChancePref(groups_matkul_id){
+function takeOneShiftRoom(pref) {
+    for (let pos_idx = 0; pos_idx < pref["shift_selected"].length; pos_idx++) {
+        if (parseInt(pref["shift_selected"][pos_idx]) == 1) {
+            pref["shift_selected"][pos_idx] = 0;
+            pref["room_shift"] = pos_idx;
+            return pref;
+        }
+    }
+    return pref;
+}
+
+function filterChancePref(groups_matkul_id) {
     let pref_chance_list = [];
     for (let pref_idx = 0; pref_idx < group_pref_per_matkul[groups_matkul_id].length; pref_idx++) {
         let selected_pref = group_pref_per_matkul[groups_matkul_id][pref_idx];
-        if(checkChance(selected_pref)){
+        if (checkChance(selected_pref)) {
             pref_chance_list.push(pref_idx);
         }
     }
     return pref_chance_list;
+}
+
+function setRuangan() {
+    let class_preffed = data_class_requirement.filter(element => element['pref'] != undefined);
+    // let scheduled_rooms = [];
+    let group_ruangan = [];
+    for (let idx_ruang = 0; idx_ruang < data_ruangan.length; idx_ruang++) {
+        if (group_ruangan[data_ruangan[idx_ruang]['id_jurusan']] == undefined) {
+            group_ruangan[data_ruangan[idx_ruang]['id_jurusan']] = [];
+        }
+        data_ruangan[idx_ruang]["scheduled"] = [];
+        data_ruangan[idx_ruang]["no"] = idx_ruang;
+        group_ruangan[data_ruangan[idx_ruang]['id_jurusan']].push(data_ruangan[idx_ruang]);
+    }
+
+    for (let class_idx = 0; class_idx < class_preffed.length; class_idx++) {
+
+        class_preffed[class_idx]["pref"] = takeOneShiftRoom(class_preffed[class_idx]["pref"]);
+
+        let ruangan_selection = group_ruangan[class_preffed[class_idx]["id_jurusan"]];
+        ruangan_selection = ruangan_selection.filter(element => !element["scheduled"].includes([class_preffed[class_idx]["pref"]["id_hari"], class_preffed[class_idx]["pref"]["id_hari"]]));
+
+        let random_ruangan = ruangan_selection[Math.floor(Math.random() * ruangan_selection.length)];
+        // let random_ruangan = ruangan_selection[random_idx];
+        class_preffed[class_idx]["ruangan"] = random_ruangan;
+
+        let update_ruang_scheduled = data_ruangan.filter(element => element["id_ruangan"] == random_ruangan["id_ruangan"]);
+        for (let urs_idx = 0; urs_idx < update_ruang_scheduled.length; urs_idx++) {
+            data_ruangan[update_ruang_scheduled[urs_idx]["no"]]["scheduled"].push([class_preffed[class_idx]["pref"]["id_hari"], class_preffed[class_idx]["pref"]["room_shift"]]);
+        }
+
+        // scheduled_rooms.push([class_preffed[class_idx]["id_hari"], class_preffed[class_idx]["pref"]["room_shift"]]);
+    }
+    return class_preffed;
 }
 
 // //Fungsi untuk proses persilangan/perkawinan
@@ -338,7 +362,7 @@ function filterChancePref(groups_matkul_id){
 // function getPrefById(id_preferensi){
 //     for (let idx = 0; idx < data_preferensi_dosen.length; idx++) {
 //         const element = array[idx];
-        
+
 //     }
 //     data_preferensi_dosen
 // }
@@ -346,7 +370,7 @@ function filterChancePref(groups_matkul_id){
 // function get_shift_pref(idx_pref, last_shift){
 //     res = null;
 //     for (var x = last_shift+1 ; x < 13; x++) {
-        
+
 //         var shift = data_preferensi_dosen[idx_pref]["shift" + (x + 1)]
 //         if(shift == "1"){
 //             return x;
@@ -356,658 +380,72 @@ function filterChancePref(groups_matkul_id){
 // }
 
 
-function generateResult(results, selected_pop=0){
-    
+function generateResult(selected_pop = 0) {
+
     for (let idx = 0; idx < data_class_requirement.length; idx++) {
         // if (data_class_requirement[idx][]) {
-            
+
         // }
         data_class_requirement[idx]["pref"] = data_preferensi_dosen[results.population[selected_pop]["individual"][idx]];
+
+
+
     }
     // results.population.length
-    
-    console.log("uncomplete_data_matkul",uncomplete_data_matkul);
-    console.log("data_class_requirement",data_class_requirement);
-    console.log("group_pref_per_matkul",group_pref_per_matkul);
 
+    console.log("uncomplete_data_matkul", uncomplete_data_matkul);
+    console.log("data_class_requirement", data_class_requirement);
+    console.log("group_pref_per_matkul", group_pref_per_matkul);
 
+    let data_with_ruang = setRuangan();
+    console.log(data_with_ruang);
 
-    // for (let idx_hari = 0; idx_hari < 6; idx_hari++) {
-    //     for (let idx_shift = 0; idx_shift < 13; idx_shift++) {
-    //         data_preferensi_dosen[results.population[]]
-    //     }
-        
-    // }
+    let hari_list = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    let str_to_html = 
+    '<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">' +
+        '<thead>' +
+            '<tr>' +
+                '<th scope="col">NO</th>' +
+                '<th scope="col">HARI</th>' +
+                '<th scope="col">JAM</th>' +
+                '<th scope="col">FAKULTAS</th>' +
+                '<th scope="col">PROGRAM STUDI</th>' +
+                '<th scope="col">RUANG</th>' +
+                '<th scope="col">KELAS</th>' +
+                '<th scope="col">DOSEN</th>' +
+            '</tr>' +
+        '</thead>' +
+        '<tbody>';
+
+    for (let idx_dwr = 0; idx_dwr < data_with_ruang.length; idx_dwr++) {
+        let hari = hari_list[parseInt(data_with_ruang[idx_dwr]['pref']['id_hari']) - 1];
+        let jam_mulai = parseInt(data_with_ruang[idx_dwr]["pref"]["room_shift"]) + 6;
+        let jam_selesai = jam_mulai + parseInt(data_with_ruang[idx_dwr]["sks"]);
+        let nama_fakultas = data_with_ruang[idx_dwr]["ruangan"]["nama_fakultas"];
+        let nama_jurusan = data_with_ruang[idx_dwr]["nama_jurusan"];
+        let ruangan = data_with_ruang[idx_dwr]["ruangan"]["nama_ruangan"];
+        let nama_kelas = data_with_ruang[idx_dwr]["nama_kelas"];
+        let nama_dosen = data_with_ruang[idx_dwr]["pref"]["nama_depan"] + " " + data_with_ruang[idx_dwr]["pref"]["nama_belakang"];
+
+        let jam_lengkap = jam_mulai < 10 == 1 ? "0"+jam_mulai : jam_mulai;
+
+            jam_lengkap += jam_lengkap + (jam_selesai < 10 ) ? "0"+jam_selesai : jam_selesai;
+
+        str_to_html += 
+            '<tr>' +
+                '<td>' + parseInt(idx_dwr + 1) + '</td>' +
+                '<td>' + hari + '</td>' +
+                '<td>' + jam_mulai+":30:00 - "+jam_selesai + ':30:00</td>' +
+                '<td>' + nama_fakultas + '</td>' +
+                '<td>' + nama_jurusan + '</td>' +
+                '<td>' + ruangan + '</td>' +
+                '<td>' + nama_kelas + '</td>' +
+                '<td>' + nama_dosen + '</td>' +
+            '</tr>';
+
+    }
+    str_to_html += '</tbody></table>';
+
+    document.getElementById("res_table").innerHTML = str_to_html;
+
 }
-
-// function draw_table_result($data_result){
-//     str = ' <table class="table">';
-//     str += ' <thead>';
-//     str += '  <tr>';
-//     str += '     <th class="text-center" colspan="2">Waktu</th>';
-//     str += '     <th class="text-center align-middle" rowspan="2">Mata Kuliah</th>';
-//     str += '     <th class="text-center align-middle" rowspan="2">Dosen</th>';
-//     str += '     <th class="text-center align-middle" rowspan="2">Jurusan</th>';
-//     str += '     <th class="text-center align-middle" rowspan="2">Kelas</th>';
-//     str += '     <th class="text-center align-middle" rowspan="2">Ruangan</th>';
-//     str += '  </tr>';
-//     str += '  <tr>';
-//     str += '     <th class="text-center">Hari</th>';
-//     str += '     <th class="text-center">Jam</th>';
-//     str += '  </tr>';
-//     str += ' </thead>';
-//     str += ' <tbody>';
-//     for (let index = 0; index < array.length; index++) {
-//         const element = array[index];
-        
-//     }
-//     str += ' </tbody>';
-//     str += '</table>';
-// }
-
-
-// //Fungsi untuk print Tabel Hasil individu Terbaik
-// function printResultEvo(individual) {
-//     resultEvo = document.getElementById('resultEvo');
-
-//     var html = "";
-
-//     html += '<tr>';
-//     html += '<th class="text-center" colspan="6"> List Data Jadwal Penguji </th>';
-//     html += '</tr>';
-//     html += '<tr>';
-//     html += '<th class="text-center align-middle" rowspan="2"> Tanggal </th>';
-//     html += '<th class="text-center align-middle" rowspan="2"> Kode Dosen </th>';
-//     html += '<th class="text-center" colspan="4"> Shift </th>';
-//     html += '</tr>';
-//     html += '<tr>';
-//     html += '<th class="text-center"> 1 </th>';
-//     html += '<th class="text-center"> 2 </th>';
-//     html += '<th class="text-center"> 3 </th>';
-//     html += '<th class="text-center"> 4 </th>';
-//     html += '</tr>';
-
-//     let countDate = 0;
-//     let idx = 0;
-
-//     for (var i = 0; i < calonPenguji.length; i++) {
-//         html += '<tr>';
-//         let size = getCountDate(calonPenguji[i].tanggal);
-
-//         if (countDate == 0) {
-//             html += '<th class="text-center align-middle" rowspan="' + size + '">'
-//                 + calonPenguji[i].tanggal + '</th>';
-//             countDate = size;
-//         }
-
-//         html += '<td class="text-center">' + calonPenguji[i].kode_dosen + '</td>';
-
-//         for (var j = 0; j < 4; j++) {
-//             html += '<td class="text-center">' + individual[idx++] + ' </td>';
-//         }
-
-//         html += '</tr>';
-//         countDate--;
-//     }
-
-//     resultEvo.innerHTML = html;
-// }
-
-// //Fungsi untuk Menampilkan Dosen Memungkinkan menjadi Penguji
-// function printListDosen(individual) {
-//     resultDos = document.getElementById('resultDos');
-//     var html = "";
-//     html += '<tr>';
-//     html += '<th class="text-center" colspan="3"> Jadwal Penguji Per Shift </th>';
-//     html += '</tr>';
-//     html += '<tr>';
-//     html += '<th class="text-center align-middle"> Tanggal </th>';
-//     html += '<th class="text-center"> Shift </th>';
-//     html += '<th class="text-center"> Dosen Pilihan </th>';
-//     html += '</tr>';
-
-//     let countDate = 0;
-//     let idx = 0;
-
-//     for (var i = 0; i < dates.length; i++) {
-//         html += '<tr>';
-
-//         html += '<th class="text-center align-middle" rowspan="4">' + dates[i] + '</th>';
-
-//         for (var j = 0; j < 4; j++) {
-//             html += '<th class="text-center align-middle">' + (j + 1) + '</th>';
-
-//             let str = getDosenListText(dates[i], j, individual);
-
-//             html += '<td class="text-center align-middle">' + str + '</td>';
-//             html += "</tr>";
-//             html += "<tr>";
-
-//         }
-//     }
-
-//     resultDos.innerHTML = html;
-// }
-
-
-// //Fungsi untuk Mempersiapkan tampilan hasil akhir
-// function generateResult_(results) {
-
-//     //pilih individu fitnes terbaik
-//     var individual = results.population[0].individual;
-//     var finalFitness = results.population[0].fitness;
-//     var finalGeneration = results.generations;
-//     document.getElementById("printStatus").innerHTML = "Status : Fitness = " + finalFitness + "; Generation = " + finalGeneration;
-
-//     //ganti jadwal dengan yang baru
-//     updateJadwal(individual);
-
-//     let listJadwalDosen = [];
-//     for (var i = 0; i < dates.length; i++) {
-//         for (var j = 0; j < 4; j++) {
-//             listJadwalDosen.push(getListPerShift(dates[i], j, individual));
-//         }
-//     }
-
-//     console.log("calonPenguji: ", calonPenguji);
-//     console.log("listJadwalDosen: ", listJadwalDosen);
-
-//     //let listPenguji = [];
-//     listPenguji = getPenguji(listJadwalDosen);
-
-//     console.log("listPenguji: ", listPenguji);
-//     console.log("dataList: ", dataList);
-//     console.log("dataListGroup: ", dataListGroup);
-//     printJadwalResult(listPenguji);
-
-//     printResultEvo(individual);
-//     printListDosen(individual);
-// }
-
-// //Fungsi untuk Menampilkan Hasil Penjadwalan dalam bentuk Tabel
-// function printJadwalResult(listPenguji) {
-//     jadwalRes = document.getElementById('jadwalRes');
-
-//     var html = "";
-
-//     html += '<tr>';
-//     html += '<th class="text-center" colspan="12"> Hasil Jadwal Sidang </th>';
-//     html += '</tr>';
-//     html += '<tr>';
-//     html += '<th class="text-center align-middle" rowspan="2"> NO </th>';
-//     html += '<th class="text-center align-middle" rowspan="2"> NAMA </th>';
-//     html += '<th class="text-center align-middle" rowspan="2"> NIM </th>';
-//     html += '<th class="text-center align-middle" colspan="2"> PBB </th>';
-//     html += '<th class="text-center align-middle" colspan="3"> PENGUJI </th>';
-//     html += '<th class="text-center align-middle" rowspan="2"> TGL </th>';
-//     html += '<th class="text-center align-middle" width="100" rowspan="2"> WAKTU </th>';
-//     html += '<th class="text-center align-middle" rowspan="2"> TEMPAT </th>';
-//     html += '<th class="text-center align-middle" rowspan="2"> JUDUL </th>';
-//     html += '</tr>';
-//     html += '<tr>';
-//     html += '<th class="text-center align-middle"> 1 </th>';
-//     html += '<th class="text-center align-middle"> 2 </th>';
-//     html += '<th class="text-center align-middle"> 1 </th>';
-//     html += '<th class="text-center align-middle"> 2 </th>';
-//     html += '<th class="text-center align-middle"> 3 </th>';
-//     html += '</tr>';
-
-//     for (var i = 0; i < selecteds.length; i++) {
-
-//         var topik = selecteds[i];
-//         var dataSidang = dataList[topik];
-//         var size = dataSidang.length;
-
-//         var warning = '';
-
-//         var tglB = getTanggal(listPenguji[i][0].schedule);
-//         console.log(dataList[topik][0].tanggal_sidang, tglB);
-//         if (dataList[topik][0].tanggal_sidang != tglB) {
-//             warning = 'table-warning';
-//         }
-
-//         html += '<tr>';
-//         html += '<td class="text-center "' + warning + '" align-middle" rowspan="' + size + '"> ' + (i + 1) + ' </td>';
-
-//         var idxRuang = 1;
-
-//         for (var j = 0; j < size; j++) {
-//             var nama = dataSidang[j].nama_awal;
-//             var nim = dataSidang[j].nim;
-
-//             html += '<td class="text-center ' + warning + ' align-middle"> ' + nama + ' </td>';
-//             html += '<td class="text-center ' + warning + ' align-middle"> ' + nim + ' </td>';
-//             if (j == 0) {
-//                 var pbb1 = dataListGroup[topik].pbb1;
-//                 var pbb2 = dataListGroup[topik].pbb2;
-//                 var p1 = listPenguji[i][0].p;
-//                 var p2 = listPenguji[i][1].p;
-//                 var p3 = "-";
-
-//                 if (listPenguji[i].length == 3) {
-//                     p3 = listPenguji[i][2].p;
-//                 }
-
-//                 var tgl = getTanggal(listPenguji[i][0].schedule);
-//                 var indexWaktu = getWaktu(listPenguji[i][0].schedule);
-//                 var waktu = getWaktuStr(indexWaktu - 1);
-
-//                 var indexRuang = getRuangan(listPenguji, i);
-//                 var ruang = listRuangTA[indexRuang - 1].nama_ruangan;
-
-//                 html += '<td class="text-center ' + warning + ' align-middle" rowspan="' + size + '"> ' + pbb1 + ' </td>';
-//                 html += '<td class="text-center ' + warning + ' align-middle" rowspan="' + size + '"> ' + pbb2 + ' </td>';
-
-//                 html += '<td class="text-center ' + warning + ' align-middle" rowspan="' + size + '"> ' + p1 + ' </td>';
-//                 html += '<td class="text-center ' + warning + ' align-middle" rowspan="' + size + '"> ' + p2 + ' </td>';
-//                 html += '<td class="text-center ' + warning + ' align-middle" rowspan="' + size + '"> ' + p3 + ' </td>';
-
-//                 html += '<td class="text-center ' + warning + ' align-middle" rowspan="' + size + '"> ' + tgl + ' </td>';
-//                 html += '<td class="text-center ' + warning + ' align-middle" rowspan="' + size + '"> ' + waktu + ' </td>';
-//                 html += '<td class="text-center ' + warning + ' align-middle" rowspan="' + size + '"> ' + ruang + ' </td>';
-//             }
-
-//             html += '<td class="text-center ' + warning + ' align-middle"> ' + dataSidang[j].judul + ' </td>';
-//             html += '</tr>';
-//             html += '<tr>';
-//         }
-//         html += '</tr>';
-//     }
-//     jadwalRes.innerHTML = html;
-// }
-
-// //Fungsi untuk Menyimpan kedalam Database
-// function setScheduledClick() {
-//     var form = document.getElementById("form-data");
-//     var str = '';
-
-//     //var dataInsert = [];
-//     for (var i = 0; i < selecteds.length; i++) {
-//         //var dataSchedule = [];
-//         //var topik = selecteds[i];
-//         var p1 = getNip(listPenguji[i][0].p);
-//         var p2 = getNip(listPenguji[i][1].p);
-//         var p3 = 0;
-
-//         if (listPenguji[i].length == 3) {
-//             p3 = getNip(listPenguji[i][2].p);
-//         }
-
-//         var id_pekansidang = getIdPekanSidang(getTanggal(listPenguji[i][0].schedule));
-//         var indexWaktu = getWaktu(listPenguji[i][0].schedule);
-
-//         var indexRuang = getRuangan(listPenguji, i);
-
-//         str += '<input name="idta[]" value="' + selecteds[i] + '">';
-//         str += '<input name="id_pekansidang[]" value="' + id_pekansidang + '">';
-//         str += '<input name="id_ruangan[]" value="' + indexRuang + '">';
-//         str += '<input name="penguji1[]" value="' + p1 + '">';
-//         str += '<input name="penguji2[]" value="' + p2 + '">';
-//         str += '<input name="penguji3[]" value="' + p3 + '">';
-//         str += '<input name="shift[]" value="' + indexWaktu + '">';
-
-
-//     }
-
-//     form.innerHTML = str;
-//     var el = document.getElementsByName('form-data');
-//     el[0].submit();
-
-// }
-
-// //Fungsi untuk Mendapatkan NIP dari suatu Kode Dosen
-// function getNip(kode_dosen) {
-//     for (var i = 0; i < calonPenguji.length; i++) {
-//         if (calonPenguji[i].kode_dosen == kode_dosen) {
-//             return calonPenguji[i].nip;
-//         }
-//     }
-// }
-
-// //Fungsi untuk Mendapatkan Id Pekan Sidang dari Tanggal
-// function getIdPekanSidang(tgl) {
-//     for (var i = 0; i < calonPenguji.length; i++) {
-//         if (calonPenguji[i].tanggal == tgl) {
-//             return calonPenguji[i].id_pekansidang;
-//         }
-//     }
-// }
-
-// //Fungsi untuk Menentukan string waktu
-// function getWaktuStr(index) {
-//     var str = "";
-//     if (index == 0) {
-//         return "07.30 - 09.30"
-//     } else if (index == 1) {
-//         return "10.00 - 12.00"
-//     } else if (index == 2) {
-//         return "13.00 - 15.00"
-//     } else if (index == 3) {
-//         return "15.30 - 17.30"
-//     }
-// }
-
-// //Fungsi untuk menentukan ruangan
-// function getRuangan(listPenguji, index) {
-//     var r1 = [];
-//     var r2 = [];
-//     var r3 = [];
-//     var r4 = [];
-
-//     //var res = "Ruang-";
-//     var number = 0;
-
-//     for (var i = 0; i < listPenguji.length; i++) {
-//         var tgl = getTanggal(listPenguji[i][0].schedule);
-//         var waktu = getWaktu(listPenguji[i][0].schedule);
-//         var str = tgl + "_" + waktu;
-
-//         if (!r1.includes(str)) {
-//             r1.push(str);
-//             number = 1;
-//         } else if (!r2.includes(str)) {
-//             r2.push(str);
-//             number = 2;
-//         } else if (!r3.includes(str)) {
-//             r3.push(str);
-//             number = 3;
-//         } else if (!r4.includes(str)) {
-//             r4.push(str);
-//             number = 4;
-//         }
-
-//         if (index == i) {
-//             return number;
-//         }
-//     }
-// }
-
-// //Fungsi untuk menentukan tanggal dari index shift
-// function getTanggal(schedule) {
-//     var index = schedule.j;
-//     var point = Math.floor(index / 4);
-//     return dates[point];
-// }
-
-// //Fungsi untuk menentukan waktu dari index shift
-// function getWaktu(schedule) {
-//     var index = schedule.j;
-//     var shift = (index % 4) + 1;
-//     return shift;
-// }
-
-// //Fungsi untuk mendapatkan list penguji
-// function getPenguji(listJadwalDosen) {
-//     var res = [];
-//     var pUji = [];
-//     var scheduled = [];
-
-//     var listPenguji = [];
-
-//     for (var i = 0; i < selecteds.length; i++) {
-//         pUji = [];
-
-//         var penguji1 = getPenguji1(listJadwalDosen, selecteds[i], scheduled);
-//         if (!penguji1) {
-//             penguji1 = getPenguji2(listJadwalDosen, selecteds[i], scheduled, penguji1);
-//         }
-//         pUji.push(penguji1);
-//         console.log("scheduled : ", scheduled);
-//         //if(dataList[selecteds[i]].length == 1)continue;
-//         var penguji2 = getPenguji2(listJadwalDosen, selecteds[i], scheduled, penguji1);
-//         pUji.push(penguji2);
-
-//         if (dataList[selecteds[i]].length > 2) {
-//             pUji.push(getPenguji2(listJadwalDosen, selecteds[i], scheduled, penguji2));
-//         }
-
-//         listPenguji.push(getListPenguji(selecteds[i], scheduled, pUji));
-
-//     }
-
-//     return listPenguji;
-// }
-
-// //Fungsi untuk mendapatkan jabatan dari kode dosen
-// function getJabatanDosen(kode_dosen) {
-//     for (var i = 0; i < calonPenguji.length; i++) {
-//         if (kode_dosen == calonPenguji[i].kode_dosen) {
-//             return parseInt(calonPenguji[i].id_jabatan);
-//         }
-//     }
-//     return false;
-// }
-
-// function getListPenguji(idta, scheduled, pUji) {
-//     var list = [];
-
-//     var idxS = scheduled.length - pUji.length;
-//     for (var i = 0; i < pUji.length; i++) {
-//         data = {
-//             idta: idta,
-//             p: pUji[i],
-//             jab: getJabatanDosen(pUji[i]),
-//             schedule: scheduled[idxS + i]
-//         }
-//         list.push(data);
-//     }
-
-//     return list;
-// }
-
-// //Fungsi untuk melakukan pencarian Penguji 1
-// function getPenguji1(listJadwalDosen, idta, scheduled) {
-//     var res = [];
-//     var resData = [];
-//     var max = 0;
-//     for (var j = 0; j < listJadwalDosen.length; j++) {
-//         var listDosen = listJadwalDosen[j];
-//         for (var k = 0; k < listDosen.length; k++) {
-//             var size = listDosen.length - countScheduled(j, scheduled);
-//             if (dataList[idta].length > size) {
-//                 break;
-//             }
-
-//             if (notScheduled(j, k, scheduled)) {
-//                 var bidang = getBidangDosen(listDosen[k])[0];
-//                 if (listDosen[k] != dataListGroup[idta].pbb1 &&
-//                     listDosen[k] != dataListGroup[idta].pbb2) {
-//                     if (bidang.includes(dataListGroup[idta].id_bidang)) {
-//                         var jabatan = getJabatanDosen(listDosen[k]);
-//                         if (jabatan > max) {
-//                             max = jabatan;
-//                         }
-//                         var data = {
-//                             j: j,
-//                             k: k
-//                         };
-//                         resData.push(data);
-//                         res.push(listDosen[k]);
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-
-
-
-//     for (var i = 0; i < res.length; i++) {
-
-//         //pilih jabatan tertinggi
-//         var jabatan = getJabatanDosen(res[i]);
-//         if (jabatan == max) {
-//             setPbbScheduled(listJadwalDosen, dataListGroup[idta], resData[i], scheduled);
-//             scheduled.push(resData[i]);
-//             return res[i];
-//         }
-//     }
-
-//     return false;
-// }
-
-// //Fungsi untuk menambahkan pembimbing kedalam schedule
-// function setPbbScheduled(listJadwalDosen, listData, resData, scheduled) {
-//     var j = resData.j;
-//     var listDosen = listJadwalDosen[j];
-//     for (var k = 0; k < listDosen.length; k++) {
-//         if (listData.pbb1 == listDosen[k] ||
-//             listData.pbb2 == listDosen[k]) {
-//             var data = {
-//                 j: j,
-//                 k: k
-//             };
-//             scheduled.push(data);
-//         }
-//     }
-// }
-
-// //Fungsi untuk menentukan jika suatu dosen belum ter jadwal pada suatu shift
-// function notScheduled(j, k, scheduled) {
-//     for (var i = 0; i < scheduled.length; i++) {
-//         var schedule = scheduled[i];
-//         if (schedule.j == j && schedule.k == k) {
-//             return false;
-//         }
-//     }
-//     return true;
-// }
-
-// //Fungsi untuk menghitung jumlah dosen yang terjadwal pada suatu shift
-// function countScheduled(j, scheduled) {
-//     var count = 0;
-//     for (var i = 0; i < scheduled.length; i++) {
-//         var schedule = scheduled[i];
-//         if (schedule.j == j) {
-//             count++;
-//         }
-//     }
-//     return count;
-// }
-
-// //Fungsi untuk melakukan pencarian Penguji 2
-// function getPenguji2(listJadwalDosen, idta, scheduled, pengujiSebelum) {
-//     //if (typeof(scheduled[scheduled.length-1].j) === 'undefined')
-//     var j;
-//     if (scheduled == "") {
-//         var data = {
-//             j: 0,
-//             k: 0
-//         };
-//         scheduled.push(data);
-//         j = 0;
-//     } else {
-//         j = scheduled[scheduled.length - 1].j;
-//     }
-
-//     var listDosen = listJadwalDosen[j];
-//     for (var k = 0; k < listDosen.length; k++) {
-//         if (notScheduled(j, k, scheduled)) {
-//             var bidang = getBidangDosen(listDosen[k]);
-//             if (listDosen[k] != dataListGroup[idta].pbb1 &&
-//                 listDosen[k] != dataListGroup[idta].pbb2) {
-//                 var jabatanDosen = getJabatanDosen(listDosen[k]);
-//                 var jabSebelum = getJabatanDosen(pengujiSebelum);
-
-//                 if (bidang.includes(dataListGroup[idta].id_bidang) &&
-//                     (jabSebelum >= jabatanDosen)) {
-//                     var data = {
-//                         j: j,
-//                         k: k
-//                     };
-//                     scheduled.push(data);
-//                     return listDosen[k];
-//                 }
-//             }
-//         }
-//     }
-//     //jika tidak ada yg sebidang
-//     for (var k = 0; k < listDosen.length; k++) {
-//         if (notScheduled(j, k, scheduled)) {
-//             var jabatanDosen = getJabatanDosen(listDosen[k]);
-//             var jabSebelum = getJabatanDosen(pengujiSebelum);
-//             if (jabSebelum >= jabatanDosen) {
-//                 var data = {
-//                     j: j,
-//                     k: k
-//                 };
-//                 scheduled.push(data);
-//                 return listDosen[k];
-//             }
-//         }
-
-//     }
-
-// }
-
-// function getBidangDosen(kode_dosen) {
-//     var bidang = [];
-//     for (var i = 0; i < calonPenguji.length; i++) {
-//         if (kode_dosen == calonPenguji[i].kode_dosen) {
-//             bidang.push(calonPenguji[i].id_bidang);
-//             bidang.push(calonPenguji[i].id_bidang2);
-//             return bidang;
-//         }
-//     }
-//     return bidang;
-// }
-
-// function updateJadwal(individual) {
-//     var idx = 0;
-//     for (var i = 0; i < calonPenguji.length; i++) {
-//         if (calonPenguji[i].shift1 == individual[idx] &&
-//             calonPenguji[i].shift2 == individual[idx + 1] &&
-//             calonPenguji[i].shift3 == individual[idx + 2] &&
-//             calonPenguji[i].shift4 == individual[idx + 3]) {
-//             //cek jadwal yg tdk berubah
-//             //console.log(calonPenguji[i]);
-//         }
-//         calonPenguji[i].shift1 = individual[idx++];
-//         calonPenguji[i].shift2 = individual[idx++];
-//         calonPenguji[i].shift3 = individual[idx++];
-//         calonPenguji[i].shift4 = individual[idx++];
-//     }
-// }
-
-// function getCountDate(strDate) {
-//     //calonPenguji
-//     let count = 0;
-//     for (var i = 0; i < calonPenguji.length; i++) {
-//         if (strDate == calonPenguji[i].tanggal) {
-//             count++;
-//         }
-//     }
-//     return count;
-// }
-
-// function getDosenListText(strDate, shift, individual) {
-//     let strRes = getListPerShift(strDate, shift, individual);
-//     return strRes;
-// }
-
-// function getListPerShift(strDate, shift, individual) {
-//     let list = [];
-//     let idx = 0;
-
-//     for (var i = 0; i < individual.length; i++) {
-//         var penguji = calonPenguji[idx];
-//         var shiftVal = 0;
-//         if (penguji.tanggal == strDate) {
-//             if (i % 4 == shift) {
-//                 shiftVal = individual[i];
-//             }
-
-//             if (shiftVal == 1) {
-//                 list.push(penguji.kode_dosen);
-//             }
-//         }
-
-//         if (i % 4 == 3) {
-//             idx++;
-//         }
-//     }
-//     return list;
-// }
-
-
-
