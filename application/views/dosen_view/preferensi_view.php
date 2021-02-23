@@ -122,7 +122,7 @@
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
-                                        <font size="2" font color="red">*Sesuaikan Inputan dengan Preferensi Anda</font><br>
+                                        <font size="2" font color="red">*Sesuaikan Inputan dengan Preferensi Jadwal Anda</font><br>
                                         <font size="2" font color="red">**Inputkan Preferensi Anda Minimal 24 Shift </font><br><br>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
@@ -139,7 +139,7 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <i class="fas fa-table"></i>
-                            Preferensi Jadwal Mengajar
+                            Preferensi Jadwal Mengajar Anda
                         </div>
                         <div class="card card-default">
                             <div class="card-body">
