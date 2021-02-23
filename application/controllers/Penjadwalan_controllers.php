@@ -21,6 +21,7 @@ class Penjadwalan_controllers extends CI_Controller
 
             $data['data_class_requirement'] = $this->penjadwalan_model->getClassRequirements();
             $data['data_preferensi_dosen'] = $this->penjadwalan_model->getDataDosen();
+            $data['data_ruangan'] = $this->penjadwalan_model->getDataRuangan();
             $data['data_unique_sks'] = $this->penjadwalan_model->getUniqueSks();
 
             foreach ($data['data_preferensi_dosen'] as $key => $value) {
@@ -32,6 +33,7 @@ class Penjadwalan_controllers extends CI_Controller
             }
 
             $this->load->view("penjadwalan/generate_jadwal", $data);
+            
         } catch (Exception $e){
             show_error("Internal Server Error",500);
         }
