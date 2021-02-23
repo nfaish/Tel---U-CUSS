@@ -1,8 +1,17 @@
 <?php
 class Penjadwalan_model extends CI_Model {
+
+    public function getDataRuangan(){
+        $query = "SELECT * FROM ruangan
+        JOIN gedung_fakultas ON gedung_fakultas.id_gedung = ruangan.id_gedung
+        JOIN fakultas ON fakultas.id_fakultas = gedung_fakultas.id_fakultas
+        JOIN jurusan ON jurusan.id_fakultas = fakultas.id_fakultas";
+
+        return $this->db->query($query)->result_array();
+    }
     
     public function getDataDosen(){
-        $query = "SELECT dosen.nip, dosen.kode_dosen, 
+        $query = "SELECT dosen.nip, dosen.kode_dosen, dosen.nama_depan, dosen.nama_belakang,
         preferensi.id_preferensi, preferensi.id_hari, 
         preferensi.shift1, preferensi.shift2, preferensi.shift3, preferensi.shift4, preferensi.shift5,
         preferensi.shift6, preferensi.shift7, preferensi.shift8, preferensi.shift9, preferensi.shift10,
@@ -35,16 +44,5 @@ class Penjadwalan_model extends CI_Model {
 
         return $this->db->query($query)->result_array();
     }
-    
-
-
-
-    // public function tampil()
-    // {   
-
-    //     $query = $this->db->get($this->table);
-    //     return $query->result();
-    // }
-    
     
 }
