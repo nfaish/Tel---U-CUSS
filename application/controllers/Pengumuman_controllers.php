@@ -8,12 +8,12 @@
             $this->load->model("pengumuman_model");
             $data['list_pengumuman'] = $this->pengumuman_model->load_pengumuman();
 
-            $this->load->view('v_pengumuman/v_pengumuman', $data);
+            $this->load->view('pengumuman_view/v_pengumuman', $data);
         }
 
         public function inputPengumuman()
         {
-            $this->load->view('v_pengumuman/v_inputPengumuman');
+            $this->load->view('pengumuman_view/v_inputPengumuman');
         }
 
         function simpanPengumuman()
@@ -81,7 +81,7 @@
                     $this->session->set_flashdata('alert_ubah', 'Pengumuman telah diperbarui');
                     redirect("pengumuman");
                 }
-            $this->load->view('v_pengumuman/v_editPengumuman', $data);
+            $this->load->view('pengumuman_view/v_editPengumuman', $data);
         }
 
         function detail($id_pengumuman)
@@ -89,7 +89,7 @@
             $this->load->model("pengumuman_model");
             $data['list_pengumuman'] = $this->pengumuman_model->load_pengumumanSelect($id_pengumuman);
 
-            $this->load->view('v_pengumuman/v_detailPengumuman', $data);
+            $this->load->view('pengumuman_view/v_detailPengumuman', $data);
         }
 
 
