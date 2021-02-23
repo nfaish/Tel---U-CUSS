@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Tel - U CUSS | Daftar Data Fakultas - Gedung</title>
+    <title>Tel - U CUSS | Daftar Data Gedung - Fakultas</title>
     <?php $this->load->view("_partials/header.php") ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/data_controllers/css/daleman.css') ?>">
 </head>
@@ -20,7 +20,7 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <i class="fas fa-table"></i>
-                            Daftar Fakultas Gedung
+                            Daftar Gedung Fakultas
                         </div>
                         <div class="card card-default">
                             <div class="card-body">
