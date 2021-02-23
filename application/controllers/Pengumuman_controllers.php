@@ -20,7 +20,8 @@
         {
             $config['upload_path']          = './assets/documents/pengumuman/';
             $config['allowed_types']        = '*';
-            $config['max_size']             = 2560000000;
+            $config['max_size']             = 25600000;
+
     
             $this->load->library('upload', $config);
             
@@ -50,7 +51,7 @@
                                 '$file_name'
                             ) ";
                 $sql = $this->db->query($query);
-                redirect('Pengumuman');
+                redirect('pengumuman_controllers');
             }
         }
 
@@ -58,9 +59,9 @@
         {
             $this->load->model("pengumuman_model");
             $this->pengumuman_model->hapusPengumuman($id_pengumuman);
-            $this->session->set_flashdata('alert_hapus', 'Pengumuman telah dihapus');
+            $this->session->set_flashdata('alert_hapus', 'Pengumuman Telah Dihapus!');
             
-            redirect (base_url("pengumuman"));
+            redirect (base_url("pengumuman_controllers"));
         }
 
         public function edit($id_pengumuman)
@@ -78,8 +79,8 @@
                                     WHERE id_pengumuman = ".intval($id_pengumuman)
                                     ;
                     $sql = $this->db->query($query);
-                    $this->session->set_flashdata('alert_ubah', 'Pengumuman telah diperbarui');
-                    redirect("pengumuman");
+                    $this->session->set_flashdata('alert_ubah', 'Pengumuman Telah Diperbarui!');
+                    redirect("pengumuman_controllers");
                 }
             $this->load->view('pengumuman_view/v_editPengumuman', $data);
         }

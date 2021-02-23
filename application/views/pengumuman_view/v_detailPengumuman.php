@@ -15,37 +15,51 @@
       <div id="content-wrapper">
        <div class="container-fluid">
           <div class="mb-3">
-            <h1>Detail Pengumuman</h1><hr><br>
-            <table class="table-detail">
-                <tr>
-                    <td class="td-width">Judul</td>
-                    <td class="td-padding1"><?= $list_pengumuman['judul'] ?></td>
-                </tr>
-                <tr>
-                    <td class="td-width">Isi Pengumuman</td>
-                    <td class="td-padding1"><?= $list_pengumuman['pengumuman'] ?></td>
-                </tr>
-                <tr>
-                    <td class="td-width">Tanggal terbit / diperbarui</td>
-                    <td class="td-padding1"><?= $list_pengumuman['tgl_dibuat'] ?></td>
-                </tr>
-                <tr>
-                    <td class="td-width">File</td>
-                    <td class="td-padding1">
-                      <a href="<?php print site_url('/assets/documents/pengumuman/'.$list_pengumuman['file']) ?>" target="blank  ">
-                        <?= $list_pengumuman['file'] ?>
-                      </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td-width"></td>
-                    <td class="td-padding1">
-                        <a href="<?= base_url('/pengumuman/edit/'.$list_pengumuman['id_pengumuman']) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i> Ubah Pengumuman</a>
-                        <button data-link="<?= base_url('/pengumuman/delete/'.$list_pengumuman['id_pengumuman']) ?>" type="button" id="do-hapus"class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus Pengumuman</button>
-                    </td>
-                </tr>
-            </table>
+            <h2>Detail Pengumuman</h2><hr>
           </div>
+          <div class="card mb-3">
+              <div class="card-header">
+                <i class="fas fa-table"></i>
+                Detail Pengumuman
+              </div>
+                <div class="card card-default">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                        
+                        <table class="table-detail">
+                          <tr>
+                              <td class="td-width">Judul</td>
+                              <td class="td-padding1">: <?= $list_pengumuman['judul'] ?></td>
+                          </tr>
+                          <tr>
+                              <td class="td-width">Isi Pengumuman</td>
+                              <td class="td-padding1">: <?= $list_pengumuman['pengumuman'] ?></td>
+                          </tr>
+                          <tr>
+                              <td class="td-width">Tanggal Terbit / Diperbarui</td>
+                              <td class="td-padding1">: <?= $list_pengumuman['tgl_dibuat'] ?></td>
+                          </tr>
+                          <tr>
+                              <td class="td-width">File Pendukung</td>
+                              <td class="td-padding1">
+                                <a href="<?php print site_url('/assets/documents/pengumuman/'.$list_pengumuman['file']) ?>" target="blank  ">: 
+                                  <?= $list_pengumuman['file'] ?>
+                                </a>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td class="td-width"></td>
+                              <td class="td-padding1">
+                                <a href="<?= base_url('/pengumuman_controllers/edit/'.$list_pengumuman['id_pengumuman']) ?>" class="btn btn-sm btn-success"><i class="fas fa-edit"></i> Edit Pengumuman</a>
+                                <button data-link="<?= base_url('/pengumuman_controllers/delete/'.$list_pengumuman['id_pengumuman']) ?>" type="button" id="do-hapus"class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus Pengumuman</button>
+                              </td>
+                          </tr>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>
