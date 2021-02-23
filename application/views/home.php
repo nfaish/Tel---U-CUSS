@@ -28,8 +28,13 @@
                     <center><h3 class="entry-title">Telkom University Course Scheduling System</h3></center>
                   </div>
                   <div class="card-body" align="justify">
-                  <h5>Telkom University Course Scheduling System atau TEL-U CUSS adalah sebuah aplikasi 
-              berbasis website yang bertujuan untuk ... .</h5>
+                      <p style="text-indent: 45px;">Telkom University Course Scheduling System atau TEL-U CUSS adalah sebuah aplikasi 
+                        sistem penjadwalan berbasis website yang berfungsi untuk melakukan penjadwalan untuk Mata Kuliah Dasar Umum (Dosen Luar Biasa) di Universitas Telkom.
+                        <br>Pada Universitas Telkom sendiri, Mata Kuliah Dasar Umum seperti Bahasa Indonesia, Bahasa Inggris, Pendidikan dan Kewarganegaraan, Pendidikan Agama dan Etika, Literasi TIK, dan Kewirausahaan diajar atau diampu oleh Dosen Luar Biasa.
+                        Dan pada penerapannya dilapangan, proses penjadwalan dari Mata Kuliah Dasar Umum (MKDU) ini sendiri awalnya masih dilakukan secara manual dan dibutuhkannya waktu yang cukup lama oleh Program Perkuliahan Dasar dan Umum (PPDU). 
+                        Dimana PPDU sendiri adalah sebuah unit  pelaksana akademik dengan tugas pokok membantu seluruh fakultas/program studi dalam penyelenggaraan matakuliah universitas bawah Direktorat Akademik Universitas Telkom.
+                        Berdasarkan kendala diatas maka dibuatlah sebuah aplikasi bernama TEL-U CUSS yang menjadi wadah untuk mempermudah PPDU dalam mengatur dan mengelola penjadwalan untuk Mata Kuliah Dasar Umum (Dosen Luar Biasa).
+                      </p>
                   </div>
                 </div>
               </div>
