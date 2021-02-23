@@ -122,6 +122,8 @@
                                                 <?php endforeach; ?>
                                             </tbody>
                                         </table>
+                                        <font size="2" font color="red">*Sesuaikan Inputan dengan Preferensi Anda</font><br>
+                                        <font size="2" font color="red">**Inputkan Preferensi Anda Minimal 24 Shift </font><br><br>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
