@@ -30,10 +30,19 @@
                   <div class="card-body" align="justify">
                       <p style="text-indent: 45px;">Telkom University Course Scheduling System atau TEL-U CUSS adalah sebuah aplikasi 
                         sistem penjadwalan berbasis website yang berfungsi untuk melakukan penjadwalan untuk Mata Kuliah Dasar Umum (Dosen Luar Biasa) di Universitas Telkom.
-                        <br>Pada Universitas Telkom sendiri, Mata Kuliah Dasar Umum seperti Bahasa Indonesia, Bahasa Inggris, Pendidikan dan Kewarganegaraan, Pendidikan Agama dan Etika, Literasi TIK, dan Kewirausahaan diajar atau diampu oleh Dosen Luar Biasa.
-                        Dan pada penerapannya dilapangan, proses penjadwalan dari Mata Kuliah Dasar Umum (MKDU) ini sendiri awalnya masih dilakukan secara manual dan dibutuhkannya waktu yang cukup lama oleh Program Perkuliahan Dasar dan Umum (PPDU). 
-                        Dimana PPDU sendiri adalah sebuah unit  pelaksana akademik dengan tugas pokok membantu seluruh fakultas/program studi dalam penyelenggaraan matakuliah universitas bawah Direktorat Akademik Universitas Telkom.
-                        Berdasarkan kendala diatas maka dibuatlah sebuah aplikasi bernama TEL-U CUSS yang menjadi wadah untuk mempermudah PPDU dalam mengatur dan mengelola penjadwalan untuk Mata Kuliah Dasar Umum (Dosen Luar Biasa).
+                        <br>Pada Universitas Telkom sendiri, terdapat beberapa Mata Kuliah Dasar Umum seperti :
+                        <ol type="1"> 
+                          <li>Bahasa Indonesia</li> 
+                          <li>Bahasa Inggris</li>
+                          <li>Pendidikan dan Kewarganegaraan</li>
+                          <li>Pendidikan Agama dan Etika</li>
+                          <li>Literasi TIK</li>
+                          <li>Kewirausahaan </li>
+                        </ol> 
+                        Sebagian besar semua Mata Kuliah Dasar Umum diatas diajar atau diampu oleh Dosen Luar Biasa.
+                        Sedangkan pada penerapannya dilapangan, proses penjadwalan dari Mata Kuliah Dasar Umum (MKDU) ini sendiri masih dilakukan secara manual dan dibutuhkannya waktu yang cukup lama untuk PPDU (Program Perkuliahan Dasar dan Umum) dalam membuat penjadwalan tersebut. 
+                        PPDU (Program Perkuliahan Dasar dan Umum) adalah sebuah unit pelaksana akademik dengan tugas pokok membantu seluruh fakultas/program studi dalam penyelenggaraan matakuliah universitas bawah Direktorat Akademik Universitas Telkom.
+                        Berdasarkan kendala diatas maka dibuatlah sebuah aplikasi bernama TEL-U CUSS yang menjadi wadah untuk mempermudah dan memaksimalkan PPDU dalam mengatur serta mengelola sumber daya yang ada untuk penjadwalan Mata Kuliah Dasar Umum (Dosen Luar Biasa).
                       </p>
                   </div>
                 </div>
