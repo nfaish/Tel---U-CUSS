@@ -18,4 +18,11 @@ class pengaturan_model extends CI_Model
 
         return $sql->result_array();
     }
+
+    public function gantipassword($id, $passBaru, $passLama)
+    {
+        $query = "UPDATE dosen SET password = '$passBaru' WHERE dosen.nip = '$id' AND dosen.password = '$passLama' ";
+        $sql = $this->db->query($query);
+        $this->session->set_flashdata('alert', 'Password Berhasil Diubah!');
+    }
 }

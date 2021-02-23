@@ -49,14 +49,14 @@ function generateIndividual() {
 function getFitness(indv) {
     let unique = indv.filter((item, i, ar) => ar.indexOf(item) === i);
     let err = indv.filter(element => element === false);
-    console.log("err", err);
+    // console.log("err", err);
 
     // let sum_count = 0;
     // for (let idx_unique = 0; idx_unique < unique.length; idx_unique++) {
     //     sum_count++;
     // }
 
-    return calculateErrorFitness([err.length,unique]);
+    return calculateErrorFitness([err.length,unique.length]);
 }
 
 function calculateErrorFitness(score){
