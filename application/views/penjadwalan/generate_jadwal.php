@@ -55,12 +55,12 @@
                                         <div class="form-group">
                                             <label>Jumlah Kromosom Dibangkitkan</label>
                                             <input class="form-control" type="text" id="num_kromosom" name="num_kromosom" value="<?= $num_kromosom ?>" />
-                                            <p class="help-block">Masukkan antara <?= $a ?>-500</p>
+                                            <p class="help-block">Masukkan antara <?= $a ?>-100</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Maksimal Generasi</label>
                                             <input class="form-control" type="text" id="max_generation" name="max_generation" value="<?= $max_generation ?>" />
-                                            <p class="help-block">Masukkan antara <?= $b ?>-500</p>
+                                            <p class="help-block">Masukkan antara <?= $b ?>-100</p>
                                         </div>
                                         <div class="checkbox">
                                             <label>
@@ -106,7 +106,7 @@
                                         <div class="row">
                                             <div class="col-sm-4 text-center">
                                                 <button class="btn btn-success" onclick="pref_btn()">
-                                                    prev
+                                                    Previous
                                                 </button>
                                             </div>
                                             <div class="col-sm-4 text-center" id="label_mid_res">
@@ -114,7 +114,7 @@
                                             </div>
                                             <div class="col-sm-4 text-center">
                                                 <button class="btn btn-success"onclick="next_btn()"> 
-                                                    next
+                                                    Next
                                                 </button>
                                             </div>
                                         </div>

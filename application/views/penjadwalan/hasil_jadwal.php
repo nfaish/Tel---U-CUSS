@@ -49,6 +49,7 @@
                                                     <th scope="col">FAKULTAS</th>
                                                     <th scope="col">PROGRAM STUDI</th>
                                                     <th scope="col">RUANG</th>
+                                                    <th scope="col">MATA KULIAH</th>
                                                     <th scope="col">KELAS</th>
                                                     <th scope="col">DOSEN</th>
                                                 </tr>
@@ -74,6 +75,9 @@
                                                             </td>
                                                             <td>
                                                                 <?php echo $value['nama_ruangan']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $value['nama_matkul']; ?>
                                                             </td>
                                                             <td>
                                                                 <?php echo $value['nama_kelas']; ?>
