@@ -55,7 +55,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (!empty($list_hasil_penjadwal)) { ?>
+                                                <?php if (!empty($list_hasil_penjadwal)) { 
+                                                    $no = 0;?>
                                                     <?php foreach ($list_hasil_penjadwal as $row => $value) { ?>
                                                         <tr>
                                                             <td>
