@@ -332,7 +332,7 @@ function save_jadwal(){
         }
         save_row(jadwal);
     }
-    setTimeout(() => {  window.location.replace(next_link); }, 7000);
+    setTimeout(() => {  window.location.replace(next_link); }, 15000);
     
 }
 
