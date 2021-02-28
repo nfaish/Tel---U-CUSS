@@ -327,7 +327,8 @@ function save_jadwal(){
             id_preferensi: data_with_ruang[index]['pref']['id_preferensi'],
             id_ruangan: data_with_ruang[index]['ruangan']['id_ruangan'],
             id_perkuliahan: data_with_ruang[index]['id_perkuliahan'],
-            id_kelas: data_with_ruang[index]['id_kelas']
+            id_kelas: data_with_ruang[index]['id_kelas'],
+            kode_jam : parseInt(data_with_ruang[index]["pref"]["room_shift"]) + 1
         }
         save_row(jadwal);
     }
@@ -346,7 +347,8 @@ function save_row(jadwal){
             id_preferensi: jadwal['id_preferensi'],
             id_ruangan: jadwal['id_ruangan'],
             id_perkuliahan: jadwal['id_perkuliahan'],
-            id_kelas: jadwal['id_kelas']
+            id_kelas: jadwal['id_kelas'],
+            kode_jam: jadwal['kode_jam']
         }
     );
 }
@@ -409,9 +411,9 @@ function generateResult(selected_pop = 0, set_ruang=false) {
         '<tbody>';
 
     for (let idx_dwr = 0; idx_dwr < data_with_ruang.length; idx_dwr++) {
-        if(data_with_ruang[idx_dwr]['pref'] == false){
-            continue;
-        }
+        // if(data_with_ruang[idx_dwr]['pref'] == false){
+        //     continue;
+        // }
 
         let hari = hari_list[parseInt(data_with_ruang[idx_dwr]['pref']['id_hari']) - 1];
         let jam_mulai = parseInt(data_with_ruang[idx_dwr]["pref"]["room_shift"]) + 6;
