@@ -44,7 +44,7 @@ class Penjadwalan_controllers extends CI_Controller
         try{
             $nip = $this->session->userdata("nip");
             $data['my_profile'] = $this->dosen_model->exploredosenByNip($nip);
-            
+            $data['list_hasil_penjadwal'] = $this->penjadwalan_model->getHasilPenjadwalan();
             $this->load->view("penjadwalan/hasil_jadwal", $data);
         } catch (Exception $e){
             show_error("Internal Server Error",500);
@@ -71,11 +71,11 @@ class Penjadwalan_controllers extends CI_Controller
 
     public function cetak()
     {
-            $this->load->view("penjadwalan/cetak_jadwal");
+         $this->load->view("penjadwalan/cetak_jadwal");
     }
 
     public function cetak_jadwal()
-        {
-            $this->load->view('penjadwalan/cetak_jadwal');
-        }
+    {
+        $this->load->view('penjadwalan/cetak_jadwal');
+    }
 }
