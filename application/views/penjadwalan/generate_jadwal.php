@@ -62,6 +62,95 @@
                                             <input class="form-control" id="max_generation" name="max_generation" value="<?= $max_generation ?>" type="number" min="5" max="100" />
                                             <p class="help-block">Masukkan antara <?= $b ?>-100</p>
                                         </div>
+                                        <!-- <div class="card-body">
+                                            <div class='inner'>
+                                                <h7>Jumlah Gedung</h7>    :<?php echo $total_gedung ?>
+                                            </div>
+                                            <div class='inner'>
+                                                <h7>Jumlah Ruangan</h7> : <?php echo $total_ruangan ?>
+                                            </div>
+                                            <div class='inner'>
+                                                <h7>Jumlah Hari</h7> : <?php echo $total_hari ?>
+                                            </div>
+                                            <div class='inner'>
+                                                <h7>Jumlah Shift</h7> : <?php echo $total_shift ?>
+                                            </div>
+                                            <div class='inner'>
+                                                <h7>Jumlah Dosen</h7> : <?php echo $total_dosen ?>
+                                            </div>
+                                            <div class='inner'>
+                                                <h7>Jumlah Kuliah</h7> : <?php echo $total_kuliah ?>
+                                            </div>
+                                        </div> -->
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <table>
+                                                    <tr>
+                                                        <th rowspan="1" >Data</th>
+                                                        <th colspan="1" >Jumlah</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Gedung</td>
+                                                        <td align=center><?php echo $total_gedung ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Ruangan</td>
+                                                        <td align=center><?php echo $total_ruangan ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Hari</td>
+                                                        <td align=center><?php echo $total_hari ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Shift</td>
+                                                        <td align=center><?php echo $total_shift ?></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <table>
+                                                    <tr>
+                                                        <th rowspan="1" > Data</th>
+                                                        <th colspan="1" >Jumlah</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Fakultas</td>
+                                                        <td align=center><?php echo $total_gedung ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Program Studi</td>
+                                                        <td align=center><?php echo $total_ruangan ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Kelas</td>
+                                                        <td align=center><?php echo $total_kelas ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah MKDU</td>
+                                                        <td align=center><?php echo $total_mkdu ?></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <table>
+                                                    <tr>
+                                                        <th rowspan="1" >Data</th>
+                                                        <th colspan="1" >Jumlah</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Dosen</td>
+                                                        <td align=center><?php echo $total_dosen ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Kuliah</td>
+                                                        <td align=center><?php echo $total_kuliah ?></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                            
+                                        
+                                        <br>
                                         <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" name="debug"> Tampilkan Proses Algoritma
@@ -135,6 +224,10 @@
             </div>
         </div>
     </div>
+    <script >
+        let jml_ruangan;
+        let jml_hari;
+    </script>
     <script src="<?= base_url() ?>assets/js/evolution/evolutionarry-algoritm.js"> </script>
     <script>
         let data_preferensi_dosen;

@@ -24,6 +24,15 @@ class Penjadwalan_controllers extends CI_Controller
             $data['data_ruangan'] = $this->penjadwalan_model->getDataRuangan();
             $data['data_unique_sks'] = $this->penjadwalan_model->getUniqueSks();
 
+            $data['total_hari'] =  $this->penjadwalan_model->total_hari();
+            $data['total_shift'] =  $this->penjadwalan_model->total_shift();
+            $data['total_ruangan'] =  $this->penjadwalan_model->total_ruangan();
+            $data['total_gedung'] =  $this->penjadwalan_model->total_gedung();
+            $data['total_kuliah'] =  $this->penjadwalan_model->total_kuliah();
+            $data['total_dosen'] =  $this->penjadwalan_model->total_dosen();
+            $data['total_kelas'] =  $this->penjadwalan_model->total_kelas();
+            $data['total_mkdu'] =  $this->penjadwalan_model->total_mkdu();
+
             foreach ($data['data_preferensi_dosen'] as $key => $value) {
                 $data['data_preferensi_dosen'][$key]['no'] = $key;
             }

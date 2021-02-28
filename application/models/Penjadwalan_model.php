@@ -75,5 +75,38 @@ class Penjadwalan_model extends CI_Model {
 
         return $this->db->query($query);
     }
+
+    function total_hari() 
+    {
+        return $this->db->get('hari')->num_rows();
+    }
+    function total_ruangan() 
+    {
+        return $this->db->get('ruangan')->num_rows();
+    }
+    function total_gedung() 
+    {
+        return $this->db->get('gedung')->num_rows();
+    }
+    function total_kuliah() 
+    {
+        return $this->db->get('perkuliahan')->num_rows();
+    }
+    function total_shift() 
+    {
+        return $this->db->get('jam')->num_rows();
+    }
+    function total_dosen() 
+    {
+        return $this->db->get('dosen')->num_rows();
+    }
+    function total_kelas() 
+    {
+        return $this->db->get('kelas')->num_rows();
+    }
+    function total_mkdu() 
+    {
+        return $this->db->get('matkul')->num_rows();
+    }
     
 }
