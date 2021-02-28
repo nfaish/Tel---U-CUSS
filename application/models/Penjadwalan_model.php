@@ -108,5 +108,17 @@ class Penjadwalan_model extends CI_Model {
     {
         return $this->db->get('matkul')->num_rows();
     }
+    function total_fakultas() 
+    {
+        return $this->db->get('fakultas')->num_rows();
+    }
+    function total_prodi() 
+    {
+        return $this->db->get('jurusan')->num_rows();
+    }
+    function total_preferensi() 
+    {
+        return $this->db->get('preferensi')->num_rows();
+    }
     
 }

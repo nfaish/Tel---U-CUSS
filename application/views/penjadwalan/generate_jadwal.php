@@ -115,11 +115,11 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Jumlah Fakultas</td>
-                                                        <td align=center><?php echo $total_gedung ?></td>
+                                                        <td align=center><?php echo $total_fakultas ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Jumlah Program Studi</td>
-                                                        <td align=center><?php echo $total_ruangan ?></td>
+                                                        <td align=center><?php echo $total_prodi ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Jumlah Kelas</td>
@@ -144,6 +144,10 @@
                                                     <tr>
                                                         <td>Jumlah Kuliah</td>
                                                         <td align=center><?php echo $total_kuliah ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jumlah Preferensi</td>
+                                                        <td align=center><?php echo $total_preferensi ?></td>
                                                     </tr>
                                                 </table>
                                             </div>
