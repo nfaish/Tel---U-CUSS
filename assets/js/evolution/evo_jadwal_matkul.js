@@ -272,7 +272,8 @@ function filterChancePref(groups_matkul_id) {
 }
 
 function setRuangan() {
-    let class_preffed = data_class_requirement.filter(element => element['pref'] != undefined && element['pref']["room_shift"] != false);
+    // let class_preffed = data_class_requirement.filter(element => element['pref'] != undefined && element['pref']["room_shift"] != false);
+    let class_preffed = data_class_requirement.filter(element => element['pref'] != undefined);
     let group_ruangan = [];
     for (let idx_ruang = 0; idx_ruang < data_ruangan.length; idx_ruang++) {
 
@@ -292,10 +293,10 @@ function setRuangan() {
         
 
         if(res_take["room_shift"] == undefined){
-            // arr = class_preffed.filter(element => element['pref']["id_preferensi"] == class_preffed[class_idx]['pref']["id_preferensi"]);
-            // console.log("Problem :", res_take, arr);
+            arr = class_preffed.filter(element => element['pref']["id_preferensi"] == class_preffed[class_idx]['pref']["id_preferensi"]);
+            console.log("Problem :", res_take, arr);
             class_preffed[class_idx]["pref"] = false;
-            continue;
+            // continue;
         }else{
             class_preffed[class_idx]["pref"] = res_take;
         }

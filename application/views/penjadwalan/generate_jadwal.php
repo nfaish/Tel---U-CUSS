@@ -1,8 +1,8 @@
 <?php
     $success = true;
-    $a = 5;
+    $a = 1;
     $b = 5;
-    $c = 75;
+    $c = 25;
     $d = 25;
     $num_kromosom = $a;
     $max_generation = $b;
@@ -54,12 +54,12 @@
                                         <!-- <form action="<?= base_url('hitung/hitung') ?>" method="post"> -->
                                         <div class="form-group">
                                             <label>Jumlah Kromosom Dibangkitkan</label>
-                                            <input class="form-control" type="text" id="num_kromosom" name="num_kromosom" value="<?= $num_kromosom ?>" />
-                                            <p class="help-block">Masukkan antara <?= $a ?>-100</p>
+                                            <input class="form-control" id="num_kromosom" name="num_kromosom" value="<?= $num_kromosom ?>" type="number" min="1" max="100" />
+                                            <p class="help-block">Masukkan antara 1-100</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Maksimal Generasi</label>
-                                            <input class="form-control" type="text" id="max_generation" name="max_generation" value="<?= $max_generation ?>" />
+                                            <input class="form-control" id="max_generation" name="max_generation" value="<?= $max_generation ?>" type="number" min="5" max="100" />
                                             <p class="help-block">Masukkan antara <?= $b ?>-100</p>
                                         </div>
                                         <div class="checkbox">
@@ -77,12 +77,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Crossover Rate</label>
-                                                <input class="form-control" type="text" id="crossover_rate" name="crossover_rate" value="<?= $crossover_rate ?>" />
+                                                <input class="form-control" id="crossover_rate" name="crossover_rate" value="<?= $crossover_rate ?>" type="number" min="1" max="100" />
                                                 <p class="help-block">Masukkan antara 1-100</p>
                                             </div>
                                             <div class="form-group">
                                                 <label>Mutation Rate</label>
-                                                <input class="form-control" type="text" id="mutation_rate" name="mutation_rate" value="<?= $mutation_rate ?>" />
+                                                <input class="form-control" id="mutation_rate" name="mutation_rate" value="<?= $mutation_rate ?>" type="number" min="1" max="100" />
                                                 <p class="help-block">Masukkan antara 1-100</p>
                                             </div>
                                         </div>

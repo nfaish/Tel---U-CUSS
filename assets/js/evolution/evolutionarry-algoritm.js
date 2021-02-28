@@ -21,8 +21,8 @@ function EvolutionarryAlgorithm(toolbox, popSize, mutProb, breedFunction, verbos
             throw 'Ukuran Populasi Harus Terdefinisikan';
         }
 
-        if (popSize <= 2) {
-            throw 'Ukuran Populasi Harus > dari 2 Current size: ' + popSize;
+        if (popSize <= 0) {
+            throw 'Ukuran Populasi Harus > dari 1 Current size: ' + popSize;
         }
 
         if(mutProb === undefined) {
