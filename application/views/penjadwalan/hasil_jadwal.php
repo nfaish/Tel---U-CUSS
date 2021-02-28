@@ -29,8 +29,20 @@
                             <li class="list-group-item"><?= $my_profile['kode_dosen'] ?></li>
                         </ul>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Cetak Jadwal Fakultas</label>
+                        <select class="form-control" name="select" id="id_fakultas">
+                            <?php foreach ($list_fakultas as $row => $value) { ?>
+                                <option value="<?= $value['id_fakultas']?>"><?= $value['nama_fakultas']?></option>
+                            <?php } ?>
+                        </select>
+                        
+                        <!-- <a href="<!?= base_url('/Penjadwalan_controllers/cetak') ?>" target="_blank" class="btn btn-primary fa fa-print">  Cetak</a> -->
+                        
+                    </div>
+                    <button id="print_btn" onclick="print_data()" target="_blank" class="btn btn-primary "><span class="fa fa-print"></span> Cetak</button>
                     <br>
-                    <a href="<?= base_url('/penjadwalan/cetak_jadwal') ?>" target="_blank" class="btn btn-primary fa fa-print">  Cetak</a>
                     <br><br>
                     <div class="card mb-3">
                         <div class="card-header">
@@ -101,6 +113,22 @@
             </div>
         </div>
     </div>
+    <script>
+        function print_data(){
+            
+            id_fakultas = document.getElementById("id_fakultas").value;
+            print_link = '<?=base_url("Penjadwalan_controllers/cetak/")?>' + id_fakultas;
+            window.open(print_link, '_blank');
+            
+            // $.post(print_link,  
+            //     {
+            //         "id_fakultas": id_fakultas
+            //     }
+            // );
+        }
+    
+    
+    </script>
 </body>
 
 </html>
