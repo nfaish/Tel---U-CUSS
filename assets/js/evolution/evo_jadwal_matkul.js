@@ -18,6 +18,7 @@ function generateIndividual() {
         if (group_pref_per_matkul[cari_matkul] == undefined) {
             uncomplete_data_matkul.push(cari_matkul);
             data_class_requirement[idx]["pref"] = false;
+            new_indv.push(data_class_requirement[idx]["pref"]);
 
         } else {
 
@@ -31,9 +32,16 @@ function generateIndividual() {
 
                 let random_pref = group_pref_per_matkul[cari_matkul][random_idx];
                 random_pref = takeOneTime(random_pref);
+                
+                if (random_pref != false){
+                    
+                    group_pref_per_matkul[cari_matkul][random_idx] = random_pref;
 
-                data_preferensi_dosen[parseInt(random_pref["no"])] = random_pref;
-                data_class_requirement[idx]["pref"] = parseInt(random_pref["no"]);
+                    data_preferensi_dosen[parseInt(random_pref["no"])] = random_pref;
+                    data_class_requirement[idx]["pref"] = parseInt(random_pref["no"]);
+                }else{
+                    data_class_requirement[idx]["pref"] = random_pref;
+                }
 
             }
 
@@ -48,14 +56,15 @@ function generateIndividual() {
 //Fungsi untuk Mencari Nilai Fitness 
 function getFitness(indv) {
     let unique = indv.filter((item, i, ar) => ar.indexOf(item) === i);
-    let err = indv.filter(element => element === false).length;
+    let err = indv.filter(element => element === false);
 
-    // let sum_count = 0;
-    // for (let idx_unique = 0; idx_unique < unique.length; idx_unique++) {
-    //     sum_count++;
-    // }
-
-    return calculateErrorFitness([err, unique]);
+    for (let idx = 0; idx < data_class_requirement.length; idx++) {
+        data_class_requirement[idx]["pref"] = data_preferensi_dosen[indv[idx]];
+    }
+    let dengan_ruang = setRuangan();
+    let problem = dengan_ruang.filter(element => element["pref"]["room_shift"] === undefined);
+    
+    return calculateErrorFitness([err, unique, problem]);
 }
 
 function calculateErrorFitness(score) {
@@ -65,124 +74,74 @@ function calculateErrorFitness(score) {
 function sum_arr(arrays) {
     let total_sum = 0;
     for (let arr_idx = 0; arr_idx < arrays.length; arr_idx++) {
-        for (let el_idx = 0; el_idx < arrays[arr_idx].length; el_idx++) {
-            total_sum += arrays[arr_idx][el_idx];
-        }
+        // for (let el_idx = 0; el_idx < arrays[arr_idx].length; el_idx++) {
+            // total_sum += arrays[arr_idx][el_idx];
+            total_sum += arrays[arr_idx].length;
+        // }
 
     }
     return total_sum;
 }
 
-function parseShiftData(schedule) {
-    var shift = [];
-    var data_shift = [];
-    for (var x = 0; x < 13; x++) {
-        shift.push("shift" + (x + 1));
-    }
-
-    for (var x = 0; x < shift.length; x++) {
-        data_shift.push(schedule[shift[x]]);
-    }
-    return data_shift;
-}
-
-//Fungsi untuk Menambah suatu index ke array problem
-// function addProb(index) {
-//     if (!problem.includes(index)) {
-//         problem.push(index);
-//     }
-// }
-
-// //Fungsi untuk Menambah suatu index ke array dosen yg tidak ada jadwal dalam suatu shift
-// function addProbLess(index) {
-//     if (!probLess.includes(index)) {
-//         probLess.push(index);
-//     }
-// }
-
 //Fungsi untuk Melakukan Proses Mutasi
 function mutate(indv) {
 
-    let err = indv.filter(element => element === false);
-
-
-
-    // for (let idx = 0; idx < err.length; idx++) {
-    //     // let selectProblem = Math.floor(Math.random() * problem.length);
-    //     let matkul = parseInt(data_preferensi_dosen[parseInt(err[idx]["no"])]['id_matkul']);
-    //     let selectPref = Math.floor(Math.random() * group_pref_per_matkul[matkul].length);
-
-    //     indv[err[idx]] = parseInt(group_pref_per_matkul[matkul][selectPref]['no']);
-    // }
-
-
-
-    // let shiftSelection = Math.floor(Math.random() * 4);
-
-    // let selectProbLess = Math.floor(Math.random() * probLess.length);
-    // let shiftSelectLess = Math.floor(Math.random() * 4);
-
-    // let mutatedIndex = problem[selectProblem] + shiftSelection;
-    // let mutatedIndexLess = probLess[selectProbLess] + shiftSelectLess;
-
-    // indv[mutatedIndex] = 0;
-    // indv[mutatedIndexLess] = 1;
     let new_indv = [];
 
     for (let idx = 0; idx < data_preferensi_dosen.length; idx++) {
-        // if (!unique_sks.includes(parseInt(data_preferensi_dosen[idx].sks))){
-        //     unique_sks.push(parseInt(data_preferensi_dosen[idx].sks));
-        // }
 
         data_preferensi_dosen[idx]['possible_sks'] = setPossibleSks(data_preferensi_dosen[idx]);
         data_preferensi_dosen[idx]['shift_selected'] = shift_zeros();
-        // if (group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] == undefined) {
-        //     group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] = [];
-        // }
-        // group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']].push(data_preferensi_dosen[idx]);
+        if (group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] == undefined) {
+            group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] = [];
+        }
+        group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']].push(data_preferensi_dosen[idx]);
+    }
+
+    for (let idx = 0; idx < data_class_requirement.length; idx++) {
+        data_class_requirement[idx]["pref"] = data_preferensi_dosen[indv[idx]];
     }
 
     for (let idx = 0; idx < data_class_requirement.length; idx++) {
         let cari_matkul = data_class_requirement[idx]["id_matkul"];
 
-        // console.log("group_pref_per_matkul[cari_matkul]",group_pref_per_matkul[cari_matkul]);
         if (group_pref_per_matkul[cari_matkul] == undefined) {
             uncomplete_data_matkul.push(cari_matkul);
             data_class_requirement[idx]["pref"] = false;
-            // new_indv.push(0);
+            new_indv.push(data_class_requirement[idx]["pref"]);
+
         } else {
 
             let list_option_prefs = filterChancePref(cari_matkul);
-            // console.log("list_option_prefs", idx, list_option_prefs)
+
             if (list_option_prefs.length == 0) {
                 data_class_requirement[idx]["pref"] = false;
             } else {
-                // let random_pref =  group_pref_per_matkul[cari_matkul][Math.floor(Math.random() *
-                // group_pref_per_matkul[cari_matkul].length)];
-                // let random_pref =  group_pref_per_matkul[cari_matkul][Math.floor(Math.random() *
-                // group_pref_per_matkul[cari_matkul].length)];
+
                 let random_idx = list_option_prefs[Math.floor(Math.random() * list_option_prefs.length)];
 
                 let random_pref = group_pref_per_matkul[cari_matkul][random_idx];
                 random_pref = takeOneTime(random_pref);
-                // console.log("terpilih", parseInt(random_pref["no"]));
-                // console.log("pref_updated", random_pref);
-                data_preferensi_dosen[parseInt(random_pref["no"])] = random_pref;
-                data_class_requirement[idx]["pref"] = parseInt(random_pref["no"]);
+                
+                if (random_pref != false){
+                    
+                    group_pref_per_matkul[cari_matkul][random_idx] = random_pref;
+
+                    data_preferensi_dosen[parseInt(random_pref["no"])] = random_pref;
+                    data_class_requirement[idx]["pref"] = parseInt(random_pref["no"]);
+                }else{
+                    data_class_requirement[idx]["pref"] = random_pref;
+                }
 
             }
 
-            // if (checkAvaibleSKS(random_pref["no"], 1, random_pref["sks"])){
-
-            // }
-
             new_indv.push(data_class_requirement[idx]["pref"]);
-            //    
-            // data_scheduled_class.push(data_class_requirement[idx]);
+
         }
     }
-
+    // console.log("indv",indv,"new_indv",new_indv);
     return new_indv;
+
 }
 
 //Pemanggilan Fungsi Utama
@@ -204,8 +163,16 @@ function generateInit() {
 
     results = gen.evolve(generations);
     console.log("Result Evolution:", results);
-    console.log("result", results);
-    generateResult();
+    // console.log("result", results);
+
+    result_sets = [];
+
+    for (let idx_pop = 0; idx_pop < results.population.length; idx_pop++) {
+        result_sets.push(generateResult(idx_pop, true));
+        
+    }
+
+    // generateResult();
 
 }
 
@@ -279,7 +246,7 @@ function takeOneTime(pref) {
             }
         }
     }
-    return pref;
+    return false;
 }
 
 function takeOneShiftRoom(pref) {
@@ -305,27 +272,38 @@ function filterChancePref(groups_matkul_id) {
 }
 
 function setRuangan() {
-    let class_preffed = data_class_requirement.filter(element => element['pref'] != undefined);
-    // let scheduled_rooms = [];
+    let class_preffed = data_class_requirement.filter(element => element['pref'] != undefined && element['pref']["room_shift"] != false);
     let group_ruangan = [];
     for (let idx_ruang = 0; idx_ruang < data_ruangan.length; idx_ruang++) {
+
         if (group_ruangan[data_ruangan[idx_ruang]['id_jurusan']] == undefined) {
             group_ruangan[data_ruangan[idx_ruang]['id_jurusan']] = [];
         }
+
         data_ruangan[idx_ruang]["scheduled"] = [];
         data_ruangan[idx_ruang]["no"] = idx_ruang;
         group_ruangan[data_ruangan[idx_ruang]['id_jurusan']].push(data_ruangan[idx_ruang]);
+
     }
 
     for (let class_idx = 0; class_idx < class_preffed.length; class_idx++) {
 
-        class_preffed[class_idx]["pref"] = takeOneShiftRoom(class_preffed[class_idx]["pref"]);
+        let res_take = takeOneShiftRoom(class_preffed[class_idx]["pref"]);
+        
+
+        if(res_take["room_shift"] == undefined){
+            // arr = class_preffed.filter(element => element['pref']["id_preferensi"] == class_preffed[class_idx]['pref']["id_preferensi"]);
+            // console.log("Problem :", res_take, arr);
+            class_preffed[class_idx]["pref"] = false;
+            continue;
+        }else{
+            class_preffed[class_idx]["pref"] = res_take;
+        }
 
         let ruangan_selection = group_ruangan[class_preffed[class_idx]["id_jurusan"]];
         ruangan_selection = ruangan_selection.filter(element => !element["scheduled"].includes([class_preffed[class_idx]["pref"]["id_hari"], class_preffed[class_idx]["pref"]["id_hari"]]));
 
         let random_ruangan = ruangan_selection[Math.floor(Math.random() * ruangan_selection.length)];
-        // let random_ruangan = ruangan_selection[random_idx];
         class_preffed[class_idx]["ruangan"] = random_ruangan;
 
         let update_ruang_scheduled = data_ruangan.filter(element => element["id_ruangan"] == random_ruangan["id_ruangan"]);
@@ -333,71 +311,82 @@ function setRuangan() {
             data_ruangan[update_ruang_scheduled[urs_idx]["no"]]["scheduled"].push([class_preffed[class_idx]["pref"]["id_hari"], class_preffed[class_idx]["pref"]["room_shift"]]);
         }
 
-        // scheduled_rooms.push([class_preffed[class_idx]["id_hari"], class_preffed[class_idx]["pref"]["room_shift"]]);
     }
     return class_preffed;
 }
 
-// //Fungsi untuk proses persilangan/perkawinan
-// function breedFunction(parent0, parent1) {
-//     let protoParent = Math.round(Math.random());
-//     let newborn = protoParent == 0 ? parent0.slice() : parent1.slice();
-
-//     for (var i = 0; i < 2; i++) {
-
-//         let probPoint = Math.floor(Math.random() * problem.length);
-//         let probLessPoint = Math.floor(Math.random() * probLess.length);
-
-//         let breedPoint = problem[probPoint] + Math.floor(Math.random() * 4);
-//         let breedPoint2 = probLess[probLessPoint] + Math.floor(Math.random() * 4);
-
-//         let tmp = newborn[breedPoint];
-//         newborn[breedPoint] = newborn[breedPoint2];
-//         newborn[breedPoint2] = tmp;
-
-//     }
-//     return newborn;
-// };
-
-// function getPrefById(id_preferensi){
-//     for (let idx = 0; idx < data_preferensi_dosen.length; idx++) {
-//         const element = array[idx];
-
-//     }
-//     data_preferensi_dosen
-// }
-
-// function get_shift_pref(idx_pref, last_shift){
-//     res = null;
-//     for (var x = last_shift+1 ; x < 13; x++) {
-
-//         var shift = data_preferensi_dosen[idx_pref]["shift" + (x + 1)]
-//         if(shift == "1"){
-//             return x;
-//         }
-//     }
-//     return res;
-// }
-
-
-function generateResult(selected_pop = 0) {
-
-    for (let idx = 0; idx < data_class_requirement.length; idx++) {
-        // if (data_class_requirement[idx][]) {
-
-        // }
-        data_class_requirement[idx]["pref"] = data_preferensi_dosen[results.population[selected_pop]["individual"][idx]];
-
-
-
+function save_jadwal(){
+    let curr_page = parseInt(document.getElementById("res_number").innerHTML);
+    document.getElementById("btnSave").disabled = true;
+    let data_with_ruang = result_sets[curr_page-1];
+    deleteAll();
+    for (let index = 0; index < data_with_ruang.length; index++) {
+        let jadwal = {
+            id_mengajar: data_with_ruang[index]['pref']['id_mengajar'],
+            id_preferensi: data_with_ruang[index]['pref']['id_preferensi'],
+            id_ruangan: data_with_ruang[index]['ruangan']['id_ruangan'],
+            id_perkuliahan: data_with_ruang[index]['id_perkuliahan'],
+            id_kelas: data_with_ruang[index]['id_kelas']
+        }
+        save_row(jadwal);
     }
-    // results.population.length
+    setTimeout(() => {  window.location.replace(next_link); }, 7000);
+    
+}
 
-    console.log("uncomplete_data_matkul", uncomplete_data_matkul);
-    console.log("data_class_requirement", data_class_requirement);
-    console.log("group_pref_per_matkul", group_pref_per_matkul);
+function deleteAll(){
+    $.post(delete_link);
+}
 
-    let data_with_ruang = setRuangan();
+function save_row(jadwal){
+    $.post(save_link,  
+        {
+            id_mengajar: jadwal['id_mengajar'],
+            id_preferensi: jadwal['id_preferensi'],
+            id_ruangan: jadwal['id_ruangan'],
+            id_perkuliahan: jadwal['id_perkuliahan'],
+            id_kelas: jadwal['id_kelas']
+        }
+    );
+}
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
+function generateResult(selected_pop = 0, set_ruang=false) {
+
+    let data_with_ruang;
+
+    if(set_ruang){
+        for (let idx = 0; idx < data_class_requirement.length; idx++) {
+            data_class_requirement[idx]["pref"] = data_preferensi_dosen[results.population[selected_pop]["individual"][idx]];
+        }
+    
+        console.log("uncomplete_data_matkul", uncomplete_data_matkul);
+        console.log("data_class_requirement", data_class_requirement);
+        console.log("group_pref_per_matkul", group_pref_per_matkul);
+    
+        data_with_ruang = setRuangan();
+    }else{
+        data_with_ruang = result_sets[selected_pop];
+    }
+    
+    let jumlah_data;
+    let jumlah_kelas;
+    let jumlah_jurusan;
+    let jumlah_ruangan;
+    let jumlah_dosen;
+    
+    data_with_ruang.sort(
+        function(a, b) {          
+           if (parseInt(a['pref']['id_hari']) === parseInt(b['pref']['id_hari']) ) {
+              // Price is only important when cities are the same
+              return parseInt(a["pref"]["room_shift"]) - parseInt(b["pref"]["room_shift"]);
+           }
+           return parseInt(a['pref']['id_hari']) >parseInt(b['pref']['id_hari']) ? 1 : -1;
+        });
+
     console.log(data_with_ruang);
 
     let hari_list = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
@@ -410,6 +399,7 @@ function generateResult(selected_pop = 0) {
                 '<th scope="col">JAM</th>' +
                 '<th scope="col">FAKULTAS</th>' +
                 '<th scope="col">PROGRAM STUDI</th>' +
+                '<th scope="col">Matkul</th>' +
                 '<th scope="col">RUANG</th>' +
                 '<th scope="col">KELAS</th>' +
                 '<th scope="col">DOSEN</th>' +
@@ -418,18 +408,22 @@ function generateResult(selected_pop = 0) {
         '<tbody>';
 
     for (let idx_dwr = 0; idx_dwr < data_with_ruang.length; idx_dwr++) {
+        if(data_with_ruang[idx_dwr]['pref'] == false){
+            continue;
+        }
+
         let hari = hari_list[parseInt(data_with_ruang[idx_dwr]['pref']['id_hari']) - 1];
         let jam_mulai = parseInt(data_with_ruang[idx_dwr]["pref"]["room_shift"]) + 6;
         let jam_selesai = jam_mulai + parseInt(data_with_ruang[idx_dwr]["sks"]);
         let nama_fakultas = data_with_ruang[idx_dwr]["ruangan"]["nama_fakultas"];
         let nama_jurusan = data_with_ruang[idx_dwr]["nama_jurusan"];
+        let matkul = data_with_ruang[idx_dwr]['nama_matkul'];
         let ruangan = data_with_ruang[idx_dwr]["ruangan"]["nama_ruangan"];
         let nama_kelas = data_with_ruang[idx_dwr]["nama_kelas"];
         let nama_dosen = data_with_ruang[idx_dwr]["pref"]["nama_depan"] + " " + data_with_ruang[idx_dwr]["pref"]["nama_belakang"];
 
-        let jam_lengkap = jam_mulai < 10 == 1 ? "0"+jam_mulai : jam_mulai;
-
-            jam_lengkap += jam_lengkap + (jam_selesai < 10 ) ? "0"+jam_selesai : jam_selesai;
+        jam_mulai = (parseInt(jam_mulai) < 10) ? "0"+jam_mulai : ""+jam_mulai;
+        jam_selesai = (parseInt(jam_selesai) < 10) ? "0"+jam_selesai : ""+jam_selesai;
 
         str_to_html += 
             '<tr>' +
@@ -438,14 +432,17 @@ function generateResult(selected_pop = 0) {
                 '<td>' + jam_mulai+":30:00 - "+jam_selesai + ':30:00</td>' +
                 '<td>' + nama_fakultas + '</td>' +
                 '<td>' + nama_jurusan + '</td>' +
+                '<td>' + matkul + '</td>' +
                 '<td>' + ruangan + '</td>' +
                 '<td>' + nama_kelas + '</td>' +
                 '<td>' + nama_dosen + '</td>' +
             '</tr>';
 
     }
-    str_to_html += '</tbody></table>';
 
+    str_to_html += '</tbody></table>';
+    document.getElementById("card_res").hidden = false;
     document.getElementById("res_table").innerHTML = str_to_html;
 
+    return data_with_ruang;
 }

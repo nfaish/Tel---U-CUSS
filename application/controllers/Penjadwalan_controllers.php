@@ -51,6 +51,24 @@ class Penjadwalan_controllers extends CI_Controller
         }
     }
 
+    public function delete_all(){
+        $this->penjadwalan_model->deleteAll();
+    }
+
+    public function save_jadwal(){
+
+        $post = $this->input->post();
+        // echo var_dump($post); die();
+        // $jadwal = array(
+        //     'id_mengajar' => $post['id_mengajar'],
+        //     'id_preferensi' => $post['id_preferensi'],
+        //     'id_ruangan' => $post['id_ruangan'],
+        //     'id_perkuliahan' => $post['id_perkuliahan'],
+        //     'id_kelas' => $post['id_kelas']
+        // );
+        return $this->penjadwalan_model->save_jadwal($post);
+    }
+
     public function cetak()
     {
             $this->load->view("penjadwalan/cetak_jadwal");

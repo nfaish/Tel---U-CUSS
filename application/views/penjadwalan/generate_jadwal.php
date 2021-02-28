@@ -93,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-3">
+                    <div class="card mb-3" hidden id="card_res">
                         <div class="card-header">
                             <i class="fas fa-table"></i>
                             Generate Result
@@ -120,15 +120,12 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
-                                            <div id="res_table" ></div>
+                                            <div id="res_table" class="table-responsive-lg"></div>
                                             </div>
                                         </div>
+                                        <button onclick="save_jadwal()" id="btnSave" class="btn btn-primary float-right">Simpan Jadwal</button>
                                         <br>
-                                        <div class="row">
-                                            <div class="col-md-12" id="table_result">
-
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -151,11 +148,17 @@
         let crossover_rate = parseFloat(document.getElementById("crossover_rate").value);
         let mutation_rate = parseFloat(document.getElementById("mutation_rate").value);
 
+        let save_link = '<?=base_url("Penjadwalan_controllers/save_jadwal")?>';
+        let delete_link = '<?=base_url("Penjadwalan_controllers/delete_all")?>';
+        let next_link = '<?=base_url("Penjadwalan_controllers/hasil_generate")?>';
+
         let mod = [];
         let problem = [];
         let group_pref_per_matkul;
         let uncomplete_data_matkul;
         let results;
+        
+        let result_sets;
 
         function generate() {
 
@@ -201,8 +204,11 @@
                 document.getElementById("res_number").innerHTML = curr_page - 1;
             }
         }
+        
+
     </script>
     <script src="<?= base_url() ?>assets/js/evolution/evo_jadwal_matkul.js"></script>
 </body>
 
 </html>
+

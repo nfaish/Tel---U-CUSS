@@ -12,7 +12,7 @@ class Penjadwalan_model extends CI_Model {
     
     public function getDataDosen(){
         $query = "SELECT dosen.nip, dosen.kode_dosen, dosen.nama_depan, dosen.nama_belakang,
-        preferensi.id_preferensi, preferensi.id_hari, 
+        preferensi.id_preferensi, preferensi.id_hari, mengajar.id_mengajar,
         preferensi.shift1, preferensi.shift2, preferensi.shift3, preferensi.shift4, preferensi.shift5,
         preferensi.shift6, preferensi.shift7, preferensi.shift8, preferensi.shift9, preferensi.shift10,
         preferensi.shift11, preferensi.shift12, preferensi.shift13,
@@ -43,6 +43,20 @@ class Penjadwalan_model extends CI_Model {
         $query = "SELECT DISTINCT(sks) FROM `matkul`";
 
         return $this->db->query($query)->result_array();
+    }
+
+    public function deleteAll(){
+        $query = 'DELETE FROM penjadwalan';
+        $this->db->query($query);
+        $query ='ALTER TABLE penjadwalan AUTO_INCREMENT = 1';
+        return $this->db->query($query);
+    }
+
+    public function save_jadwal($jadwal){
+        $query = 'INSERT INTO penjadwalan (id_mengajar, id_preferensi, id_ruangan, id_perkuliahan, id_kelas)
+        VALUES ("'.$jadwal['id_mengajar'].'", "'.$jadwal['id_preferensi'].'", "'.$jadwal['id_ruangan'].'", "'.$jadwal['id_perkuliahan'].'", "'.$jadwal['id_kelas'].'")';
+
+        return $this->db->query($query);
     }
     
 }
