@@ -39,6 +39,23 @@ class Penjadwalan_model extends CI_Model {
         return $this->db->query($query)->result_array();
     }
 
+    public function getHasilPenjadwalan(){
+        $query = "SELECT hari.nama_hari, jam.nama_jam, fakultas.nama_fakultas, jurusan.nama_jurusan, ruangan.nama_ruangan, matkul.nama_matkul, kelas.nama_kelas, dosen.nama_depan, dosen.nama_belakang, matkul.sks FROM `penjadwalan`
+        JOIN mengajar ON penjadwalan.id_mengajar = mengajar.id_mengajar
+        JOIN dosen ON mengajar.nip = dosen.nip
+        JOIN preferensi ON preferensi.id_preferensi = penjadwalan.id_preferensi
+        JOIN hari ON hari.id_hari = preferensi.id_hari
+        JOIN jam ON jam.kode_jam = penjadwalan.kode_jam
+        JOIN ruangan ON ruangan.id_ruangan = penjadwalan.id_ruangan
+        JOIN perkuliahan ON perkuliahan.id_perkuliahan = penjadwalan.id_perkuliahan
+        JOIN kelas ON kelas.id_kelas = penjadwalan.id_kelas
+        JOIN jurusan ON jurusan.id_jurusan = perkuliahan.id_jurusan
+        JOIN fakultas ON jurusan.id_fakultas = fakultas.id_fakultas
+        JOIN matkul ON perkuliahan.id_matkul = matkul.id_matkul";
+
+        return $this->db->query($query)->result_array();
+    }
+
     public function getUniqueSks(){
         $query = "SELECT DISTINCT(sks) FROM `matkul`";
 
@@ -53,8 +70,8 @@ class Penjadwalan_model extends CI_Model {
     }
 
     public function save_jadwal($jadwal){
-        $query = 'INSERT INTO penjadwalan (id_mengajar, id_preferensi, id_ruangan, id_perkuliahan, id_kelas)
-        VALUES ("'.$jadwal['id_mengajar'].'", "'.$jadwal['id_preferensi'].'", "'.$jadwal['id_ruangan'].'", "'.$jadwal['id_perkuliahan'].'", "'.$jadwal['id_kelas'].'")';
+        $query = 'INSERT INTO penjadwalan (id_mengajar, id_preferensi, id_ruangan, id_perkuliahan, id_kelas, kode_jam)
+        VALUES ("'.$jadwal['id_mengajar'].'", "'.$jadwal['id_preferensi'].'", "'.$jadwal['id_ruangan'].'", "'.$jadwal['id_perkuliahan'].'", "'.$jadwal['id_kelas'].'","'.$jadwal['kode_jam'].'")';
 
         return $this->db->query($query);
     }
