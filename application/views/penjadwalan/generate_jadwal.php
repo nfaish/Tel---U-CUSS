@@ -228,10 +228,10 @@
             </div>
         </div>
     </div>
-    <script >
+    <!-- <script >
         let jml_ruangan;
         let jml_hari;
-    </script>
+    </script> -->
     <script src="<?= base_url() ?>assets/js/evolution/evolutionarry-algoritm.js"> </script>
     <script>
         let data_preferensi_dosen;
