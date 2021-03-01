@@ -155,11 +155,11 @@
                                             
                                         
                                         <br>
-                                        <div class="checkbox">
+                                        <!-- <div class="checkbox">
                                             <label>
                                                 <input type="checkbox" name="debug" <?=(isset($_GET['debug'])) ? 'checked' : ''?> name="debug" /> Tampilkan Proses Algoritma
                                             </label>
-                                        </div>
+                                        </div> -->
                                         <a class="btn btn-info" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                             Opsi Lain
                                         </a>
