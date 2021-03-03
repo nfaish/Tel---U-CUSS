@@ -3,7 +3,7 @@
     $a = 1;
     $b = 5;
     $c = 25;
-    $d = 25;
+    $d = 0.25;
     $num_kromosom = $a;
     $max_generation = $b;
     $crossover_rate = $c;
@@ -54,13 +54,13 @@
                                         <!-- <form action="<?= base_url('hitung/hitung') ?>" method="post"> -->
                                         <div class="form-group">
                                             <label>Jumlah Kromosom Dibangkitkan</label>
-                                            <input class="form-control" id="num_kromosom" name="num_kromosom" value="<?= $num_kromosom ?>" type="number" min="1" max="100" />
-                                            <p class="help-block">Masukkan antara 1-100</p>
+                                            <input class="form-control" id="num_kromosom" name="num_kromosom" value="<?= $num_kromosom ?>" type="number" min="1" max="25" />
+                                            <p class="help-block">Masukkan antara 1-25</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Maksimal Generasi</label>
-                                            <input class="form-control" id="max_generation" name="max_generation" value="<?= $max_generation ?>" type="number" min="5" max="100" />
-                                            <p class="help-block">Masukkan antara <?= $b ?>-100</p>
+                                            <input class="form-control" id="max_generation" name="max_generation" value="<?= $max_generation ?>" type="number" min="5" max="25" />
+                                            <p class="help-block">Masukkan antara <?= $b ?>-25</p>
                                         </div>
                                         <!-- <div class="card-body">
                                             <div class='inner'>
@@ -176,7 +176,7 @@
                                             <div class="form-group">
                                                 <label>Mutation Rate</label>
                                                 <input class="form-control" id="mutation_rate" name="mutation_rate" value="<?= $mutation_rate ?>" type="number" min="1" max="100" />
-                                                <p class="help-block">Masukkan antara 1-100</p>
+                                                <p class="help-block">Masukkan antara 0-1</p>
                                             </div>
                                         </div>
                                         <button onclick="generate()" class="btn btn-primary">Generate Jadwal</button>

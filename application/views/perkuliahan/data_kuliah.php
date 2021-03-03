@@ -47,6 +47,7 @@
                                                     <th scope="col">SKS</th>
                                                     <th scope="col">NAMA DOSEN</th>
                                                     <th scope="col">KODE DOSEN</th>
+                                                    <!-- <th scope="col">NIP</th> -->
                                                     <th scope="col">ACTION</th>
                                                 </tr>
                                             </thead>
@@ -70,6 +71,9 @@
                                                             <td>
                                                                 <?php echo $value['kode_dosen']; ?>
                                                             </td>
+                                                            <!-- <td>
+                                                                <?php echo $value['nip']; ?>
+                                                            </td> -->
                                                             <td>
                                                                 
                                                             <a href="<?= base_url('/perkuliahan_controllers/hapusMatkul_ajarkuu/' . $value['id_mengajar']) ?>" class='btn btn-sm btn-danger'>Delete</a>

@@ -63,7 +63,7 @@ function generateIndividual()
 //Fungsi untuk Mencari Nilai Fitness 
 function getFitness(indv) 
 {
-    let unique = indv.filter((item, i, ar) => ar.indexOf(item) === i);
+    // let unique = indv.filter((item, i, ar) => ar.indexOf(item) === i);
     let err = indv.filter(element => element === false);
 
     for (let idx = 0; idx < data_class_requirement.length; idx++) 
@@ -73,12 +73,12 @@ function getFitness(indv)
     let dengan_ruang = setRuangan();
     let problem = dengan_ruang.filter(element => element["pref"]["room_shift"] === undefined);
     
-    return calculateErrorFitness([err, unique, problem]);
+    return calculateErrorFitness([err,problem]);
 }
 
 function calculateErrorFitness(score) 
 {
-    return 1.0 / (1.0 + (sum_arr(score)));
+    return (1.0 / (1.0 + (sum_arr(score))));
 }
 
 function sum_arr(arrays) 
@@ -360,7 +360,7 @@ function setRuangan() {
         }
 
         let ruangan_selection = group_ruangan[class_preffed[class_idx]["id_jurusan"]];
-        ruangan_selection = ruangan_selection.filter(element => !element["scheduled"].includes([class_preffed[class_idx]["pref"]["id_hari"], class_preffed[class_idx]["pref"]["id_hari"]]));
+        ruangan_selection = ruangan_selection.filter(element => !element["scheduled"].includes([class_preffed[class_idx]["pref"]["id_hari"], class_preffed[class_idx]["pref"]["room_shift"]]));
 
         let random_ruangan = ruangan_selection[Math.floor(Math.random() * ruangan_selection.length)];
         class_preffed[class_idx]["ruangan"] = random_ruangan;
