@@ -28,6 +28,7 @@ function generateIndividual()
         } 
         else 
         {
+
             let list_option_prefs = filterChancePref(cari_matkul);
 
             if (list_option_prefs.length == 0) 
@@ -44,7 +45,9 @@ function generateIndividual()
                 
                 if (random_pref != false)
                 {
+ 
                     group_pref_per_matkul[cari_matkul][random_idx] = random_pref;
+
                     data_preferensi_dosen[parseInt(random_pref["no"])] = random_pref;
                     data_class_requirement[idx]["pref"] = parseInt(random_pref["no"]);
                 }
@@ -52,10 +55,14 @@ function generateIndividual()
                 {
                     data_class_requirement[idx]["pref"] = random_pref;
                 }
+
             }
+
             new_indv.push(data_class_requirement[idx]["pref"]);
+
         }
     }
+    console.log("new_indv",new_indv);
     return new_indv;
 };
 
@@ -64,21 +71,22 @@ function generateIndividual()
 function getFitness(indv) 
 {
     // let unique = indv.filter((item, i, ar) => ar.indexOf(item) === i);
-    let err = indv.filter(element => element === false);
+    // let err = indv.filter(element => element === false);
 
     for (let idx = 0; idx < data_class_requirement.length; idx++) 
     {
         data_class_requirement[idx]["pref"] = data_preferensi_dosen[indv[idx]];
     }
     let dengan_ruang = setRuangan();
-    let problem = dengan_ruang.filter(element => element["pref"]["room_shift"] === undefined);
+    let problem = dengan_ruang.filter(element => element["pref"]["ruangan"] === undefined);
     
-    return calculateErrorFitness([err,problem]);
+    return calculateErrorFitness([problem]);
+    // return calculateErrorFitness([err, unique]);
 }
 
 function calculateErrorFitness(score) 
 {
-    return (1.0 / (1.0 + (sum_arr(score))));
+    return 1.0 / (1.0 + (sum_arr(score)));
 }
 
 function sum_arr(arrays) 
@@ -98,69 +106,7 @@ function sum_arr(arrays)
 //Fungsi untuk Melakukan Proses Mutasi
 function mutate(indv) 
 {
-
-    let new_indv = [];
-
-    for (let idx = 0; idx < data_preferensi_dosen.length; idx++) 
-    {
-
-        data_preferensi_dosen[idx]['possible_sks'] = setPossibleSks(data_preferensi_dosen[idx]);
-        data_preferensi_dosen[idx]['shift_selected'] = shift_zeros();
-        if (group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] == undefined) 
-        {
-            group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']] = [];
-        }
-        group_pref_per_matkul[data_preferensi_dosen[idx]['id_matkul']].push(data_preferensi_dosen[idx]);
-    }
-
-    for (let idx = 0; idx < data_class_requirement.length; idx++) 
-    {
-        data_class_requirement[idx]["pref"] = data_preferensi_dosen[indv[idx]];
-    }
-
-    for (let idx = 0; idx < data_class_requirement.length; idx++) 
-    {
-        let cari_matkul = data_class_requirement[idx]["id_matkul"];
-
-        if (group_pref_per_matkul[cari_matkul] == undefined) 
-        {
-            uncomplete_data_matkul.push(cari_matkul);
-            data_class_requirement[idx]["pref"] = false;
-            new_indv.push(data_class_requirement[idx]["pref"]);
-
-        } 
-        else 
-        {
-
-            let list_option_prefs = filterChancePref(cari_matkul);
-
-            if (list_option_prefs.length == 0) 
-            {
-                data_class_requirement[idx]["pref"] = false;
-            } 
-            else 
-            {
-                let random_idx = list_option_prefs[Math.floor(Math.random() * list_option_prefs.length)];
-                let random_pref = group_pref_per_matkul[cari_matkul][random_idx];
-                random_pref = takeOneTime(random_pref);
-                
-                if (random_pref != false)
-                {
-                    group_pref_per_matkul[cari_matkul][random_idx] = random_pref;
-                    data_preferensi_dosen[parseInt(random_pref["no"])] = random_pref;
-                    data_class_requirement[idx]["pref"] = parseInt(random_pref["no"]);
-                }
-                else
-                {
-                    data_class_requirement[idx]["pref"] = random_pref;
-                }
-            }
-            new_indv.push(data_class_requirement[idx]["pref"]);
-        }
-    }
-    // console.log("indv",indv,"new_indv",new_indv);
-    return new_indv;
-
+    return generateIndividual(indv);
 }
 
 //Pemanggilan Fungsi Utama
@@ -190,10 +136,21 @@ function generateInit()
     for (let idx_pop = 0; idx_pop < results.population.length; idx_pop++) 
     {
         result_sets.push(generateResult(idx_pop, true));
+        
     }
 
     // generateResult();
 
+}
+
+function generateSksPossible(number)
+{
+    let arr_num = [];
+    for(let idx_number = number; idx_number > 0; idx_number--)
+    {
+        arr_num.push(idx_number);
+    }
+    return arr_num;
 }
 
 function setPossibleSks(preferensi_) 
@@ -207,22 +164,23 @@ function setPossibleSks(preferensi_)
             {
                 if (set_possible[index] != 0) 
                 {
-                    set_possible[parseInt(index - 1)] = set_possible[index] + 1;
+                    set_possible[parseInt(index - 1)] = generateSksPossible(parseInt(set_possible[index]) + 1);
                 } 
                 else 
                 {
-                    set_possible[parseInt(index - 1)] = 1;
+                    set_possible[parseInt(index - 1)] = generateSksPossible(1);
                 }
             } 
             else 
             {
-                set_possible[parseInt(index - 1)] = 1;
+                set_possible[parseInt(index - 1)] = generateSksPossible(1);
             }
         } 
         else 
         {
-            set_possible[parseInt(index - 1)] = 0;
+            set_possible[parseInt(index - 1)] = [0];
         }
+
     }
     set_possible = requiredPossibleSks(set_possible);
     return set_possible;
@@ -233,13 +191,16 @@ function requiredPossibleSks(possible_sks)
     let new_possible = [];
     for (let index = 0; index < possible_sks.length; index++) 
     {
-        if (unique_sks.includes(possible_sks[index])) 
+        for (let index2 = 0; index2 < possible_sks[index].length; index2++)
         {
-            new_possible.push(possible_sks[index]);
-        } 
-        else 
-        {
-            new_possible.push(0);
+            if (unique_sks.includes(possible_sks[index][index2])) 
+            {
+                new_possible.push(possible_sks[index][index2]);
+            } 
+            else 
+            {
+                new_possible.push(0);
+            }
         }
     }
     return new_possible;
@@ -300,8 +261,7 @@ function takeOneShiftRoom(pref)
 {
     for (let pos_idx = 0; pos_idx < pref["shift_selected"].length; pos_idx++) 
     {
-        if (parseInt(pref["shift_selected"][pos_idx]) == 1) 
-        {
+        if (parseInt(pref["shift_selected"][pos_idx]) == 1) {
             pref["shift_selected"][pos_idx] = 0;
             pref["room_shift"] = pos_idx;
             return pref;
@@ -324,7 +284,8 @@ function filterChancePref(groups_matkul_id)
     return pref_chance_list;
 }
 
-function setRuangan() {
+function setRuangan() 
+{
     // let class_preffed = data_class_requirement.filter(element => element['pref'] != undefined && element['pref']["room_shift"] != false);
     let class_preffed = data_class_requirement.filter(element => element['pref'] != undefined);
     let group_ruangan = [];
@@ -347,8 +308,8 @@ function setRuangan() {
 
         let res_take = takeOneShiftRoom(class_preffed[class_idx]["pref"]);
         
-        if(res_take["room_shift"] == undefined)
-        {
+
+        if(res_take["room_shift"] == undefined){
             arr = class_preffed.filter(element => element['pref']["id_preferensi"] == class_preffed[class_idx]['pref']["id_preferensi"]);
             console.log("Problem :", res_take, arr);
             class_preffed[class_idx]["pref"] = false;
@@ -370,6 +331,7 @@ function setRuangan() {
         {
             data_ruangan[update_ruang_scheduled[urs_idx]["no"]]["scheduled"].push([class_preffed[class_idx]["pref"]["id_hari"], class_preffed[class_idx]["pref"]["room_shift"]]);
         }
+
     }
     return class_preffed;
 }
@@ -393,7 +355,7 @@ function save_jadwal()
         }
         save_row(jadwal);
     }
-    setTimeout(() => {  window.location.replace(next_link); }, 30000);
+    setTimeout(() => {  window.location.replace(next_link); }, 7000);
     
 }
 
@@ -423,6 +385,7 @@ function onlyUnique(value, index, self)
 
 function generateResult(selected_pop = 0, set_ruang=false) 
 {
+
     let data_with_ruang;
 
     if(set_ruang)
@@ -499,8 +462,14 @@ function generateResult(selected_pop = 0, set_ruang=false)
         jam_mulai = (parseInt(jam_mulai) < 10) ? "0"+jam_mulai : ""+jam_mulai;
         jam_selesai = (parseInt(jam_selesai) < 10) ? "0"+jam_selesai : ""+jam_selesai;
 
+        let str_text_warning = '';
+
+        if(jam_mulai == "NaN"){
+            str_text_warning = 'class= "bg-warning"';
+        }
+
         str_to_html += 
-            '<tr>' +
+            '<tr '+str_text_warning+'>' +
                 '<td>' + parseInt(idx_dwr + 1) + '</td>' +
                 '<td>' + hari + '</td>' +
                 '<td>' + jam_mulai+":30:00 - "+jam_selesai + ':30:00</td>' +
