@@ -40,8 +40,6 @@ function EvolutionarryAlgorithm(toolbox, popSize, mutProb, breedFunction, verbos
         let population = this.generatePopulation(toolbox.genIndv, popSize);
 
         for (var i = 0; i < generations; i++) {
-            problem = [];
-            probLess = [];
             population = this.getFitness(population, toolbox.getFitness);
             population = this.sortByFitness(population, toolbox.getFitness, toolbox.goalFitness);
 
